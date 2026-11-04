@@ -396,7 +396,7 @@
               <!-- Banner Slot 1 -->
               <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div class="w-24 h-14 rounded-lg bg-slate-200 border border-slate-300 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img id="preview-banner-0" src="" alt="Banner 1" class="hidden w-full h-full object-cover max-w-full">
+                  <img id="preview-banner-0" referrerpolicy="no-referrer" src="" alt="Banner 1" class="hidden w-full h-full object-cover max-w-full">
                   <span id="placeholder-banner-0" class="text-[10px] font-bold text-slate-400">ব্যানার ১</span>
                 </div>
                 <div class="flex-1 w-full space-y-1">
@@ -412,7 +412,7 @@
               <!-- Banner Slot 2 -->
               <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div class="w-24 h-14 rounded-lg bg-slate-200 border border-slate-300 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img id="preview-banner-1" src="" alt="Banner 2" class="hidden w-full h-full object-cover max-w-full">
+                  <img id="preview-banner-1" referrerpolicy="no-referrer" src="" alt="Banner 2" class="hidden w-full h-full object-cover max-w-full">
                   <span id="placeholder-banner-1" class="text-[10px] font-bold text-slate-400">ব্যানার ২</span>
                 </div>
                 <div class="flex-1 w-full space-y-1">
@@ -428,7 +428,7 @@
               <!-- Banner Slot 3 -->
               <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div class="w-24 h-14 rounded-lg bg-slate-200 border border-slate-300 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img id="preview-banner-2" src="" alt="Banner 3" class="hidden w-full h-full object-cover max-w-full">
+                  <img id="preview-banner-2" referrerpolicy="no-referrer" src="" alt="Banner 3" class="hidden w-full h-full object-cover max-w-full">
                   <span id="placeholder-banner-2" class="text-[10px] font-bold text-slate-400">ব্যানার ৩</span>
                 </div>
                 <div class="flex-1 w-full space-y-1">
@@ -444,7 +444,7 @@
               <!-- Banner Slot 4 -->
               <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div class="w-24 h-14 rounded-lg bg-slate-200 border border-slate-300 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img id="preview-banner-3" src="" alt="Banner 4" class="hidden w-full h-full object-cover max-w-full">
+                  <img id="preview-banner-3" referrerpolicy="no-referrer" src="" alt="Banner 4" class="hidden w-full h-full object-cover max-w-full">
                   <span id="placeholder-banner-3" class="text-[10px] font-bold text-slate-400">ব্যানার ৪</span>
                 </div>
                 <div class="flex-1 w-full space-y-1">
@@ -460,7 +460,7 @@
               <!-- Banner Slot 5 -->
               <div class="p-3 rounded-xl border border-slate-200 bg-slate-50 flex flex-col sm:flex-row items-start sm:items-center gap-3">
                 <div class="w-24 h-14 rounded-lg bg-slate-200 border border-slate-300 overflow-hidden shrink-0 flex items-center justify-center">
-                  <img id="preview-banner-4" src="" alt="Banner 5" class="hidden w-full h-full object-cover max-w-full">
+                  <img id="preview-banner-4" referrerpolicy="no-referrer" src="" alt="Banner 5" class="hidden w-full h-full object-cover max-w-full">
                   <span id="placeholder-banner-4" class="text-[10px] font-bold text-slate-400">ব্যানার ৫</span>
                 </div>
                 <div class="flex-1 w-full space-y-1">
@@ -780,7 +780,7 @@
     // =========================================================================
     // এখানে আপনার ধাপ ২-এর Google Apps Script Web App URL বসান:
     // =========================================================================
-    const DEFAULT_SCRIPT_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+    const DEFAULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYA85M0O1yPJQg8wKiUYqOzDLGgWfvTv9N2pFwFXVlr24rN7nh0Po7uGPwS-MmAkRb/exec";
 
     let sessionAdminPassword = "";
     let allAdmissions = [];
@@ -1094,6 +1094,14 @@
       const img = document.getElementById(`preview-banner-${slotIdx}`);
       const placeholder = document.getElementById(`placeholder-banner-${slotIdx}`);
       if (imgSrc) {
+        img.dataset.retried = "";
+        img.onerror = function() {
+          const m = String(imgSrc).match(/[-\w]{25,}/);
+          if (m && !this.dataset.retried) {
+            this.dataset.retried = "1";
+            this.src = "https://drive.google.com/thumbnail?id=" + m[0] + "&sz=w1200";
+          }
+        };
         img.src = imgSrc;
         img.classList.remove('hidden');
         placeholder.classList.add('hidden');
