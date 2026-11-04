@@ -1,1 +1,161 @@
-live soon
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b17">
+  <meta name="description" content="ইকরা অ্যাকাডেমি ওয়েবসাইটটি বর্তমানে রক্ষণাবেক্ষণের কাজ চলছে। খুব শীঘ্রই আমরা নতুন রূপে ফিরে আসছি।">
+  <title>IQRA ACADEMY | Coming Soon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #071b17;
+      --green: #0d3028;
+      --gold: #d9b66d;
+      --cream: #f7f3e9;
+      --muted: #c6d2ca;
+    }
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+      color: var(--cream);
+      background:
+        radial-gradient(ellipse at 15% 15%, rgba(35, 103, 78, .34), transparent 42%),
+        radial-gradient(ellipse at 90% 85%, rgba(180, 139, 65, .15), transparent 38%),
+        linear-gradient(135deg, #061511, var(--bg) 55%, #102b23);
+      font-family: "Hind Siliguri", sans-serif;
+      overflow-x: hidden;
+    }
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      width: 340px; height: 340px;
+      border: 1px solid rgba(217,182,109,.13);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    body::before { top: -190px; right: -120px; }
+    body::after { bottom: -220px; left: -130px; width: 440px; height: 440px; }
+    .card {
+      width: min(100%, 760px);
+      position: relative;
+      text-align: center;
+      padding: clamp(34px, 7vw, 76px) clamp(22px, 6vw, 64px);
+      border: 1px solid rgba(217,182,109,.35);
+      border-radius: 28px;
+      background: linear-gradient(145deg, rgba(17, 54, 43, .88), rgba(6, 25, 21, .94));
+      box-shadow: 0 28px 90px rgba(0,0,0,.36), inset 0 1px rgba(255,255,255,.05);
+      backdrop-filter: blur(12px);
+    }
+    .mark {
+      width: 76px; height: 76px;
+      display: grid; place-items: center;
+      margin: 0 auto 22px;
+      border: 1px solid rgba(217,182,109,.65);
+      border-radius: 23px;
+      color: var(--gold);
+      font-family: "Playfair Display", serif;
+      font-size: 34px;
+      font-weight: 700;
+      box-shadow: 0 0 35px rgba(217,182,109,.12);
+    }
+    .eyebrow {
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      margin: 0 0 12px;
+    }
+    h1 {
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-size: clamp(30px, 6vw, 48px);
+      letter-spacing: .045em;
+      line-height: 1.15;
+    }
+    .rule {
+      width: 72px; height: 2px;
+      margin: 25px auto;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .headline {
+      margin: 0 auto 12px;
+      max-width: 560px;
+      font-size: clamp(23px, 4.5vw, 32px);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .message {
+      max-width: 540px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(16px, 2.5vw, 19px);
+      line-height: 1.9;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 30px;
+      padding: 9px 17px;
+      border: 1px solid rgba(217,182,109,.28);
+      border-radius: 999px;
+      color: #ead8ad;
+      background: rgba(217,182,109,.07);
+      font-size: 13px;
+    }
+    .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #8bd3a8;
+      box-shadow: 0 0 0 5px rgba(139,211,168,.12);
+      animation: pulse 1.8s infinite;
+    }
+    footer {
+      margin-top: 42px;
+      color: rgba(198,210,202,.65);
+      font-size: 13px;
+      letter-spacing: .04em;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(139,211,168,.10); }
+      50% { box-shadow: 0 0 0 8px rgba(139,211,168,.02); }
+    }
+    @media (max-width: 480px) {
+      .card { border-radius: 22px; }
+      .mark { width: 66px; height: 66px; border-radius: 20px; }
+      footer { margin-top: 32px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="mark" aria-hidden="true">IQ</div>
+    <p class="eyebrow">A New Experience Is Coming</p>
+    <h1>IQRA ACADEMY</h1>
+    <div class="rule"></div>
+    <p class="headline">আমরা খুব শীঘ্রই ফিরছি!</p>
+    <p class="message">
+      আমাদের ওয়েবসাইটে বর্তমানে রক্ষণাবেক্ষণ ও নতুনভাবে সাজানোর কাজ চলছে।
+      আরও সুন্দর, আধুনিক এবং অসাধারণ ডিজাইন ও নতুন অভিজ্ঞতা নিয়ে
+      খুব শীঘ্রই আপনাদের মাঝে ফিরে আসব।
+    </p>
+    <div class="status"><span class="dot"></span> ওয়েবসাইটটি সাময়িকভাবে রক্ষণাবেক্ষণে রয়েছে</div>
+    <footer>© <span id="year"></span> IQRA ACADEMY. All Rights Reserved.</footer>
+  </main>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
