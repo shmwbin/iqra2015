@@ -627,7 +627,6 @@
         let previewTempId = "IQRA-" + String(Math.floor(10000 + Math.random() * 90000));
         let pendingDeleteId = "";
 
-        // Strict XSS Sanitizer
         function escapeHtml(raw) {
             return String(raw ?? '')
                 .replace(/&/g, '&amp;')
@@ -637,7 +636,6 @@
                 .replace(/'/g, '&#39;');
         }
 
-        // ================= ANTI-BOT CAPTCHA & BRUTE-FORCE LIMITER =================
         let studioCaptchaExpected = 12;
         let failedStudioAttempts = 0;
         let studioLockoutUntil = 0;
@@ -677,7 +675,6 @@
             }, 500);
         }
 
-        // 15-Minute Inactivity Auto-Lock
         let studioInactivityTimer = null;
         function resetStudioInactivity() {
             if (!sessionAdminPassword) return;
@@ -1005,7 +1002,6 @@
             checkboxes.forEach(cb => cb.checked = masterCb.checked);
         }
 
-        /* A4 MULTI-CARD GENERATOR & PRINT ENGINE */
         function createCardDOMForStudent(student) {
             const logoUrl = escapeHtml(document.getElementById('instLogoUrl').value || "https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg");
             const instName = escapeHtml(document.getElementById('instName').value || "IQRA ACADEMY");
@@ -1209,7 +1205,6 @@
             buildAndTriggerA4Print(selectedStudents);
         }
 
-        /* CRUD & GOOGLE SHEETS SYNC (WITH SERVER PASSWORD VERIFICATION) */
         function submitStudentForm() {
             if (!sessionAdminPassword) {
                 logoutStudio();
