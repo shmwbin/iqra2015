@@ -1,0 +1,26 @@
+{
+  "id": "/driver-app/",
+  "name": "IQRA ACADEMY - Driver Live GPS",
+  "short_name": "IQRA Driver",
+  "description": "IQRA ACADEMY School Vehicle Live GPS Tracker",
+  "start_url": "/driver-app/index.html",
+  "scope": "/driver-app/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f5f9",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/driver-app/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/driver-app/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
