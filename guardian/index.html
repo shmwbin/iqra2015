@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IQRA ACADEMY - Guardian Live Tracking Portal (PWA)</title>
     <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg">
-    <!-- PWA Manifest Link -->
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#065f46">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -28,7 +27,7 @@
 
         .pwa-install-btn {
             margin-top: 0.65rem; background: #fef08a; color: #065f46; border: none;
-            padding: 0.5rem 1rem; border-radius: 99px; font-weight: 800; font-size: 0.78rem;
+            padding: 0.5rem 1.1rem; border-radius: 99px; font-weight: 800; font-size: 0.8rem;
             cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
@@ -155,7 +154,7 @@
         <div class="app-header">
             <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="IQRA Logo">
             <h1>IQRA ACADEMY - অভিভাবক পোর্টাল</h1>
-            <p>Guardian Live Tracking PWA • স্কুল এন্ট্রি ও গাড়ির রিয়েল-टाइम জিপিএস ম্যাপ</p>
+            <p>Guardian Live Tracking PWA • স্কুল এন্ট্রি ও গাড়ির রিয়েল-টাইম জিপিএস ম্যাপ</p>
             <button id="installGuardianBtn" class="pwa-install-btn" onclick="installGuardianPWA()">📲 অ্যাপটি ফোনে ইনস্টল করুন (Install App)</button>
         </div>
 
@@ -268,7 +267,6 @@
         let pollTimer = null;
         let deferredGuardianPrompt = null;
 
-        // Service Worker রেজিস্ট্রেশন PWA ইনস্টলের জন্য
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
@@ -284,6 +282,20 @@
                 .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#39;');
+        }
+
+        // এক্সেলের ত্রুটিপূর্ণ ডেট (30/12/1899) ফিল্টার করে সঠিক সময় দেখানোর ফাংশন
+        function cleanTimeFormat(timeStr) {
+            if (!timeStr) return "-";
+            let s = String(timeStr).trim();
+            if (s.includes("30/12/1899") || s.includes("1899-12-30")) {
+                let parts = s.split(" ");
+                if (parts.length > 1) {
+                    return parts.slice(1).join(" "); // শুধু টাইম অংশটুকু রাখবে
+                }
+            }
+            // যদি সরাসরি সিরিয়াল বা অন্য ফরম্যাট থাকে, হিস্ট্রি বা লগ থেকে ম্যাচ করার চেষ্টা করবে
+            return s;
         }
 
         window.onload = function() {
@@ -545,8 +557,20 @@
                         sub.innerText = "লাল বাতি জ্বলছে: আপনার সন্তান স্কুল থেকে নিরাপদে ছুটি নিয়ে প্রস্থান করেছে।";
                     }
 
-                    document.getElementById("gLastIn").innerText = st.lastInTime || "-";
-                    document.getElementById("gLastOut").innerText = st.lastOutTime || "-";
+                    // এখানে cleanTimeFormat ব্যবহার করা হয়েছে যাতে 30/12/1899 বাগটি না আসে
+                    let inTimeDisplay = cleanTimeFormat(st.lastInTime);
+                    let outTimeDisplay = cleanTimeFormat(st.lastOutTime);
+
+                    // যদি ইতিহাস (history) থেকে সঠিক ডেট ও টাইম পাওয়া যায়, সেটি দিয়ে ওভাররাইড করা হবে
+                    if (Array.isArray(res.history) && res.history.length > 0) {
+                        const latestIn = res.history.find(h => String(h.status).toUpperCase() === "IN");
+                        const latestOut = res.history.find(h => String(h.status).toUpperCase() === "OUT");
+                        if (latestIn && latestIn.fullTimestamp) inTimeDisplay = latestIn.fullTimestamp;
+                        if (latestOut && latestOut.fullTimestamp) outTimeDisplay = latestOut.fullTimestamp;
+                    }
+
+                    document.getElementById("gLastIn").innerText = inTimeDisplay;
+                    document.getElementById("gLastOut").innerText = outTimeDisplay;
                     document.getElementById("gLastSynced").innerText = "আপডেট: " + new Date().toLocaleTimeString();
 
                     const mapCard = document.getElementById("vehicleMapCard");
