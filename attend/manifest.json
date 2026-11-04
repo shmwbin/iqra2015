@@ -1,8 +1,8 @@
 {
   "id": "./index.html",
-  "name": "IQRA Guardian Portal",
-  "short_name": "IQRA Guardian",
-  "description": "IQRA ACADEMY - Guardian Live Tracking Portal PWA",
+  "name": "IQRA Admin QR Attendance Scanner",
+  "short_name": "IQRA Admin",
+  "description": "IQRA Admin QR Attendance Scanner - IQRA ACADEMY Smart System",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
@@ -11,16 +11,28 @@
   "theme_color": "#065f46",
   "icons": [
     {
-      "src": "https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg",
+      "src": "./icon-192.png",
       "sizes": "192x192",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg",
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/jpeg",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
