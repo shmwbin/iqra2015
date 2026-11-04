@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IQRA ACADEMY - Guardian Live Tracking Portal (PWA)</title>
     <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg">
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#065f46">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -37,7 +39,6 @@
             box-shadow: 0 12px 30px rgba(0,0,0,0.35); margin-bottom: 1.1rem;
         }
 
-        /* ওয়ান-টাইম সেটআপ / QR স্ক্যান ভিউ */
         #setupSection h2 { font-size: 1.05rem; color: #34d399; margin-bottom: 0.5rem; text-align: center; }
         #setupSection p { font-size: 0.82rem; color: #cbd5e1; text-align: center; margin-bottom: 1rem; line-height: 1.45; }
         #guardianQrReader { width: 100%; border-radius: 12px; overflow: hidden; background: #020617; border: 2px dashed #10b981; min-height: 230px; }
@@ -61,7 +62,6 @@
         .btn-blue:hover { background: #0369a1; }
         .btn-outline { background: transparent; border: 1px solid #64748b; color: #cbd5e1; font-size: 0.78rem; padding: 0.45rem 0.8rem; }
 
-        /* লাইভ ট্র্যাকিং প্রোফাইল ও ব্লিঙ্কিং বাল্ব */
         .profile-top { display: flex; align-items: center; gap: 14px; padding-bottom: 1rem; border-bottom: 1px solid #334155; }
         .student-avatar {
             width: 84px; height: 96px; border-radius: 12px; border: 2.5px solid #10b981;
@@ -74,7 +74,6 @@
         }
         .student-meta p { font-size: 0.82rem; color: #cbd5e1; line-height: 1.45; }
 
-        /* রিয়েল-টাইম ব্লিঙ্কিং বাল্ব সেকশন */
         .live-bulb-stage {
             margin: 1.25rem 0; padding: 1.4rem 1rem; border-radius: 16px; text-align: center;
             background: #0f172a; border: 2px solid #334155; transition: 0.3s;
@@ -128,7 +127,6 @@
         .time-box .t-lbl { font-size: 0.74rem; color: #94a3b8; font-weight: 600; }
         .time-box .t-val { font-size: 0.92rem; font-weight: 800; margin-top: 3px; }
 
-        /* গুগল ম্যাপ লাইভ ভেহিকেল ট্র্যাকিং কার্ড */
         .map-card { margin-top: 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 0.85rem; }
         .map-card h3 { font-size: 0.92rem; color: #34d399; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
         .map-container-box { width: 100%; height: 260px; border-radius: 10px; overflow: hidden; border: 1.5px solid #475569; background: #1e293b; }
@@ -142,7 +140,6 @@
         }
         .history-item:last-child { border-bottom: none; }
 
-        /* PWA Install Helper Modal */
         .install-modal-backdrop {
             position: fixed; inset: 0; background: rgba(2,6,23,0.75); display: none;
             align-items: center; justify-content: center; z-index: 9999; padding: 1rem;
@@ -158,11 +155,11 @@
         <div class="app-header">
             <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="IQRA Logo">
             <h1>IQRA ACADEMY - অভিভাবক পোর্টাল</h1>
-            <p>Guardian Live Tracking PWA • স্কুল এন্ট্রি ও গাড়ির রিয়েল-টাইম জিপিএস ম্যাপ</p>
+            <p>Guardian Live Tracking PWA • স্কুল এন্ট্রি ও গাড়ির রিয়েল-टाइम জিপিএস ম্যাপ</p>
             <button id="installGuardianBtn" class="pwa-install-btn" onclick="installGuardianPWA()">📲 অ্যাপটি ফোনে ইনস্টল করুন (Install App)</button>
         </div>
 
-        <!-- ১. ওয়ান-টাইম সেটআপ সেকশন (পাসওয়ার্ড/রেজিস্টার্ড মোবাইল ভেরিফাইড) -->
+        <!-- ১. ওয়ান-টাইম সেটআপ সেকশন -->
         <div class="card" id="setupSection">
             <h2>🔐 এককালীন আইডি কার্ড ও পাসওয়ার্ড যাচাই</h2>
             <p>আপনার সন্তানের আইডি কার্ডের QR কোড স্ক্যান করুন (অথবা আইডি লিখুন) এবং সিকিউরিটি পাসওয়ার্ড বা রেজিস্টার্ড মোবাইল নম্বর দিয়ে লগইন করুন।</p>
@@ -199,7 +196,6 @@
                 </div>
             </div>
 
-            <!-- রিয়েল-টাইম ব্লিঙ্কিং বাল্ব সেকশন -->
             <div class="live-bulb-stage stage-loading" id="gBulbStage">
                 <div class="giant-bulb loading-pulse" id="gBulbIcon">⏳</div>
                 <div class="bulb-status-title title-loading" id="gBulbTitle">তথ্য লোড হচ্ছে...</div>
@@ -217,7 +213,6 @@
                 </div>
             </div>
 
-            <!-- গুগল ম্যাপস লাইভ ভেহিকেল ট্র্যাকিং -->
             <div class="map-card" id="vehicleMapCard" style="display:none;">
                 <h3>
                     <span>🚐 গাড়ির লাইভ লোকেশন</span>
@@ -228,7 +223,7 @@
                     <iframe id="googleMapFrame" src="" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
-            <!-- অফলাইন মেসেজ -->
+            
             <div id="driverOfflineMsg" style="display:none; text-align:center; padding:1rem; background:#334155; border-radius:12px; margin-top:1rem; font-size:0.85rem; color:#94a3b8;">
                 🚐 বর্তমানে গাড়ির জিপিএস ট্র্যাকিং বন্ধ (Offline) আছে।
             </div>
@@ -273,6 +268,15 @@
         let pollTimer = null;
         let deferredGuardianPrompt = null;
 
+        // Service Worker রেজিস্ট্রেশন PWA ইনস্টলের জন্য
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Guardian PWA Service Worker Registered', reg))
+                    .catch(err => console.log('SW registration failed', err));
+            });
+        }
+
         function escapeHtml(raw) {
             return String(raw ?? '')
                 .replace(/&/g, '&amp;')
@@ -310,7 +314,10 @@
         function installGuardianPWA() {
             if (deferredGuardianPrompt) {
                 deferredGuardianPrompt.prompt();
-                deferredGuardianPrompt.userChoice.then(() => {
+                deferredGuardianPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the guardian app install');
+                    }
                     deferredGuardianPrompt = null;
                 });
             } else {
