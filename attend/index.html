@@ -3,464 +3,588 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IQRA ACADEMY - Admin QR Attendance Scanner PWA</title>
-    <link rel="manifest" href="manifest.json">
+    <title>IQRA ACADEMY - Guardian Live Tracking Portal (PWA)</title>
     <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg">
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#065f46">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <!-- html5-qrcode library for high-speed camera QR scanning -->
     <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #0f172a; color: #f8fafc; min-height: 100vh; padding: 1rem; }
+        body { background: linear-gradient(160deg, #064e3b 0%, #0f172a 100%); color: #f8fafc; min-height: 100vh; padding: 1rem; }
 
-        .app-shell { max-width: 960px; margin: 0 auto; }
+        .guardian-container { max-width: 540px; margin: 0 auto; }
 
-        .top-header {
-            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-            padding: 1rem 1.25rem; border-radius: 14px; display: flex; align-items: center;
-            justify-content: space-between; gap: 12px; flex-wrap: wrap; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            border: 1px solid #10b981; margin-bottom: 1.2rem;
+        .app-header {
+            text-align: center; padding: 1.1rem; background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; margin-bottom: 1.1rem;
+            backdrop-filter: blur(10px);
         }
-        .brand-row { display: flex; align-items: center; gap: 12px; }
-        .brand-row img { width: 46px; height: 46px; border-radius: 50%; border: 2px solid #fef08a; background: #fff; object-fit: cover; }
-        .brand-row h1 { font-size: 1.25rem; font-weight: 800; color: #fff; }
-        .brand-row p { font-size: 0.78rem; color: #a7f3d0; }
+        .app-header img { width: 54px; height: 54px; border-radius: 50%; border: 2px solid #fef08a; background: #fff; object-fit: cover; margin-bottom: 0.4rem; }
+        .app-header h1 { font-size: 1.25rem; font-weight: 800; color: #fff; }
+        .app-header p { font-size: 0.8rem; color: #a7f3d0; margin-top: 2px; }
 
-        .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .pwa-install-btn {
-            background: #fef08a; color: #065f46; border: none; padding: 0.55rem 0.95rem;
-            border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer;
-            display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-top: 0.65rem; background: #fef08a; color: #065f46; border: none;
+            padding: 0.5rem 1rem; border-radius: 99px; font-weight: 800; font-size: 0.78rem;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
         }
         .pwa-install-btn:hover { background: #fde047; }
-        .refresh-top-btn {
-            background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3);
-            padding: 0.52rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
-        }
-
-        .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; align-items: start; }
-        @media (max-width: 780px) { .main-grid { grid-template-columns: 1fr; } }
 
         .card {
-            background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 1.25rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
-        }
-        .card-title {
-            font-size: 1rem; font-weight: 700; color: #34d399; margin-bottom: 0.9rem;
-            padding-bottom: 0.45rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;
+            background: #1e293b; border: 1px solid #334155; border-radius: 18px; padding: 1.35rem;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35); margin-bottom: 1.1rem;
         }
 
-        /* মোড সিলেক্টর: IN vs OUT */
-        .mode-selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
-        .mode-btn {
-            padding: 0.7rem 0.5rem; border-radius: 10px; border: 2px solid #334155; background: #0f172a;
-            color: #cbd5e1; font-weight: 700; font-size: 0.82rem; cursor: pointer; text-align: center; transition: 0.2s;
-        }
-        .mode-btn.active-in { border-color: #22c55e; background: rgba(34,197,94,0.18); color: #4ade80; box-shadow: 0 0 15px rgba(34,197,94,0.3); }
-        .mode-btn.active-out { border-color: #ef4444; background: rgba(239,68,68,0.18); color: #f87171; box-shadow: 0 0 15px rgba(239,68,68,0.3); }
-        .mode-btn.active-auto { border-color: #38bdf8; background: rgba(56,189,248,0.18); color: #7dd3fc; }
+        #setupSection h2 { font-size: 1.05rem; color: #34d399; margin-bottom: 0.5rem; text-align: center; }
+        #setupSection p { font-size: 0.82rem; color: #cbd5e1; text-align: center; margin-bottom: 1rem; line-height: 1.45; }
+        #guardianQrReader { width: 100%; border-radius: 12px; overflow: hidden; background: #020617; border: 2px dashed #10b981; min-height: 230px; }
 
-        #reader {
-            width: 100%; border-radius: 12px; overflow: hidden; background: #020617;
-            border: 2px dashed #10b981; min-height: 250px;
+        .field-group { margin-top: 0.8rem; }
+        .field-group label { display: block; font-size: 0.78rem; font-weight: 700; color: #a7f3d0; margin-bottom: 4px; }
+        .field-group input {
+            width: 100%; padding: 0.68rem 0.8rem; border-radius: 10px; border: 1px solid #475569;
+            background: #0f172a; color: #fff; font-size: 0.9rem; outline: none;
         }
+        .field-group input:focus { border-color: #10b981; }
 
-        .scanner-controls { display: flex; gap: 8px; margin-top: 0.9rem; }
         .btn {
-            padding: 0.65rem 1rem; border-radius: 8px; border: none; font-weight: 700;
-            font-size: 0.85rem; cursor: pointer; flex: 1; color: #fff; transition: 0.2s;
+            padding: 0.68rem 1rem; border-radius: 10px; border: none; font-weight: 700;
+            font-size: 0.86rem; cursor: pointer; color: #fff; transition: 0.2s; display: inline-flex;
+            align-items: center; justify-content: center; gap: 6px;
         }
-        .btn-start { background: #10b981; }
-        .btn-start:hover { background: #059669; }
-        .btn-stop { background: #ef4444; }
-        .btn-stop:hover { background: #dc2626; }
+        .btn-emerald { background: #10b981; width: 100%; margin-top: 0.75rem; }
+        .btn-emerald:hover { background: #059669; }
+        .btn-blue { background: #0284c7; width: 100%; margin-top: 0.85rem; }
+        .btn-blue:hover { background: #0369a1; }
+        .btn-outline { background: transparent; border: 1px solid #64748b; color: #cbd5e1; font-size: 0.78rem; padding: 0.45rem 0.8rem; }
 
-        .manual-box { display: flex; gap: 8px; margin-top: 1rem; padding-top: 0.9rem; border-top: 1px solid #334155; }
-        .manual-box input {
-            flex: 1; padding: 0.6rem 0.75rem; border-radius: 8px; border: 1px solid #475569;
-            background: #0f172a; color: #fff; font-size: 0.88rem; outline: none;
+        .profile-top { display: flex; align-items: center; gap: 14px; padding-bottom: 1rem; border-bottom: 1px solid #334155; }
+        .student-avatar {
+            width: 84px; height: 96px; border-radius: 12px; border: 2.5px solid #10b981;
+            object-fit: cover; background: #0f172a; flex-shrink: 0;
         }
+        .student-meta h2 { font-size: 1.2rem; color: #fff; margin-bottom: 3px; }
+        .student-meta .badge {
+            display: inline-block; padding: 2px 9px; border-radius: 99px; font-size: 0.72rem;
+            font-weight: 700; background: #fef08a; color: #065f46; margin-bottom: 5px;
+        }
+        .student-meta p { font-size: 0.82rem; color: #cbd5e1; line-height: 1.45; }
 
-        /* অটো-ফেচ স্টুডেন্ট রেজাল্ট কার্ড */
-        .scan-result-card {
-            display: flex; flex-direction: column; align-items: center; text-align: center;
-            padding: 1.2rem; border-radius: 12px; background: #0f172a; border: 2px solid #334155;
-            min-height: 330px; justify-content: center; position: relative; transition: 0.3s;
+        .live-bulb-stage {
+            margin: 1.25rem 0; padding: 1.4rem 1rem; border-radius: 16px; text-align: center;
+            background: #0f172a; border: 2px solid #334155; transition: 0.3s;
         }
-        .scan-result-card.state-in { border-color: #22c55e; box-shadow: 0 0 28px rgba(34,197,94,0.22); }
-        .scan-result-card.state-out { border-color: #ef4444; box-shadow: 0 0 28px rgba(239,68,68,0.22); }
+        .live-bulb-stage.stage-in { border-color: #22c55e; background: radial-gradient(circle at center, rgba(34,197,94,0.18) 0%, #0f172a 75%); }
+        .live-bulb-stage.stage-out { border-color: #ef4444; background: radial-gradient(circle at center, rgba(239,68,68,0.18) 0%, #0f172a 75%); }
+        .live-bulb-stage.stage-loading { border-color: #f59e0b; background: radial-gradient(circle at center, rgba(245,158,11,0.16) 0%, #0f172a 75%); }
 
-        .student-photo-ring {
-            width: 110px; height: 110px; border-radius: 50%; border: 3px solid #10b981;
-            overflow: hidden; margin-bottom: 0.75rem; background: #1e293b; display: flex;
-            align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        .giant-bulb {
+            width: 78px; height: 78px; border-radius: 50%; margin: 0 auto 0.85rem auto;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem;
+            position: relative;
         }
-        .student-photo-ring img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* ব্লিঙ্কিং লাইভ বাল্ব */
-        .bulb-banner {
-            display: inline-flex; align-items: center; gap: 10px; padding: 0.5rem 1.1rem;
-            border-radius: 999px; font-weight: 800; font-size: 0.9rem; margin: 0.5rem 0 0.85rem 0;
+        .giant-bulb.green-blinking {
+            background: radial-gradient(circle at 35% 35%, #86efac, #22c55e 60%, #15803d 100%);
+            box-shadow: 0 0 25px #22c55e, 0 0 55px #22c55e, inset 0 0 12px #ffffff;
+            animation: guardianGreenBlink 1.1s infinite ease-in-out alternate;
         }
-        .bulb-in { background: rgba(34,197,94,0.2); color: #4ade80; border: 1px solid #22c55e; }
-        .bulb-out { background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid #ef4444; }
-
-        .bulb-dot { width: 14px; height: 14px; border-radius: 50%; display: inline-block; }
-        .dot-green {
-            background: #22c55e;
-            box-shadow: 0 0 12px #22c55e, 0 0 24px #22c55e;
-            animation: pulseGreen 1s infinite alternate;
+        .giant-bulb.red-blinking {
+            background: radial-gradient(circle at 35% 35%, #fca5a5, #ef4444 60%, #b91c1c 100%);
+            box-shadow: 0 0 25px #ef4444, 0 0 55px #ef4444, inset 0 0 12px #ffffff;
+            animation: guardianRedBlink 1.1s infinite ease-in-out alternate;
         }
-        .dot-red {
-            background: #ef4444;
-            box-shadow: 0 0 12px #ef4444, 0 0 24px #ef4444;
-            animation: pulseRed 1s infinite alternate;
-        }
-        @keyframes pulseGreen {
-            0% { transform: scale(0.9); opacity: 0.65; box-shadow: 0 0 6px #22c55e; }
-            100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 20px #22c55e, 0 0 35px #4ade80; }
-        }
-        @keyframes pulseRed {
-            0% { transform: scale(0.9); opacity: 0.65; box-shadow: 0 0 6px #ef4444; }
-            100% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 20px #ef4444, 0 0 35px #f87171; }
+        .giant-bulb.loading-pulse {
+            background: radial-gradient(circle at 35% 35%, #fde68a, #f59e0b 60%, #b45309 100%);
+            box-shadow: 0 0 20px #f59e0b, inset 0 0 10px #ffffff;
+            animation: guardianLoadingPulse 1.2s infinite ease-in-out alternate;
         }
 
-        .info-grid {
-            width: 100%; text-align: left; background: #1e293b; padding: 0.85rem 1rem;
-            border-radius: 10px; font-size: 0.84rem; line-height: 1.65; border: 1px solid #334155;
+        @keyframes guardianGreenBlink {
+            0% { transform: scale(0.92); opacity: 0.55; box-shadow: 0 0 10px #22c55e; }
+            100% { transform: scale(1.08); opacity: 1; box-shadow: 0 0 35px #22c55e, 0 0 70px #4ade80; }
         }
-        .info-grid div { display: flex; justify-content: space-between; border-bottom: 1px dashed #334155; padding: 2px 0; }
-        .info-grid div:last-child { border-bottom: none; }
-        .info-grid span.lbl { color: #94a3b8; font-weight: 600; }
-        .info-grid span.val { color: #f8fafc; font-weight: 700; }
+        @keyframes guardianRedBlink {
+            0% { transform: scale(0.92); opacity: 0.55; box-shadow: 0 0 10px #ef4444; }
+            100% { transform: scale(1.08); opacity: 1; box-shadow: 0 0 35px #ef4444, 0 0 70px #f87171; }
+        }
+        @keyframes guardianLoadingPulse {
+            0% { transform: scale(0.92); opacity: 0.55; box-shadow: 0 0 10px #f59e0b; }
+            100% { transform: scale(1.06); opacity: 1; box-shadow: 0 0 28px #f59e0b, 0 0 50px #fbbf24; }
+        }
 
-        .log-table-wrap { margin-top: 1.25rem; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: left; }
-        th { background: #065f46; color: #fff; padding: 9px 10px; }
-        td { padding: 8px 10px; border-bottom: 1px solid #334155; color: #cbd5e1; }
+        .bulb-status-title { font-size: 1.15rem; font-weight: 800; letter-spacing: 0.4px; }
+        .title-in { color: #4ade80; }
+        .title-out { color: #f87171; }
+        .title-loading { color: #fbbf24; }
+        .bulb-status-sub { font-size: 0.82rem; color: #cbd5e1; margin-top: 4px; }
+
+        .time-boxes { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 1rem; }
+        .time-box { background: #0f172a; border: 1px solid #334155; padding: 0.75rem; border-radius: 12px; text-align: center; }
+        .time-box .t-lbl { font-size: 0.74rem; color: #94a3b8; font-weight: 600; }
+        .time-box .t-val { font-size: 0.92rem; font-weight: 800; margin-top: 3px; }
+
+        .map-card { margin-top: 1rem; background: #0f172a; border: 1px solid #334155; border-radius: 14px; padding: 0.85rem; }
+        .map-card h3 { font-size: 0.92rem; color: #34d399; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .map-container-box { width: 100%; height: 260px; border-radius: 10px; overflow: hidden; border: 1.5px solid #475569; background: #1e293b; }
+        .map-container-box iframe { width: 100%; height: 100%; border: none; }
+        .driver-status-badge { font-size: 0.7rem; padding: 3px 8px; border-radius: 8px; font-weight: 700; background: #22c55e; color: #022c22; }
+
+        .history-list { margin-top: 0.75rem; max-height: 180px; overflow-y: auto; }
+        .history-item {
+            display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0.65rem;
+            border-bottom: 1px solid #334155; font-size: 0.78rem;
+        }
+        .history-item:last-child { border-bottom: none; }
+
+        .install-modal-backdrop {
+            position: fixed; inset: 0; background: rgba(2,6,23,0.75); display: none;
+            align-items: center; justify-content: center; z-index: 9999; padding: 1rem;
+        }
+        .install-modal-box {
+            background: #1e293b; border: 1px solid #10b981; border-radius: 16px; max-width: 420px;
+            width: 100%; padding: 1.4rem; color: #f8fafc; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body>
-    <div class="app-shell">
-        <div class="top-header">
-            <div class="brand-row">
-                <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="IQRA Logo">
-                <div>
-                    <h1>IQRA ACADEMY - Admin Attendance Scanner</h1>
-                    <p>QR ইন-টাইম ও ছুটির টাইম স্ক্যানার (PWA App)</p>
+    <div class="guardian-container">
+        <div class="app-header">
+            <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="IQRA Logo">
+            <h1>IQRA ACADEMY - অভিভাবক পোর্টাল</h1>
+            <p>Guardian Live Tracking PWA • স্কুল এন্ট্রি ও গাড়ির রিয়েল-टाइम জিপিএস ম্যাপ</p>
+            <button id="installGuardianBtn" class="pwa-install-btn" onclick="installGuardianPWA()">📲 অ্যাপটি ফোনে ইনস্টল করুন (Install App)</button>
+        </div>
+
+        <!-- ১. ওয়ান-টাইম সেটআপ সেকশন -->
+        <div class="card" id="setupSection">
+            <h2>🔐 এককালীন আইডি কার্ড ও পাসওয়ার্ড যাচাই</h2>
+            <p>আপনার সন্তানের আইডি কার্ডের QR কোড স্ক্যান করুন (অথবা আইডি লিখুন) এবং সিকিউরিটি পাসওয়ার্ড বা রেজিস্টার্ড মোবাইল নম্বর দিয়ে লগইন করুন।</p>
+
+            <div id="guardianQrReader"></div>
+            <button class="btn btn-emerald" onclick="startGuardianCamera()">📷 ক্যামেরা দিয়ে QR স্ক্যান করুন</button>
+
+            <div class="field-group">
+                <label>শিক্ষার্থীর আইডি নম্বর (Student ID) *</label>
+                <input type="text" id="guardianStudentIdInput" placeholder="যেমন: IQRA-50607">
+            </div>
+
+            <div class="field-group">
+                <label>সিকিউরিটি পাসওয়ার্ড অথবা রেজিস্টার্ড মোবাইল নম্বর *</label>
+                <input type="password" id="guardianSecretPassInput" placeholder="গোপন পাসওয়ার্ড বা ১০ সংখ্যার মোবাইল নম্বর">
+            </div>
+
+            <button class="btn btn-blue" id="btnBindGuardian" onclick="bindStudentManually()">🔒 যাচাই ও সেভ করুন</button>
+            <p id="setupErrorMsg" style="color:#f87171; margin-top:0.6rem; display:none;"></p>
+        </div>
+
+        <!-- ২. লাইভ ট্র্যাকিং ড্যাশবোর্ড -->
+        <div class="card" id="liveDashboardSection" style="display:none;">
+            <div class="profile-top">
+                <img id="gStudentPhoto" class="student-avatar" referrerpolicy="no-referrer" src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="Student Photo">
+                <div class="student-meta">
+                    <span class="badge" id="gStudentCategory">অনাবাসিক</span>
+                    <h2 id="gStudentName">লোড হচ্ছে...</h2>
+                    <p>
+                        <strong>ID:</strong> <span id="gStudentId">---</span><br>
+                        <strong>শ্রেণী:</strong> <span id="gStudentClass">---</span> | <strong>রোল:</strong> <span id="gStudentRoll">---</span><br>
+                        <strong>ড্রাইভার কোড:</strong> <span id="gDriverBadgeVal" style="color:#fef08a; font-family:monospace;">---</span>
+                    </p>
                 </div>
             </div>
-            <div class="header-actions">
-                <button class="refresh-top-btn" onclick="fetchRecentLogs()">🔄 রিফ্রেশ লগ</button>
-                <button id="installPwaBtn" class="pwa-install-btn" onclick="installPWA()">📲 Install Admin App</button>
+
+            <div class="live-bulb-stage stage-loading" id="gBulbStage">
+                <div class="giant-bulb loading-pulse" id="gBulbIcon">⏳</div>
+                <div class="bulb-status-title title-loading" id="gBulbTitle">তথ্য লোড হচ্ছে...</div>
+                <div class="bulb-status-sub" id="gBulbSub">স্কুল সার্ভার থেকে লাইভ স্ট্যাটাস যাচাই করা হচ্ছে...</div>
+            </div>
+
+            <div class="time-boxes">
+                <div class="time-box">
+                    <div class="t-lbl">🟢 আজকের প্রবেশ (In Time)</div>
+                    <div class="t-val" id="gLastIn" style="color:#4ade80;">---</div>
+                </div>
+                <div class="time-box">
+                    <div class="t-lbl">🔴 সর্বশেষ ছুটি (Quit Time)</div>
+                    <div class="t-val" id="gLastOut" style="color:#f87171;">---</div>
+                </div>
+            </div>
+
+            <div class="map-card" id="vehicleMapCard" style="display:none;">
+                <h3>
+                    <span>🚐 গাড়ির লাইভ লোকেশন</span>
+                    <span class="driver-status-badge">🟢 ONLINE</span>
+                </h3>
+                <div style="font-size:0.75rem; color:#cbd5e1; margin-bottom:8px;" id="driverInfoSub"></div>
+                <div class="map-container-box">
+                    <iframe id="googleMapFrame" src="" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            
+            <div id="driverOfflineMsg" style="display:none; text-align:center; padding:1rem; background:#334155; border-radius:12px; margin-top:1rem; font-size:0.85rem; color:#94a3b8;">
+                🚐 বর্তমানে গাড়ির জিপিএস ট্র্যাকিং বন্ধ (Offline) আছে।
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1.1rem; padding-top:0.85rem; border-top:1px solid #334155;">
+                <span id="gLastSynced" style="font-size:0.74rem; color:#94a3b8;">তথ্য সংযোগ করা হচ্ছে...</span>
+                <div style="display:flex; gap:6px;">
+                    <button class="btn btn-outline" onclick="refreshGuardianStatus()">🔄 রিফ্রেশ</button>
+                    <button class="btn btn-outline" style="border-color:#ef4444; color:#fca5a5;" onclick="unbindStudentCard()">🚪 লগআউট / অন্য কার্ড</button>
+                </div>
             </div>
         </div>
 
-        <div class="main-grid">
-            <!-- বাম পাশ: ক্যামেরা QR স্ক্যানার -->
-            <div class="card">
-                <div class="card-title">
-                    <span>📷 আইডি কার্ড QR স্ক্যানার</span>
-                    <span id="scanStateBadge" style="font-size:0.75rem; color:#fde047;">প্রস্তুত</span>
-                </div>
-
-                <div class="mode-selector">
-                    <button class="mode-btn active-in" id="modeInBtn" onclick="setScanMode('IN')">🟢 প্রবেশ (IN TIME)</button>
-                    <button class="mode-btn" id="modeOutBtn" onclick="setScanMode('OUT')">🔴 ছুটি (QUIT TIME)</button>
-                    <button class="mode-btn" id="modeAutoBtn" onclick="setScanMode('AUTO')">⚡ অটো টগল</button>
-                </div>
-
-                <div id="reader"></div>
-
-                <div class="scanner-controls">
-                    <button class="btn btn-start" onclick="startCameraScanner()">▶️ ক্যামেরা চালু করুন</button>
-                    <button class="btn btn-stop" onclick="stopCameraScanner()">⏹️ ক্যামেরা বন্ধ</button>
-                </div>
-
-                <div class="manual-box">
-                    <input type="text" id="manualStudentId" placeholder="ম্যানুয়াল আইডি (যেমন: IQRA-50607)" onkeydown="if(event.key==='Enter') submitManualScan()">
-                    <button class="btn btn-start" style="flex:0; white-space:nowrap;" onclick="submitManualScan()">✅ এন্ট্রি দিন</button>
-                </div>
-            </div>
-
-            <!-- ডান পাশ: অটো-ফেচ স্টুডেন্ট প্রোফাইল ও লাইভ স্ট্যাটাস -->
-            <div class="card">
-                <div class="card-title">
-                    <span>👤 অটো-ফেচ শিক্ষার্থী ও স্ট্যাটাস</span>
-                    <span id="scanClock" style="font-size:0.75rem; color:#94a3b8;">--:--:--</span>
-                </div>
-
-                <div class="scan-result-card" id="resultCard">
-                    <div class="student-photo-ring">
-                        <img id="resPhoto" src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="Student">
-                    </div>
-                    <h2 id="resName" style="font-size:1.2rem; color:#fff;">কার্ড স্ক্যান করার অপেক্ষায়...</h2>
-                    <p id="resSub" style="font-size:0.82rem; color:#94a3b8; margin-top:2px;">শিক্ষার্থীর QR কোড ক্যামেরার সামনে ধরুন</p>
-
-                    <div id="resBulbWrap" class="bulb-banner bulb-in" style="display:none;">
-                        <span id="resBulbDot" class="bulb-dot dot-green"></span>
-                        <span id="resBulbText">SAFELY IN (নিরাপদে স্কুলে প্রবেশ)</span>
-                    </div>
-
-                    <div class="info-grid" style="margin-top:0.6rem;">
-                        <div><span class="lbl">আইডি নম্বর:</span> <span class="val" id="resId">---</span></div>
-                        <div><span class="lbl">শ্রেণী ও রোল:</span> <span class="val" id="resClassRoll">---</span></div>
-                        <div><span class="lbl">ভর্তির ধরন:</span> <span class="val" id="resCategory">---</span></div>
-                        <div><span class="lbl">অভিভাবকের ফোন:</span> <span class="val" id="resPhone">---</span></div>
-                        <div><span class="lbl">প্রবেশ সময় (In Time):</span> <span class="val" id="resInTime" style="color:#4ade80;">---</span></div>
-                        <div><span class="lbl">ছুটির সময় (Quit Time):</span> <span class="val" id="resOutTime" style="color:#f87171;">---</span></div>
-                    </div>
-                </div>
+        <!-- ৩. সাম্প্রতিক হিস্ট্রি -->
+        <div class="card" id="historyCard" style="display:none;">
+            <h3 style="font-size:0.95rem; color:#34d399; margin-bottom:0.5rem;">📅 সাম্প্রতিক প্রবেশ ও ছুটির সময়সূচী</h3>
+            <div class="history-list" id="gHistoryList">
+                <div class="history-item">লোড হচ্ছে...</div>
             </div>
         </div>
+    </div>
 
-        <!-- নিচের অংশ: আজকের স্ক্যান লগ -->
-        <div class="card log-table-wrap">
-            <div class="card-title">
-                <span>📋 সাম্প্রতিক অ্যাটেনডেন্স লগ (Live Sheet Sync)</span>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>সময়</th>
-                        <th>আইডি</th>
-                        <th>শিক্ষার্থীর নাম</th>
-                        <th>ক্লাস ও রোল</th>
-                        <th>স্ট্যাটাস</th>
-                        <th>প্রবেশ (In)</th>
-                        <th>ছুটি (Out)</th>
-                    </tr>
-                </thead>
-                <tbody id="attendanceLogBody">
-                    <tr><td colspan="7" style="text-align:center; padding:16px; color:#94a3b8;">কোনো স্ক্যান লগ এখনো লোড হয়নি।</td></tr>
-                </tbody>
-            </table>
+    <!-- ইনস্টল গাইড মডাল -->
+    <div class="install-modal-backdrop" id="guardianInstallModal">
+        <div class="install-modal-box">
+            <h3 style="color:#34d399; font-size:1.05rem; margin-bottom:0.6rem;">📲 অভিভাবক অ্যাপ ইনস্টল করার নিয়ম</h3>
+            <p style="font-size:0.84rem; color:#cbd5e1; line-height:1.55; margin-bottom:0.9rem;">
+                ১. পেজটি অবশ্যই <strong>GitHub Pages (HTTPS)</strong> লিঙ্কে ওপেন করুন।<br>
+                ২. Chrome ব্রাউজারের উপরের ডানদিকের <strong>⋮ (Three Dots)</strong> মেনুতে ট্যাপ করুন।<br>
+                ৩. <strong>"Install app"</strong> বা <strong>"Add to Home screen"</strong>-এ ক্লিক করলেই অ্যাপটি আপনার ফোনের হোম স্ক্রিনে চলে আসবে!
+            </p>
+            <button class="btn btn-emerald" style="margin-top:0;" onclick="closeGuardianInstallModal()">ঠিক আছে</button>
         </div>
     </div>
 
     <script>
         const GAS_API_URL = "https://script.google.com/macros/s/AKfycbyNL0w90Z5JYEr_G2Uxz2uv3h3iEdqzghX87AFo9BoDEKB63kgYp7GaIRtkV8RedIud/exec";
 
-        let currentScanMode = "IN";
-        let html5QrScanner = null;
-        let isScanningLocked = false;
-        let deferredPrompt = null;
+        let guardianQrScanner = null;
+        let boundStudentId = "";
+        let boundGuardianPass = "";
+        let pollTimer = null;
+        let deferredGuardianPrompt = null;
 
-        // PWA ইনস্টল প্রম্পট ইভেন্ট ক্যাপচার
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            const installBtn = document.getElementById("installPwaBtn");
-            if (installBtn) {
-                installBtn.style.display = "inline-flex";
-            }
-        });
-
-        // Service Worker রেজিস্ট্রিউশন
+        // Service Worker রেজিস্ট্রেশন PWA ইনস্টলের জন্য
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('Service Worker Registered!', reg))
-                    .catch(err => console.log('Service Worker registration failed: ', err));
+                    .then(reg => console.log('Guardian PWA Service Worker Registered', reg))
+                    .catch(err => console.log('SW registration failed', err));
             });
         }
 
-        // Install PWA ফাংশন
-        function installPWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    deferredPrompt = null;
-                });
-            } else {
-                alert('অ্যাপটি ইতিমধ্যে ইনস্টল করা আছে অথবা আপনার ব্রাউজার সরাসরি ইনস্টল সমর্থন করছে না। অ্যান্ড্রয়েড মোবাইলে Chrome ব্রাউজারের ওপরের ডানপাশের তিন ডট মেনু (⋮) থেকে "Install app" বা "Add to Home screen" অপশন ব্যবহার করুন।');
-            }
+        function escapeHtml(raw) {
+            return String(raw ?? '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
         window.onload = function() {
-            setInterval(() => {
-                document.getElementById("scanClock").innerText = new Date().toLocaleTimeString();
-            }, 1000);
-            fetchRecentLogs();
+            try {
+                boundStudentId = localStorage.getItem("IQRA_GUARDIAN_STUDENT_ID") || "";
+                boundGuardianPass = localStorage.getItem("IQRA_GUARDIAN_PASS") || "";
+            } catch (e) {}
+
+            if (boundStudentId && boundGuardianPass) {
+                showLiveDashboard(boundStudentId);
+            }
+            if (window.matchMedia("(display-mode: standalone)").matches) {
+                document.getElementById("installGuardianBtn").style.display = "none";
+            }
         };
+
+        window.addEventListener("beforeinstallprompt", e => {
+            e.preventDefault();
+            deferredGuardianPrompt = e;
+            document.getElementById("installGuardianBtn").style.display = "inline-flex";
+        });
+
+        window.addEventListener("appinstalled", () => {
+            deferredGuardianPrompt = null;
+            document.getElementById("installGuardianBtn").style.display = "none";
+        });
+
+        function installGuardianPWA() {
+            if (deferredGuardianPrompt) {
+                deferredGuardianPrompt.prompt();
+                deferredGuardianPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the guardian app install');
+                    }
+                    deferredGuardianPrompt = null;
+                });
+            } else {
+                document.getElementById("guardianInstallModal").style.display = "flex";
+            }
+        }
+
+        function closeGuardianInstallModal() {
+            document.getElementById("guardianInstallModal").style.display = "none";
+        }
 
         function getApiUrl() {
             return GAS_API_URL;
         }
 
-        function setScanMode(mode) {
-            currentScanMode = mode;
-            document.getElementById("modeInBtn").className = "mode-btn" + (mode === "IN" ? " active-in" : "");
-            document.getElementById("modeOutBtn").className = "mode-btn" + (mode === "OUT" ? " active-out" : "");
-            document.getElementById("modeAutoBtn").className = "mode-btn" + (mode === "AUTO" ? " active-auto" : "");
-        }
-
-        function playBeep(isSuccess) {
-            try {
-                const ctx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = ctx.createOscillator();
-                const gain = ctx.createGain();
-                osc.type = isSuccess ? "sine" : "sawtooth";
-                osc.frequency.setValueAtTime(isSuccess ? 880 : 240, ctx.currentTime);
-                gain.gain.setValueAtTime(0.18, ctx.currentTime);
-                osc.connect(gain);
-                gain.connect(ctx.destination);
-                osc.start();
-                osc.stop(ctx.currentTime + (isSuccess ? 0.18 : 0.35));
-            } catch (e) {}
-        }
-
-        function startCameraScanner() {
-            if (html5QrScanner) return;
-            document.getElementById("scanStateBadge").innerText = "ক্যামেরা চালু হচ্ছে...";
-            html5QrScanner = new Html5Qrcode("reader");
-            html5QrScanner.start(
+        function startGuardianCamera() {
+            if (guardianQrScanner) return;
+            guardianQrScanner = new Html5Qrcode("guardianQrReader");
+            guardianQrScanner.start(
                 { facingMode: "environment" },
-                { fps: 10, qrbox: { width: 220, height: 220 } },
+                { fps: 10, qrbox: { width: 210, height: 210 } },
                 decodedText => {
-                    if (isScanningLocked) return;
-                    isScanningLocked = true;
-                    processScannedCode(decodedText);
-                    setTimeout(() => { isScanningLocked = false; }, 3000);
+                    stopGuardianCamera();
+                    let cleanId = decodedText.trim();
+                    if (cleanId.startsWith("{")) {
+                        try {
+                            const obj = JSON.parse(cleanId);
+                            if (obj.id) cleanId = obj.id;
+                        } catch (e) {}
+                    }
+                    document.getElementById("guardianStudentIdInput").value = cleanId;
+                    const passVal = document.getElementById("guardianSecretPassInput").value.trim();
+                    if (passVal) {
+                        bindStudentManually();
+                    } else {
+                        const errEl = document.getElementById("setupErrorMsg");
+                        errEl.style.display = "block";
+                        errEl.style.color = "#fde047";
+                        errEl.innerText = "✅ আইডি কার্ড স্ক্যান হয়েছে! এবার নিচে সিকিউরিটি পাসওয়ার্ড বা মোবাইল নম্বর দিয়ে সেভ করুন।";
+                        document.getElementById("guardianSecretPassInput").focus();
+                    }
                 },
                 () => {}
-            ).then(() => {
-                document.getElementById("scanStateBadge").innerText = "🟢 স্ক্যানিং সক্রিয়";
-            }).catch(() => {
-                document.getElementById("scanStateBadge").innerText = "ক্যামেরা পারমিশন প্রয়োজন";
-                html5QrScanner = null;
+            ).catch(() => {
+                guardianQrScanner = null;
             });
         }
 
-        function stopCameraScanner() {
-            if (!html5QrScanner) return;
-            html5QrScanner.stop().then(() => {
-                html5QrScanner.clear();
-                html5QrScanner = null;
-                document.getElementById("scanStateBadge").innerText = "⏹️ বন্ধ";
+        function stopGuardianCamera() {
+            if (!guardianQrScanner) return;
+            guardianQrScanner.stop().then(() => {
+                guardianQrScanner.clear();
+                guardianQrScanner = null;
             }).catch(() => {});
         }
 
-        function submitManualScan() {
-            const val = document.getElementById("manualStudentId").value.trim();
-            if (!val) return;
-            processScannedCode(val);
-            document.getElementById("manualStudentId").value = "";
-        }
+        async function bindStudentManually() {
+            const rawId = document.getElementById("guardianStudentIdInput").value.trim();
+            const passVal = document.getElementById("guardianSecretPassInput").value.trim();
+            const errEl = document.getElementById("setupErrorMsg");
+            errEl.style.display = "none";
 
-        function processScannedCode(rawCode) {
-            document.getElementById("scanStateBadge").innerText = "⏳ সার্ভারের সাথে মিলানো হচ্ছে...";
-            const apiUrl = getApiUrl();
+            if (!rawId || !passVal) {
+                errEl.style.color = "#f87171";
+                errEl.innerText = "অনুগ্রহ করে শিক্ষার্থীর আইডি এবং সিকিউরিটি পাসওয়ার্ড / মোবাইল নম্বর উভয়ই দিন!";
+                errEl.style.display = "block";
+                return;
+            }
 
-            fetch(apiUrl, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({
-                    action: "markAttendance",
-                    id: rawCode,
-                    mode: currentScanMode,
-                    scannedBy: "School Gate Admin"
-                })
-            })
-            .then(r => r.json())
-            .then(res => {
-                if (res && res.success) {
-                    playBeep(true);
-                    fetchStudentLiveStatus(rawCode);
-                    fetchRecentLogs();
-                    document.getElementById("scanStateBadge").innerText = "✅ স্ক্যান সফল!";
-                } else {
-                    playBeep(false);
-                    document.getElementById("scanStateBadge").innerText = "❌ " + (res ? res.error : "পাওয়া যায়নি");
+            let cleanId = rawId;
+            if (cleanId.startsWith("{")) {
+                try {
+                    const obj = JSON.parse(cleanId);
+                    if (obj.id) cleanId = obj.id;
+                } catch (e) {}
+            }
+
+            const btn = document.getElementById("btnBindGuardian");
+            btn.disabled = true;
+            btn.innerText = "⏳ যাচাই করা হচ্ছে...";
+
+            try {
+                const res = await fetch(getApiUrl(), {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify({
+                        action: "getStudent",
+                        id: cleanId,
+                        guardianPassword: passVal
+                    })
+                });
+                const data = await res.json();
+                if (!data || !data.success || !data.student) {
+                    throw new Error(data.error || "আইডি বা পাসওয়ার্ড সঠিক নয়!");
                 }
-            })
-            .catch(() => {
-                playBeep(false);
-                document.getElementById("scanStateBadge").innerText = "নেটওয়ার্ক এরর";
-            });
+                boundStudentId = cleanId;
+                boundGuardianPass = passVal;
+                try {
+                    localStorage.setItem("IQRA_GUARDIAN_STUDENT_ID", boundStudentId);
+                    localStorage.setItem("IQRA_GUARDIAN_PASS", boundGuardianPass);
+                } catch (e) {}
+                showLiveDashboard(boundStudentId);
+            } catch (err) {
+                errEl.style.color = "#f87171";
+                errEl.innerText = err.message || "যাচাই ব্যর্থ হয়েছে!";
+                errEl.style.display = "block";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "🔒 যাচাই ও সেভ করুন";
+            }
         }
 
-        function fetchStudentLiveStatus(studentId) {
+        function setBulbLoading() {
+            const stage = document.getElementById("gBulbStage");
+            const bulb = document.getElementById("gBulbIcon");
+            const title = document.getElementById("gBulbTitle");
+            const sub = document.getElementById("gBulbSub");
+
+            if (stage) stage.className = "live-bulb-stage stage-loading";
+            if (bulb) {
+                bulb.className = "giant-bulb loading-pulse";
+                bulb.innerText = "⏳";
+            }
+            if (title) {
+                title.className = "bulb-status-title title-loading";
+                title.innerText = "তথ্য লোড হচ্ছে...";
+            }
+            if (sub) {
+                sub.innerText = "স্কুল সার্ভার থেকে লাইভ স্ট্যাটাস যাচাই করা হচ্ছে...";
+            }
+        }
+
+        function showLiveDashboard(studentId) {
+            document.getElementById("setupSection").style.display = "none";
+            document.getElementById("liveDashboardSection").style.display = "block";
+            document.getElementById("historyCard").style.display = "block";
+
+            setBulbLoading();
+
+            refreshGuardianStatus();
+            if (pollTimer) clearInterval(pollTimer);
+            pollTimer = setInterval(refreshGuardianStatus, 10000);
+        }
+
+        function unbindStudentCard() {
+            if (pollTimer) clearInterval(pollTimer);
+            boundStudentId = "";
+            boundGuardianPass = "";
+            try {
+                localStorage.removeItem("IQRA_GUARDIAN_STUDENT_ID");
+                localStorage.removeItem("IQRA_GUARDIAN_PASS");
+            } catch (e) {}
+            document.getElementById("liveDashboardSection").style.display = "none";
+            document.getElementById("historyCard").style.display = "none";
+            document.getElementById("setupSection").style.display = "block";
+            document.getElementById("guardianSecretPassInput").value = "";
+            setBulbLoading();
+        }
+
+        function refreshGuardianStatus() {
+            if (!boundStudentId || !boundGuardianPass) return;
+
             fetch(getApiUrl(), {
                 method: "POST",
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({
                     action: "getStudent",
-                    id: studentId,
-                    guardianPassword: "IQRA@Admin#2027"
+                    id: boundStudentId,
+                    guardianPassword: boundGuardianPass
                 })
             })
-            .then(r => r.json())
-            .then(res => {
-                if (res && res.success && res.student) {
-                    renderScannedStudent(res.student);
-                }
-            }).catch(()=>{});
-        }
-
-        function renderScannedStudent(st) {
-            const card = document.getElementById("resultCard");
-            const isInside = String(st.liveStatus).toUpperCase() === "IN";
-
-            card.className = "scan-result-card " + (isInside ? "state-in" : "state-out");
-            document.getElementById("resPhoto").src = st.photoUrl || "https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg";
-            document.getElementById("resName").innerText = st.name;
-            document.getElementById("resSub").innerText = `${st.category} (${st.gender})`;
-
-            const bulbWrap = document.getElementById("resBulbWrap");
-            const bulbDot = document.getElementById("resBulbDot");
-            const bulbText = document.getElementById("resBulbText");
-            bulbWrap.style.display = "inline-flex";
-
-            if (isInside) {
-                bulbWrap.className = "bulb-banner bulb-in";
-                bulbDot.className = "bulb-dot dot-green";
-                bulbText.innerText = "SAFELY IN (নিরাপদে স্কুলে প্রবেশ করেছে)";
-            } else {
-                bulbWrap.className = "bulb-banner bulb-out";
-                bulbDot.className = "bulb-dot dot-red";
-                bulbText.innerText = "SAFELY QUIT / OUT (নিরাপদে ছুটি হয়েছে)";
-            }
-
-            document.getElementById("resId").innerText = st.id;
-            document.getElementById("resClassRoll").innerText = `${st.studentClass} | Roll: ${st.roll}`;
-            document.getElementById("resCategory").innerText = st.category;
-            document.getElementById("resPhone").innerText = st.phone || "-";
-            document.getElementById("resInTime").innerText = st.lastInTime || "-";
-            document.getElementById("resOutTime").innerText = st.lastOutTime || "-";
-        }
-
-        function fetchRecentLogs() {
-            const apiUrl = getApiUrl() + "?action=getRecentAttendance&pass=IQRA@Admin#2027";
-            fetch(apiUrl)
                 .then(r => r.json())
                 .then(res => {
-                    if (!res || !res.success || !Array.isArray(res.logs) || res.logs.length === 0) return;
-                    const tbody = document.getElementById("attendanceLogBody");
-                    tbody.innerHTML = res.logs.map(l => {
-                        const isIn = String(l.status).toUpperCase() === "IN";
-                        const pill = isIn
-                            ? `<span style="color:#4ade80; font-weight:700;">🟢 IN</span>`
-                            : `<span style="color:#f87171; font-weight:700;">🔴 OUT</span>`;
-                        return `<tr>
-                            <td>${l.fullTimestamp || l.date}</td>
-                            <td style="font-family:monospace; color:#34d399;">${l.studentId}</td>
-                            <td><strong>${l.name}</strong></td>
-                            <td>${l.studentClass} (Roll: ${l.roll})</td>
-                            <td>${pill}</td>
-                            <td>${l.inTime || "-"}</td>
-                            <td>${l.outTime || "-"}</td>
-                        </tr>`;
-                    }).join("");
+                    if (res && res.code === "UNAUTHORIZED") {
+                        unbindStudentCard();
+                        return;
+                    }
+                    const stage = document.getElementById("gBulbStage");
+                    const bulb = document.getElementById("gBulbIcon");
+                    const title = document.getElementById("gBulbTitle");
+                    const sub = document.getElementById("gBulbSub");
+
+                    if (!res || !res.success || !res.student) {
+                        document.getElementById("gLastSynced").innerText = "আইডি খুঁজে পাওয়া যায়নি (" + boundStudentId + ")";
+                        if (stage) stage.className = "live-bulb-stage";
+                        if (bulb) {
+                            bulb.className = "giant-bulb";
+                            bulb.innerText = "⚠️";
+                        }
+                        if (title) {
+                            title.className = "bulb-status-title";
+                            title.style.color = "#f87171";
+                            title.innerText = "কোনো তথ্য পাওয়া যায়নি";
+                        }
+                        if (sub) {
+                            sub.innerText = "শিক্ষার্থীর আইডি সঠিক আছে কিনা যাচাই করুন।";
+                        }
+                        return;
+                    }
+
+                    const st = res.student;
+                    document.getElementById("gStudentPhoto").src = st.photoUrl || "https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg";
+                    document.getElementById("gStudentCategory").innerText = `${st.category} (${st.gender})`;
+                    document.getElementById("gStudentName").innerText = st.name;
+                    document.getElementById("gStudentId").innerText = st.id;
+                    document.getElementById("gStudentClass").innerText = st.studentClass;
+                    document.getElementById("gStudentRoll").innerText = st.roll;
+                    document.getElementById("gDriverBadgeVal").innerText = st.driverCode || "অ্যাসাইন করা হয়নি";
+
+                    const isInside = String(st.liveStatus || "OUT").toUpperCase() === "IN";
+
+                    if (isInside) {
+                        stage.className = "live-bulb-stage stage-in";
+                        bulb.className = "giant-bulb green-blinking";
+                        bulb.innerText = "💡";
+                        title.className = "bulb-status-title title-in";
+                        title.innerText = "🟢 SAFELY IN (নিরাপদে স্কুলে প্রবেশ)";
+                        sub.innerText = "সবুজ বাতি জ্বলছে: আপনার সন্তান এখন নিরাপদে স্কুল ক্যাম্পাসে আছে।";
+                    } else {
+                        stage.className = "live-bulb-stage stage-out";
+                        bulb.className = "giant-bulb red-blinking";
+                        bulb.innerText = "💡";
+                        title.className = "bulb-status-title title-out";
+                        title.innerText = "🔴 SAFELY QUIT (নিরাপদে ছুটি হয়েছে)";
+                        sub.innerText = "লাল বাতি জ্বলছে: আপনার সন্তান স্কুল থেকে নিরাপদে ছুটি নিয়ে প্রস্থান করেছে।";
+                    }
+
+                    document.getElementById("gLastIn").innerText = st.lastInTime || "-";
+                    document.getElementById("gLastOut").innerText = st.lastOutTime || "-";
+                    document.getElementById("gLastSynced").innerText = "আপডেট: " + new Date().toLocaleTimeString();
+
+                    const mapCard = document.getElementById("vehicleMapCard");
+                    const mapFrame = document.getElementById("googleMapFrame");
+                    const driverSub = document.getElementById("driverInfoSub");
+                    const offlineMsg = document.getElementById("driverOfflineMsg");
+
+                    if (res.driver && res.driver.lat && res.driver.lat !== "OFFLINE" && res.driver.lng && res.driver.lng !== "OFFLINE") {
+                        const lat = encodeURIComponent(res.driver.lat);
+                        const lng = encodeURIComponent(res.driver.lng);
+                        mapFrame.src = `https://maps.google.com/maps?q=${lat},${lng}&z=16&output=embed`;
+                        driverSub.innerText = `${res.driver.driverName} • ${res.driver.vehicleName}`;
+                        
+                        mapCard.style.display = "block";
+                        offlineMsg.style.display = "none";
+                    } else {
+                        mapCard.style.display = "none";
+                        offlineMsg.style.display = "block";
+                    }
+
+                    const historyEl = document.getElementById("gHistoryList");
+                    if (Array.isArray(res.history) && res.history.length > 0) {
+                        historyEl.innerHTML = res.history.map(h => {
+                            const isIn = String(h.status).toUpperCase() === "IN";
+                            return `<div class="history-item">
+                                <span><strong>${escapeHtml(h.fullTimestamp || h.date)}</strong></span>
+                                <span style="color:${isIn ? '#4ade80' : '#f87171'}; font-weight:700;">
+                                    ${isIn ? '🟢 প্রবেশ (Safely In)' : '🔴 ছুটি (Safely Quit)'}
+                                </span>
+                            </div>`;
+                        }).join("");
+                    } else {
+                        historyEl.innerHTML = `<div class="history-item" style="color:#94a3b8;">এখনো কোনো স্ক্যান রেকর্ড জমা হয়নি।</div>`;
+                    }
                 })
-                .catch(() => {});
+                .catch(() => {
+                    document.getElementById("gLastSynced").innerText = "কানেকশন চেক করা হচ্ছে...";
+                });
         }
     </script>
 </body>
