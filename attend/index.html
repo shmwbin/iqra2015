@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IQRA ACADEMY - Admin QR Attendance Scanner PWA</title>
     <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg">
+    <!-- PWA Manifest Link -->
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#065f46">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -28,12 +30,16 @@
         .brand-row p { font-size: 0.78rem; color: #a7f3d0; }
 
         .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        
+        /* অভিভাবক অ্যাপের স্টাইলের সাথে মিল রেখে আকর্ষণীয় ইনস্টল বাটন ও ব্যানার */
         .pwa-install-btn {
-            background: #fef08a; color: #065f46; border: none; padding: 0.55rem 0.95rem;
-            border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer;
-            display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background: #fef08a; color: #065f46; border: none; padding: 0.55rem 1.1rem;
+            border-radius: 99px; font-weight: 800; font-size: 0.8rem; cursor: pointer;
+            display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: 0.2s;
         }
-        .pwa-install-btn:hover { background: #fde047; }
+        .pwa-install-btn:hover { background: #fde047; transform: translateY(-1px); }
+
         .refresh-top-btn {
             background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.3);
             padding: 0.52rem 0.85rem; border-radius: 8px; font-weight: 700; font-size: 0.8rem; cursor: pointer;
@@ -51,7 +57,6 @@
             padding-bottom: 0.45rem; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;
         }
 
-        /* মোড সিলেক্টর: IN vs OUT */
         .mode-selector { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
         .mode-btn {
             padding: 0.7rem 0.5rem; border-radius: 10px; border: 2px solid #334155; background: #0f172a;
@@ -82,7 +87,6 @@
             background: #0f172a; color: #fff; font-size: 0.88rem; outline: none;
         }
 
-        /* অটো-ফেচ স্টুডেন্ট রেজাল্ট কার্ড */
         .scan-result-card {
             display: flex; flex-direction: column; align-items: center; text-align: center;
             padding: 1.2rem; border-radius: 12px; background: #0f172a; border: 2px solid #334155;
@@ -98,7 +102,6 @@
         }
         .student-photo-ring img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* ব্লিঙ্কিং লাইভ বাল্ব */
         .bulb-banner {
             display: inline-flex; align-items: center; gap: 10px; padding: 0.5rem 1.1rem;
             border-radius: 999px; font-weight: 800; font-size: 0.9rem; margin: 0.5rem 0 0.85rem 0;
@@ -153,7 +156,8 @@
             </div>
             <div class="header-actions">
                 <button class="refresh-top-btn" onclick="fetchRecentLogs()">🔄 রিফ্রেশ লগ</button>
-                <button id="installPwaBtn" class="pwa-install-btn" onclick="installPWA()">📲 Install Admin App</button>
+                <!-- স্থায়ী হলুদ ইনস্টল ব্যানার বাটন -->
+                <button id="installPwaBtn" class="pwa-install-btn" onclick="installPWA()">📲 অ্যাপটি ফোনে ইনস্টল করুন (Install App)</button>
             </div>
         </div>
 
@@ -247,7 +251,46 @@
         let isScanningLocked = false;
         let deferredPrompt = null;
 
+        // Service Worker রেজিস্ট্রেশন PWA ইনস্টলের জন্য
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Admin PWA Service Worker Registered', reg))
+                    .catch(err => console.log('SW registration failed', err));
+            });
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
+
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            const installBtn = document.getElementById("installPwaBtn");
+            if (installBtn) {
+                installBtn.style.display = "none";
+            }
+        });
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('অ্যাপটি ইতিমধ্যে ইনস্টল করা আছে অথবা আপনার ব্রাউজার সরাসরি ইনস্টল প্রম্পট সমর্থন করছে না। অ্যান্ড্রয়েড মোবাইলে Chrome ব্রাউজারের ওপরের ডানপাশের তিন ডট মেনু (⋮) থেকে "Install app" বা "Add to Home screen" অপশন ব্যবহার করুন।');
+            }
+        }
+
         window.onload = function() {
+            if (window.matchMedia("(display-mode: standalone)").matches) {
+                document.getElementById("installPwaBtn").style.display = "none";
+            }
             setInterval(() => {
                 document.getElementById("scanClock").innerText = new Date().toLocaleTimeString();
             }, 1000);
@@ -336,8 +379,6 @@
             .then(res => {
                 if (res && res.success) {
                     playBeep(true);
-                    // সফল হলে শিক্ষার্থীর সম্পূর্ণ স্ট্যাটাস ফেচ করার জন্য getStudent কল করা যেতে পারে অথবা attendance log থেকে আপডেট করা যায়। 
-                    // এখানে সরাসরি সার্ভার থেকে স্টুডেন্ট স্ট্যাটাস আনতে নিচের ফেচ করা হচ্ছে:
                     fetchStudentLiveStatus(rawCode);
                     fetchRecentLogs();
                     document.getElementById("scanStateBadge").innerText = "✅ স্ক্যান সফল!";
@@ -359,7 +400,7 @@
                 body: JSON.stringify({
                     action: "getStudent",
                     id: studentId,
-                    guardianPassword: "IQRA@Admin#2027" // বা মাস্টার পাসওয়ার্ড দিয়ে স্ক্যানার আপডেট করতে পারে
+                    guardianPassword: "IQRA@Admin#2027"
                 })
             })
             .then(r => r.json())
