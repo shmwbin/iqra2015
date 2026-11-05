@@ -68,7 +68,7 @@
       html, body {
         background: #ffffff !important;
         color: #000000 !important;
-        margin: 0 !important;
+         margin: 0 !important;
         padding: 0 !important;
         height: auto !important;
         min-height: 0 !important;
@@ -93,14 +93,14 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-600 selection:text-white min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-600 selection:text-white min-h-screen w-full flex flex-col justify-between">
 
   <!-- Printable A4 Slip Container -->
   <div id="print-container" class="hidden"></div>
 
   <!-- TOP BAR & QUICK ACTIONS -->
-  <div class="bg-slate-900 text-slate-200 text-xs py-1.5 px-4 border-b border-slate-800 sticky top-0 z-50 shadow-md">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+  <div class="bg-slate-900 text-slate-200 text-xs py-1.5 px-4 sm:px-6 lg:px-10 border-b border-slate-800 sticky top-0 z-50 shadow-md w-full">
+    <div class="w-full flex flex-wrap justify-between items-center gap-2">
       <div class="flex items-center gap-3">
         <span class="flex items-center gap-1.5 font-medium">
           <i class="fa-solid fa-graduation-cap text-amber-400"></i>
@@ -110,22 +110,18 @@
         <span class="hidden sm:inline text-slate-600">|</span>
         <span class="hidden sm:flex items-center gap-1 text-slate-300">
           <i class="fa-solid fa-calendar-check text-emerald-400"></i>
-          <span>প্রতিষ্ঠিত: <b>২০১৫</b></span>
+          <span>প্রতিষ্ঠিত: <b id="top-estd-badge">...</b></span>
         </span>
       </div>
 
-      <div class="flex items-center gap-2">
-        <a href="https://iqraacademy.co.in/guardian/" class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+      <div class="flex flex-wrap items-center gap-2">
+        <a href="https://iqraacademy.co.in/guardian/" class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold bg-emerald-950/80 hover:bg-emerald-900 px-2.5 py-0.5 rounded-full border border-emerald-500/30 transition">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>📲 অভিভাবক অ্যাপটি ফোনে ইনস্টল করুন (Install App)</span>
+          <span>📲 <span class="hidden md:inline">অভিভাবক অ্যাপটি ফোনে ইনস্টল করুন (</span>Guardian App<span class="hidden md:inline">)</span></span>
         </a>
-        <a href="https://iqraacademy.co.in/driver-app/" class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+        <a href="https://iqraacademy.co.in/driver-app/" class="inline-flex items-center gap-1.5 text-[11px] text-emerald-400 font-bold bg-emerald-950/80 hover:bg-emerald-900 px-2.5 py-0.5 rounded-full border border-emerald-500/30 transition">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>📍 Driver অ্যাপটি ফোনে ইনস্টল করুন (Install App)</span>
-        </a>
-        <a href="https://iqraacademy.co.in/admin.html" class="px-3 py-1 rounded font-bold text-xs transition flex items-center gap-1.5 bg-slate-800 hover:bg-amber-500 hover:text-slate-950 text-amber-300 border border-amber-400/30">
-          <i class="fa-solid fa-lock text-amber-400"></i>
-          <span>অ্যাডমিন পোর্টাল</span>
+          <span>📍 <span class="hidden md:inline">Driver অ্যাপটি ফোনে ইনস্টল করুন (</span>Driver App<span class="hidden md:inline">)</span></span>
         </a>
       </div>
     </div>
@@ -135,24 +131,24 @@
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
   <!-- Top Contact Bar -->
-  <div class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 border-b border-emerald-800">
-    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+  <div class="bg-emerald-950 text-emerald-100 text-xs py-2 px-4 sm:px-6 lg:px-10 border-b border-emerald-800 w-full">
+    <div class="w-full flex flex-wrap justify-between items-center gap-2">
       <div class="flex items-center gap-4">
         <span class="flex items-center gap-1.5">
           <i class="fa-solid fa-location-dot text-amber-400"></i>
           <span>Dakshin Shibpur, Jadurhati, Baduria, North 24 Parganas, PIN-743293</span>
         </span>
       </div>
-      <div class="flex items-center gap-3">
-        <a href="tel:9775123096" id="top-phone-link-1" class="flex items-center gap-1 text-emerald-200 hover:text-white transition font-semibold">
+      <div class="flex items-center gap-3 ml-auto sm:ml-0">
+        <a href="#contact" id="top-phone-link-1" class="flex items-center gap-1 text-emerald-200 hover:text-white transition font-semibold">
           <i class="fa-solid fa-phone text-amber-400"></i>
-          <span id="top-phone-1">9775123096</span>
+          <span id="top-phone-1">লোড হচ্ছে...</span>
         </a>
-        <span class="text-emerald-700">/</span>
-        <a href="tel:9647109481" id="top-phone-link-2" class="hidden sm:inline-block text-emerald-200 hover:text-white transition font-semibold">
-          <span id="top-phone-2">9647109481</span>
+        <span id="top-phone-sep" class="text-emerald-700 hidden">/</span>
+        <a href="#contact" id="top-phone-link-2" class="hidden text-emerald-200 hover:text-white transition font-semibold">
+          <span id="top-phone-2"></span>
         </a>
-        <a id="header-app-download-link" href="#app-download-section" class="bg-green-600 hover:bg-green-500 text-white px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-bold transition ml-1 shadow-sm cursor-pointer">
+        <a id="header-app-download-link" href="#app-download-section" class="bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded-full flex items-center gap-1.5 text-xs font-bold transition ml-1 shadow-sm cursor-pointer">
           <i class="fa-solid fa-mobile-screen-button text-sm"></i>
           <span>📲 App Download</span>
         </a>
@@ -161,28 +157,30 @@
   </div>
 
   <!-- Main Branding Header -->
-  <header class="bg-white text-slate-800 shadow-sm border-b border-slate-100">
-    <div class="max-w-7xl mx-auto px-4 py-3.5 flex items-center justify-between gap-4">
+  <header class="bg-white text-slate-800 shadow-sm border-b border-slate-100 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10 py-3.5 flex items-center justify-between gap-4">
       <!-- Logo & Title -->
-      <a href="#home" class="flex items-center gap-3.5 md:gap-5 group">
+      <a href="#home" class="flex items-center gap-3 sm:gap-5 group min-w-0">
         <img 
           src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" 
           alt="PVT. IQRA ACADEMY LOGO" 
-          class="w-16 h-16 md:w-20 md:h-20 rounded-full border-2 border-emerald-600 shadow-md object-cover group-hover:scale-105 transition duration-300"
+          class="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full border-2 border-emerald-600 shadow-md object-cover shrink-0 group-hover:scale-105 transition duration-300"
         />
-        <div>
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2 py-0.5 rounded tracking-wider uppercase border border-emerald-200">PVT.</span>
-            <span class="text-xs font-bold text-amber-700 tracking-wider">ESTD: 2015</span>
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-0.5">
+            <span class="bg-emerald-100 text-emerald-800 text-[10px] sm:text-[11px] font-bold px-2 py-0.5 rounded tracking-wider uppercase border border-emerald-200">PVT.</span>
+            <span class="text-[11px] sm:text-xs font-bold text-amber-700 tracking-wider">ESTD: <span id="header-estd-text">...</span></span>
             <span class="hidden md:inline-block text-slate-300">•</span>
             <span class="hidden md:inline-block text-xs font-semibold text-slate-500 font-mono">UDISE: 19111008505</span>
           </div>
-          <h1 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-emerald-900 leading-tight">
-            ইকরা অ্যাকাডেমি <span class="text-amber-600 text-lg md:text-2xl font-bold font-serif">(IQRA ACADEMY)</span>
+          <h1 class="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-emerald-900 leading-tight truncate">
+            ইকরা অ্যাকাডেমি <span class="text-amber-600 text-sm sm:text-lg md:text-2xl font-bold font-serif">(IQRA ACADEMY)</span>
           </h1>
-          <p class="text-sm md:text-base font-bold text-emerald-800 flex items-center gap-2 mt-0.5">
-            <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
-            আবাসিক গার্লস মিশন <span class="text-slate-300 font-normal">|</span> <span class="text-xs md:text-sm font-medium text-slate-600">Residential Girls' Mission</span>
+          <p class="text-xs sm:text-sm md:text-base font-bold text-emerald-800 flex flex-wrap items-center gap-1.5 sm:gap-2 mt-0.5">
+            <span class="inline-block w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+            <span>আবাসিক গার্লস মিশন</span>
+            <span class="text-slate-300 font-normal hidden sm:inline">|</span>
+            <span class="text-[11px] sm:text-xs md:text-sm font-medium text-slate-600 hidden sm:inline">Residential Girls' Mission</span>
           </p>
           <p class="hidden sm:block text-xs text-slate-600 mt-1 font-semibold tracking-wide">
             শিক্ষা • শৃঙ্খলা • আত্মবিশ্বাস • উজ্জ্বল ভবিষ্যৎ
@@ -191,7 +189,7 @@
       </a>
 
       <!-- Header CTA Buttons -->
-      <div class="hidden lg:flex items-center gap-3">
+      <div class="hidden lg:flex items-center gap-4 shrink-0">
         <div class="text-right border-r border-slate-200 pr-4">
           <span class="text-[11px] text-slate-500 uppercase font-bold block">২০২৭ শিক্ষাবর্ষ</span>
           <span class="text-sm font-extrabold text-amber-700">ভর্তি চলছে (Pre-Nursery - IX)</span>
@@ -203,104 +201,100 @@
       </div>
 
       <!-- Mobile Menu Toggle Button -->
-      <button id="btn-mobile-menu-toggle" aria-label="Toggle Menu" class="lg:hidden text-emerald-900 hover:text-emerald-700 p-2.5 rounded-xl border border-emerald-100 bg-emerald-50 focus:outline-none cursor-pointer">
-        <i class="fa-solid fa-bars text-2xl"></i>
+      <button id="btn-mobile-menu-toggle" aria-label="Toggle Menu" class="lg:hidden text-emerald-900 hover:text-emerald-700 p-2.5 rounded-xl border border-emerald-100 bg-emerald-50 focus:outline-none cursor-pointer shrink-0">
+        <i class="fa-solid fa-bars text-xl sm:text-2xl"></i>
       </button>
     </div>
   </header>
 
   <!-- Main Navigation Bar -->
-  <nav class="bg-emerald-900 text-white sticky top-7 z-40 shadow-md">
-    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+  <nav class="bg-emerald-900 text-white sticky top-7 z-40 shadow-md w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10 flex justify-between items-center">
       <!-- Navigation Links -->
-      <div class="hidden lg:flex items-center gap-1 py-1">
-        <a href="#home" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-amber-300 flex items-center gap-1.5">
-          <i class="fa-solid fa-house text-xs"></i>
-          <span>হোম</span>
-        </a>
-        <a href="#about" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-school text-xs"></i>
-          <span>পরিচিতি</span>
-        </a>
-        <a href="#streams" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-book-open text-xs"></i>
-          <span>পঠন-পাঠন</span>
-        </a>
-        <a href="#residential" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-hotel text-xs"></i>
-          <span>আবাসিক মিশন</span>
-        </a>
-        <a href="#management" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-users-gear text-xs"></i>
-          <span>পরিচালনা</span>
-        </a>
-        <a href="#admissions" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-id-card text-xs"></i>
-          <span>ভর্তি নির্দেশিকা</span>
-        </a>
-        <a href="#notices" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-bullhorn text-xs"></i>
-          <span>নোটিশ বোর্ড</span>
-        </a>
-        <a href="#gallery" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-images text-xs"></i>
-          <span>গ্যালারি</span>
-        </a>
-        <a href="#contact" class="px-4 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
-          <i class="fa-solid fa-envelope text-xs"></i>
-          <span>যোগাযোগ</span>
-        </a>
-      </div>
+      <div class="hidden lg:flex items-center justify-between w-full py-1">
+        <div class="flex items-center gap-1 xl:gap-2">
+          <a href="#home" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-amber-300 flex items-center gap-1.5">
+            <i class="fa-solid fa-house text-xs"></i>
+            <span>হোম</span>
+          </a>
+          <a href="#about" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-school text-xs"></i>
+            <span>পরিচিতি</span>
+          </a>
+          <a href="#streams" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-book-open text-xs"></i>
+            <span>পঠন-পাঠন</span>
+          </a>
+          <a href="#residential" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-hotel text-xs"></i>
+            <span>আবাসিক মিশন</span>
+          </a>
+          <a href="#management" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-users-gear text-xs"></i>
+            <span>পরিচালনা</span>
+          </a>
+          <a href="#admissions" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-id-card text-xs"></i>
+            <span>ভর্তি নির্দেশিকা</span>
+          </a>
+          <a href="#notices" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-bullhorn text-xs"></i>
+            <span>নোটিশ বোর্ড</span>
+          </a>
+          <a href="#gallery" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-images text-xs"></i>
+            <span>গ্যালারি</span>
+          </a>
+          <a href="#contact" class="px-3.5 py-2.5 rounded-lg text-sm font-semibold transition hover:bg-emerald-800 text-emerald-100 hover:text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-envelope text-xs"></i>
+            <span>যোগাযোগ</span>
+          </a>
+        </div>
 
-      <!-- Admin Jump Link in Navigation -->
-      <div class="hidden lg:flex items-center gap-2">
-        <a href="https://iqraacademy.co.in/admin.html" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-slate-950 hover:bg-amber-400 shadow">
-          <i class="fa-solid fa-lock text-xs"></i>
-          <span>অ্যাডমিন পোর্টাল</span>
-        </a>
+        <button type="button" onclick="openAdmissionModal()" class="px-4 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-slate-950 hover:bg-amber-400 shadow cursor-pointer">
+          <i class="fa-solid fa-file-pen text-xs"></i>
+          <span>ভর্তি ফরম ২০২৭</span>
+        </button>
       </div>
     </div>
 
     <!-- Mobile Dropdown Menu -->
     <div id="mobile-nav-menu" class="hidden lg:hidden bg-emerald-950 border-t border-emerald-800 px-4 py-3 space-y-1">
-      <a href="#home" class="block px-3 py-2 rounded text-sm text-amber-300 font-semibold hover:bg-emerald-800">হোম</a>
-      <a href="#about" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">পরিচিতি</a>
-      <a href="#streams" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">পঠন-পাঠন (৪টি শিক্ষাধারা)</a>
-      <a href="#residential" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">আবাসিক গার্লস মিশন</a>
-      <a href="#management" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">পরিচালনা (Director & Secretary)</a>
-      <a href="#admissions" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">ভর্তি নির্দেশিকা ২০২৭</a>
-      <a href="#notices" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">নোটিশ বোর্ড</a>
-      <a href="#gallery" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">গ্যালারি ও ক্যাম্পাস</a>
-      <a href="#contact" class="block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">যোগাযোগ</a>
+      <a href="#home" class="mobile-nav-link block px-3 py-2 rounded text-sm text-amber-300 font-semibold hover:bg-emerald-800">হোম</a>
+      <a href="#about" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">পরিচিতি</a>
+      <a href="#streams" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">পঠন-পাঠন (৪টি শিক্ষাধারা)</a>
+      <a href="#residential" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">আবাসিক গার্লস মিশন</a>
+      <a href="#management" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">পরিচালনা (Director & Secretary)</a>
+      <a href="#admissions" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">ভর্তি নির্দেশিকা ২০২৭</a>
+      <a href="#notices" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">নোটিশ বোর্ড</a>
+      <a href="#gallery" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">গ্যালারি ও ক্যাম্পাস</a>
+      <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded text-sm text-emerald-100 hover:bg-emerald-800">যোগাযোগ</a>
       <div class="pt-2 border-t border-emerald-800 flex flex-col gap-2">
-        <button type="button" id="btn-mobile-apply" onclick="openAdmissionModal()" class="w-full text-center py-2.5 rounded-lg bg-emerald-600 text-white font-bold text-sm block cursor-pointer">
-          <i class="fa-solid fa-file-pen mr-1 text-amber-300"></i> ভর্তি আবেদন করুন
+        <button type="button" id="btn-mobile-apply" onclick="openAdmissionModal()" class="w-full text-center py-2.5 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm block cursor-pointer shadow">
+          <i class="fa-solid fa-file-pen mr-1"></i> ভর্তি আবেদন করুন
         </button>
-        <a href="https://iqraacademy.co.in/admin.html" class="w-full text-center py-2.5 rounded-lg bg-amber-500 text-slate-900 font-bold text-sm block">
-          <i class="fa-solid fa-lock mr-1"></i> অ্যাডমিন ডেটা এন্ট্রি
-        </a>
       </div>
     </div>
   </nav>
 
   <!-- Dynamic Marquee Announcement Ticker (Syncs with Published CSV / Apps Script) -->
-  <div class="bg-amber-50 border-y border-amber-200 py-2 px-4 overflow-hidden">
-    <div class="max-w-7xl mx-auto w-full flex items-center">
+  <div class="bg-amber-50 border-y border-amber-200 py-2 px-4 sm:px-6 lg:px-10 overflow-hidden w-full">
+    <div class="w-full flex items-center">
       <div class="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-md flex items-center gap-1.5 uppercase tracking-wider shrink-0 shadow-sm mr-3">
         <i class="fa-solid fa-bullhorn animate-bounce text-amber-200"></i>
         <span>ঘোষণা</span>
       </div>
       <div class="overflow-hidden relative flex-1 text-xs md:text-sm text-slate-800 font-bold">
         <div id="live-marquee-text" class="animate-marquee hover:pause">
-          📢 <span id="dynamic-mar">২০২৭ শিক্ষাবর্ষে প্রি-নার্সারি থেকে নবম শ্রেণি পর্যন্ত অনাবাসিক, ডে-বোর্ডিং ও আবাসিক বালিকা বিভাগে ভর্তি চলছে! আসন সংখ্যা সীমিত। যোগাযোগ: ৯৭৭৫১২৩০৯৬ / ৯৬৪৭১০৯৪৮১</span>
+          📢 <span id="dynamic-mar">সর্বশেষ ঘোষণা ও আপডেট লোড হচ্ছে...</span>
         </div>
       </div>
     </div>
   </div>
 
   <!-- HERO PHOTO BANNER CAROUSEL (5 Banners Sync from Drive / Sheet) -->
-  <section id="home" class="relative bg-slate-900 text-white overflow-hidden">
-    <div class="relative h-[420px] md:h-[540px] lg:h-[620px] w-full">
+  <section id="home" class="relative bg-slate-900 text-white overflow-hidden w-full">
+    <div class="relative h-[400px] sm:h-[480px] md:h-[560px] lg:h-[650px] w-full">
       <div id="hero-slider" class="relative w-full h-full">
         <!-- 5 Banner Image Slides -->
         <div class="carousel-slide absolute inset-0 opacity-100 z-10 transition-all duration-1000">
@@ -327,31 +321,31 @@
 
       <!-- Hero Content Overlay -->
       <div class="absolute inset-0 z-20 flex items-center">
-        <div class="max-w-7xl mx-auto px-4 w-full">
-          <div class="max-w-2xl text-left space-y-4 md:space-y-6">
-            <div class="inline-flex items-center gap-2 bg-emerald-900/85 backdrop-blur-md text-amber-300 px-4 py-1.5 rounded-full text-xs md:text-sm font-bold border border-emerald-500/40 shadow-lg">
+        <div class="w-full px-4 sm:px-8 lg:px-16">
+          <div class="max-w-3xl text-left space-y-3 sm:space-y-5">
+            <div class="inline-flex items-center gap-2 bg-emerald-900/85 backdrop-blur-md text-amber-300 px-3.5 py-1.5 rounded-full text-xs md:text-sm font-bold border border-emerald-500/40 shadow-lg">
               <i class="fa-solid fa-star text-amber-400"></i>
               <span>২০২৭ শিক্ষাবর্ষে ভর্তি শুরু • আবাসিক বালিকা মিশন</span>
             </div>
 
-            <h2 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight drop-shadow-md">
+            <h2 class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight drop-shadow-md">
               জ্ঞান অর্জন, চরিত্র গঠন এবং <span class="text-amber-400">সুন্দর ভবিষ্যৎ নির্মাণ</span>
             </h2>
 
-            <p class="text-base md:text-lg text-slate-200 font-medium leading-relaxed drop-shadow">
+            <p class="text-sm sm:text-base md:text-lg text-slate-200 font-medium leading-relaxed drop-shadow max-w-2xl">
               ইসলামি আদর্শ, নৈতিক মূল্যবোধ ও আধুনিক শিক্ষার এক অপূর্ব মিলনমেলা। কন্যাশিক্ষার্থীদের জন্য সুশৃঙ্খল, নিরাপদ ও স্নেহময় আবাসিক এবং ডে-বোর্ডিং পরিবেশ।
             </p>
 
-            <div class="flex flex-wrap items-center gap-3 pt-2">
-              <button type="button" id="btn-hero-apply" onclick="openAdmissionModal()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-6 py-3.5 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2 text-sm md:text-base cursor-pointer">
+            <div class="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2">
+              <button type="button" id="btn-hero-apply" onclick="openAdmissionModal()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2 text-xs sm:text-sm md:text-base cursor-pointer">
                 <i class="fa-solid fa-paper-plane text-slate-900"></i>
                 <span>ভর্তি আবেদন করুন ২০২৭</span>
               </button>
-              <a href="#admissions" class="bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold px-5 py-3.5 rounded-xl border border-white/30 transition flex items-center gap-2 text-sm md:text-base">
+              <a href="#admissions" class="bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold px-4 sm:px-5 py-3 sm:py-3.5 rounded-xl border border-white/30 transition flex items-center gap-2 text-xs sm:text-sm md:text-base">
                 <i class="fa-solid fa-file-pdf text-amber-300"></i>
                 <span>ভর্তি নির্দেশিকা ও তথ্য</span>
               </a>
-              <a href="https://iqraacademy.co.in/faculty-staff.html" target="_blank" rel="noopener noreferrer" class="bg-emerald-900/80 hover:bg-gradient-to-r hover:from-purple-600 hover:via-blue-600 hover:to-pink-500 text-emerald-100 hover:text-white font-bold px-4 py-3.5 rounded-xl border border-emerald-700/50 hover:border-purple-300/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5 flex items-center gap-2 text-sm md:text-base">
+              <a href="https://iqraacademy.co.in/faculty-staff.html" target="_blank" rel="noopener noreferrer" class="bg-emerald-900/80 hover:bg-gradient-to-r hover:from-purple-600 hover:via-blue-600 hover:to-pink-500 text-emerald-100 hover:text-white font-bold px-4 py-3 sm:py-3.5 rounded-xl border border-emerald-700/50 hover:border-purple-300/50 transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/30 hover:-translate-y-0.5 flex items-center gap-2 text-xs sm:text-sm md:text-base">
                 <i class="fa-solid fa-users"></i>
                 <span>Faculty & Staff</span>
               </a>
@@ -361,54 +355,62 @@
       </div>
 
       <!-- Slider Controls -->
-      <button id="btn-carousel-prev" aria-label="Previous Slide" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-emerald-800 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition border border-white/20 backdrop-blur-sm cursor-pointer">
-        <i class="fa-solid fa-chevron-left text-lg"></i>
+      <button id="btn-carousel-prev" aria-label="Previous Slide" class="absolute left-2 sm:left-5 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-emerald-800 text-white w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition border border-white/20 backdrop-blur-sm cursor-pointer">
+        <i class="fa-solid fa-chevron-left text-sm sm:text-lg"></i>
       </button>
-      <button id="btn-carousel-next" aria-label="Next Slide" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-emerald-800 text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition border border-white/20 backdrop-blur-sm cursor-pointer">
-        <i class="fa-solid fa-chevron-right text-lg"></i>
+      <button id="btn-carousel-next" aria-label="Next Slide" class="absolute right-2 sm:right-5 top-1/2 -translate-y-1/2 z-30 bg-black/40 hover:bg-emerald-800 text-white w-9 h-9 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition border border-white/20 backdrop-blur-sm cursor-pointer">
+        <i class="fa-solid fa-chevron-right text-sm sm:text-lg"></i>
       </button>
 
       <!-- Slider Indicators -->
-      <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5 bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
-        <button data-slide="0" class="carousel-dot w-3 h-3 rounded-full bg-amber-400 transition" aria-label="Slide 1"></button>
-        <button data-slide="1" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 2"></button>
-        <button data-slide="2" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 3"></button>
-        <button data-slide="3" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 4"></button>
-        <button data-slide="4" class="carousel-dot w-3 h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 5"></button>
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5 bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10">
+        <button data-slide="0" class="carousel-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-400 transition" aria-label="Slide 1"></button>
+        <button data-slide="1" class="carousel-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 2"></button>
+        <button data-slide="2" class="carousel-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 3"></button>
+        <button data-slide="3" class="carousel-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 4"></button>
+        <button data-slide="4" class="carousel-dot w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/40 hover:bg-white transition" aria-label="Slide 5"></button>
       </div>
     </div>
   </section>
 
-  <!-- STATS COUNTER BAR (Syncs from Sheet) -->
-  <div class="bg-emerald-950 text-white py-6 border-y border-emerald-800">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+  <!-- STATS COUNTER BAR (100% Real-time Sync from Sheet, No Hardcoded Default Data) -->
+  <div class="bg-emerald-950 text-white py-6 border-y border-emerald-800 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div class="space-y-1">
-        <div class="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono" id="stat-estd">২০১৫</div>
+        <div class="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono" id="stat-estd">
+          <i class="fa-solid fa-spinner fa-spin text-lg opacity-60"></i>
+        </div>
         <div class="text-xs md:text-sm text-emerald-200 font-semibold">প্রতিষ্ঠিত সাল</div>
       </div>
       <div class="space-y-1">
-        <div class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-students">180+</div>
+        <div class="text-2xl md:text-3xl font-extrabold text-white font-mono" id="stat-students">
+          <i class="fa-solid fa-spinner fa-spin text-lg opacity-60"></i>
+        </div>
         <div class="text-xs md:text-sm text-emerald-200 font-semibold">ছাত্রী ও শিক্ষার্থী</div>
       </div>
       <div class="space-y-1">
-        <div class="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono" id="stat-teachers">15</div>
+        <div class="text-2xl md:text-3xl font-extrabold text-amber-400 font-mono" id="stat-teachers">
+          <i class="fa-solid fa-spinner fa-spin text-lg opacity-60"></i>
+        </div>
         <div class="text-xs md:text-sm text-emerald-200 font-semibold">অভিজ্ঞ শিক্ষক-শিক্ষিকা</div>
       </div>
       <div class="space-y-1">
-        <div class="text-2xl md:text-3xl font-extrabold text-emerald-400 font-mono" id="stat-pass">১০০%</div>
+        <div class="text-2xl md:text-3xl font-extrabold text-emerald-400 font-mono" id="stat-pass">
+          <i class="fa-solid fa-spinner fa-spin text-lg opacity-60"></i>
+        </div>
         <div class="text-xs md:text-sm text-emerald-200 font-semibold">সাফল্য ও নৈতিক বিকাশ</div>
       </div>
     </div>
   </div>
 
   <!-- 4 CORE STREAMS SECTION -->
-  <section id="streams" class="py-16 md:py-20 bg-slate-100">
-    <div class="max-w-7xl mx-auto px-4">
+  <section id="streams" class="py-14 md:py-20 bg-slate-100 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
       <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">
           আমাদের শিক্ষাব্যবস্থা ও বিভাগ
         </span>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
           ৪টি স্বতন্ত্র শিক্ষাধারায় শিক্ষার্থীদের <span class="text-emerald-700">সর্বাঙ্গীণ বিকাশ</span>
         </h2>
         <p class="text-slate-600 text-sm md:text-base leading-relaxed">
@@ -416,7 +418,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Stream 1: অনাবাসিক -->
         <div class="card-hover bg-white rounded-2xl p-6 border-t-4 border-emerald-600 shadow-sm flex flex-col justify-between">
@@ -438,7 +440,7 @@
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> সাপ্তাহিক মূল্যায়ন পরীক্ষা</li>
             </ul>
           </div>
-          <button class="btn-stream-details w-full py-2 bg-slate-50 hover:bg-emerald-50 text-emerald-800 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="day-scholar">
+          <button class="btn-stream-details w-full py-2.5 bg-slate-50 hover:bg-emerald-50 text-emerald-800 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="day-scholar">
             বিস্তারিত বিবরণ দেখুন
           </button>
         </div>
@@ -466,7 +468,7 @@
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-600"></i> খেলাধুলা ও সহপাঠ্যক্রম</li>
             </ul>
           </div>
-          <button class="btn-stream-details w-full py-2 bg-slate-50 hover:bg-amber-50 text-amber-900 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="day-boarding">
+          <button class="btn-stream-details w-full py-2.5 bg-slate-50 hover:bg-amber-50 text-amber-900 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="day-boarding">
             বিস্তারিত বিবরণ দেখুন
           </button>
         </div>
@@ -491,7 +493,7 @@
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-teal-600"></i> স্বাস্থ্যসম্মত খাবার ও ৪ বার আহার</li>
             </ul>
           </div>
-          <button class="btn-stream-details w-full py-2 bg-slate-50 hover:bg-teal-50 text-teal-900 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="residential">
+          <button class="btn-stream-details w-full py-2.5 bg-slate-50 hover:bg-teal-50 text-teal-900 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="residential">
             বিস্তারিত বিবরণ দেখুন
           </button>
         </div>
@@ -516,7 +518,7 @@
               <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-600"></i> স্পোকেন ইংলিশ ও ডিজিটাল দক্ষতা</li>
             </ul>
           </div>
-          <button class="btn-stream-details w-full py-2 bg-slate-50 hover:bg-purple-50 text-purple-900 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="girls-mission">
+          <button class="btn-stream-details w-full py-2.5 bg-slate-50 hover:bg-purple-50 text-purple-900 font-bold text-xs rounded-lg border border-slate-200 transition cursor-pointer" data-stream="girls-mission">
             বিস্তারিত বিবরণ দেখুন
           </button>
         </div>
@@ -526,9 +528,9 @@
   </section>
 
   <!-- ABOUT US SECTION -->
-  <section id="about" class="py-16 md:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+  <section id="about" class="py-14 md:py-24 bg-white w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
         <!-- Institution Building Image -->
         <div class="lg:col-span-5 space-y-4">
@@ -536,17 +538,17 @@
             <img 
               src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.13.49_PM.jpg" 
               alt="Iqra Academy Institution Building" 
-              class="w-full h-[400px] md:h-[480px] object-cover group-hover:scale-105 transition duration-500"
+              class="w-full h-[320px] sm:h-[400px] md:h-[460px] object-cover group-hover:scale-105 transition duration-500"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-transparent to-transparent"></div>
             
-            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-slate-100">
-              <div class="flex items-center justify-between">
+            <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3.5 sm:p-4 rounded-2xl shadow-lg border border-slate-100">
+              <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h4 class="font-bold text-slate-900 text-sm">ইকরা অ্যাকাডেমি মূল ক্যাম্পাস</h4>
-                  <p class="text-xs text-slate-600">দক্ষিণ শিবপুর, যদুরহাটি, বাদুড়িয়া</p>
+                  <h4 class="font-bold text-slate-900 text-xs sm:text-sm">ইকরা অ্যাকাডেমি মূল ক্যাম্পাস</h4>
+                  <p class="text-[11px] sm:text-xs text-slate-600">দক্ষিণ শিবপুর, যদুরহাটি, বাদুড়িয়া</p>
                 </div>
-                <span class="bg-emerald-700 text-white font-bold text-xs px-2.5 py-1 rounded-lg font-mono">
+                <span class="bg-emerald-700 text-white font-bold text-[11px] sm:text-xs px-2.5 py-1 rounded-lg font-mono">
                   UDISE: 19111008505
                 </span>
               </div>
@@ -555,15 +557,15 @@
 
           <div class="grid grid-cols-3 gap-3 text-center">
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-              <span class="block text-emerald-800 font-extrabold text-base">১০০%</span>
-              <span class="text-[11px] text-slate-500 font-medium">নিরাপদ হোস্টেল</span>
+              <span class="block text-emerald-800 font-extrabold text-sm sm:text-base">নিরাপদ</span>
+              <span class="text-[11px] text-slate-500 font-medium">হোস্টেল ক্যাম্পাস</span>
             </div>
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-              <span class="block text-amber-600 font-extrabold text-base">WBBSE</span>
+              <span class="block text-amber-600 font-extrabold text-sm sm:text-base">WBBSE</span>
               <span class="text-[11px] text-slate-500 font-medium">আধুনিক পাঠক্রম</span>
             </div>
             <div class="bg-slate-50 p-3 rounded-xl border border-slate-100">
-              <span class="block text-teal-700 font-extrabold text-base">দ্বীনি শিক্ষা</span>
+              <span class="block text-teal-700 font-extrabold text-sm sm:text-base">দ্বীনি শিক্ষা</span>
               <span class="text-[11px] text-slate-500 font-medium">কুরআন ও আদব</span>
             </div>
           </div>
@@ -575,21 +577,21 @@
             <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-emerald-200">
               আমাদের পরিচিতি ও লক্ষ্য
             </span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 leading-tight">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 leading-tight">
               ইসলামি আদর্শ ও আধুনিক শিক্ষার সমন্বয়ে <span class="text-emerald-700">আলোকিত প্রজন্মের অগ্রযাত্রা</span>
             </h2>
           </div>
 
           <p class="text-slate-700 leading-relaxed text-sm md:text-base">
-            <b>ইকরা অ্যাকাডেমি (PVT. IQRA ACADEMY)</b> একটি আদর্শ আবাসিক গার্লস মিশন, যা ২০১৫ সালে প্রতিষ্ঠিত। আমাদের মূল উদ্দেশ্য হলো—ইসলামি আদর্শ, নৈতিক মূল্যবোধ ও আধুনিক শিক্ষার সমন্বয়ে মেয়েদের এমনভাবে গড়ে তোলা, যাতে তারা জ্ঞান, চরিত্র, আত্মবিশ্বাস ও দায়িত্ববোধে সমৃদ্ধ হয়ে ভবিষ্যতে পরিবার, সমাজ ও দেশের জন্য কল্যাণকর ভূমিকা পালন করতে পারে।
+            <b>ইকরা অ্যাকাডেমি (PVT. IQRA ACADEMY)</b> একটি আদর্শ আবাসিক গার্লস মিশন। আমাদের মূল উদ্দেশ্য হলো—ইসলামি আদর্শ, নৈতিক মূল্যবোধ ও আধুনিক শিক্ষার সমন্বয়ে মেয়েদের এমনভাবে গড়ে তোলা, যাতে তারা জ্ঞান, চরিত্র, আত্মবিশ্বাস ও দায়িত্ববোধে সমৃদ্ধ হয়ে ভবিষ্যতে পরিবার, সমাজ ও দেশের জন্য কল্যাণকর ভূমিকা পালন করতে পারে।
           </p>
 
           <p class="text-slate-700 leading-relaxed text-sm md:text-base">
             আমরা বিশ্বাস করি, একটি মেয়ের শিক্ষা শুধু পাঠ্যবই ও পরীক্ষার ফলাফলের মধ্যে সীমাবদ্ধ নয়। প্রকৃত শিক্ষা তার চিন্তা, চরিত্র, আচরণ, মূল্যবোধ ও ভবিষ্যৎ জীবনকে সুন্দরভাবে গড়ে তোলে। তাই ইকরা অ্যাকাডেমিতে সাধারণ শিক্ষার পাশাপাশি কুরআন শিক্ষা, ইসলামি আদব-আখলাক, নৈতিক শিক্ষা, শৃঙ্খলা, সময়ানুবর্তিতা, আত্মনির্ভরতা ও দায়িত্বশীলতার ওপর বিশেষ গুরুত্ব দেওয়া হয়।
           </p>
 
-          <div class="bg-emerald-50/70 p-6 rounded-2xl border border-emerald-100 space-y-3">
-            <h3 class="text-base font-bold text-emerald-950 flex items-center gap-2">
+          <div class="bg-emerald-50/70 p-5 sm:p-6 rounded-2xl border border-emerald-100 space-y-3">
+            <h3 class="text-sm sm:text-base font-bold text-emerald-950 flex items-center gap-2">
               <i class="fa-solid fa-award text-amber-500"></i>
               ইকরা অ্যাকাডেমির ৫টি মূল স্তম্ভ (Core Pillars):
             </h3>
@@ -617,7 +619,7 @@
             </div>
           </div>
 
-          <div class="flex items-center gap-4 pt-2">
+          <div class="flex flex-wrap items-center gap-4 pt-2">
             <button type="button" id="btn-about-apply" onclick="openAdmissionModal()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-6 py-3 rounded-xl transition shadow flex items-center gap-2 text-sm cursor-pointer">
               <i class="fa-solid fa-file-pen text-amber-300"></i>
               <span>ভর্তি ফরম পূরণ করুন</span>
@@ -635,13 +637,13 @@
   </section>
 
   <!-- LEADERSHIP & MESSAGES (DIRECTOR & SECRETARY) -->
-  <section id="management" class="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4">
-      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+  <section id="management" class="py-14 md:py-24 bg-slate-50 border-t border-slate-200 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
+      <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
         <span class="bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-amber-200">
           পরিচালনা পরিষদ ও দিকনির্দেশনা
         </span>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900">
           পরিচালকের কলম ও <span class="text-emerald-800">সম্পাদকের বার্তা</span>
         </h2>
         <p class="text-slate-600 text-sm md:text-base">
@@ -658,7 +660,7 @@
               <img 
                 src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241336/WhatsApp_Image_2026-10-17_at_6.13.39_PM.jpg" 
                 alt="তরিকুল ইসলাম - পরিচালক" 
-                class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border-2 border-emerald-600 shadow"
+                class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border-2 border-emerald-600 shadow shrink-0"
               />
               <div>
                 <span class="bg-emerald-100 text-emerald-800 text-[11px] font-bold px-2 py-0.5 rounded tracking-wide">পরিচালকের কলম</span>
@@ -697,7 +699,7 @@
               <img 
                 src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241336/SHM-Pro-Edited.png" 
                 alt="সাহিরুল ইসলাম - সম্পাদক" 
-                class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border-2 border-amber-500 shadow"
+                class="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover border-2 border-amber-500 shadow shrink-0"
               />
               <div>
                 <span class="bg-amber-100 text-amber-900 text-[11px] font-bold px-2 py-0.5 rounded tracking-wide">সম্পাদকের কলম</span>
@@ -712,7 +714,7 @@
                 <b>প্রিয় অভিভাবক,</b> প্রতিটি বাবা-মায়ের হৃদয়ে একটি স্বপ্ন থাকে—তাঁদের সন্তান ভালোভাবে পড়াশোনা করবে, সুন্দর মানুষ হবে এবং জীবনে সম্মানের সঙ্গে প্রতিষ্ঠিত হবে। একটি মেয়েকে শিক্ষিত করে তোলা শুধু তার ব্যক্তিগত ভবিষ্যৎ গড়ে তোলা নয়; বরং একটি পরিবার ও আগামী প্রজন্মের ভিত্তিকে শক্তিশালী করা।
               </p>
               <p>
-                এই ভাবনা থেকেই ইকরা অ্যাকাডেমির পথচলা। ২০১৫ সালে প্রতিষ্ঠার পর থেকে আমাদের চেষ্টা—শিক্ষাকে শুধু পরীক্ষার ফলাফলের মধ্যে সীমাবদ্ধ না রেখে জ্ঞান, চরিত্র, নৈতিকতা, শৃঙ্খলা ও আত্মবিশ্বাসের সমন্বয়ে একটি পূর্ণাঙ্গ শিক্ষাব্যবস্থা গড়ে তোলা।
+                এই ভাবনা থেকেই ইকরা অ্যাকাডেমির পথচলা। প্রতিষ্ঠার পর থেকে আমাদের চেষ্টা—শিক্ষাকে শুধু পরীক্ষার ফলাফলের মধ্যে সীমাবদ্ধ না রেখে জ্ঞান, চরিত্র, নৈতিকতা, শৃঙ্খলা ও আত্মবিশ্বাসের সমন্বয়ে একটি পূর্ণাঙ্গ শিক্ষাব্যবস্থা গড়ে তোলা।
               </p>
               <p>
                 আমরা মনে করি, আধুনিক পৃথিবীতে এগিয়ে যেতে হলে একটি মেয়ের যেমন বাংলা, ইংরেজি, গণিত, বিজ্ঞান ও প্রযুক্তির জ্ঞান প্রয়োজন, তেমনি প্রয়োজন নিজের ধর্মীয় ও নৈতিক মূল্যবোধ সম্পর্কে সুস্পষ্ট ধারণা। একটি আবাসিক প্রতিষ্ঠান হিসেবে আমাদের দায়িত্ব আরও বেশি।
@@ -732,7 +734,7 @@
       </div>
 
       <!-- Dignitary Quotes Grid -->
-      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="bg-gradient-to-r from-emerald-900 to-emerald-950 text-white p-6 rounded-2xl shadow flex items-center gap-4">
           <div class="text-3xl text-amber-400 shrink-0">
             <i class="fa-solid fa-quote-left"></i>
@@ -762,8 +764,8 @@
   </section>
 
   <!-- RESIDENTIAL GIRLS MISSION & ROUTINE -->
-  <section id="residential" class="py-16 md:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
+  <section id="residential" class="py-14 md:py-24 bg-white w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         
         <div class="lg:col-span-6 space-y-6">
@@ -771,7 +773,7 @@
             <span class="bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-teal-200">
               হোস্টেল ও আবাসিক পরিবেশ
             </span>
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 leading-tight">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 leading-tight">
               কন্যাশিশুদের জন্য সম্পূর্ণ সুরক্ষিত, <span class="text-teal-700">সুশৃঙ্খল ও স্নেহময় পরিবেশ</span>
             </h2>
           </div>
@@ -812,40 +814,40 @@
           </button>
         </div>
 
-        <div class="lg:col-span-6 bg-slate-900 text-slate-100 p-6 md:p-8 rounded-3xl shadow-xl border border-slate-800">
+        <div class="lg:col-span-6 bg-slate-900 text-slate-100 p-5 sm:p-8 rounded-3xl shadow-xl border border-slate-800">
           <h3 class="text-lg md:text-xl font-bold text-white mb-4 flex items-center gap-2">
             <i class="fa-solid fa-calendar-day text-amber-400"></i>
             আবাসিক ছাত্রীদের দৈনন্দিন রুটিন (Daily Routine)
           </h3>
           <p class="text-xs text-slate-400 mb-6">সময়নিষ্ঠতা ও শৃঙ্খলাই সফলতার চাবিকাঠি—</p>
 
-          <div class="space-y-4 text-xs md:text-sm">
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">ভোর ৫:০০ - ৬:০০</span>
+          <div class="space-y-3 sm:space-y-4 text-xs md:text-sm">
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">ভোর ৫:০০ - ৬:০০</span>
               <span>শয্যা ত্যাগ, অজু, ফজরের নামাজ ও কুরআন তিলাওয়াত</span>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">সকাল ৬:০০ - ৮:০০</span>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">সকাল ৬:০০ - ৮:০০</span>
               <span>সকালের স্টাডি রিভিশন ও প্রাতরাশ (পুষ্টিকর নাস্তা)</span>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">সকাল ৮:৩০ - ১:৩০</span>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">সকাল ৮:৩০ - ১:৩০</span>
               <span>অ্যাকাডেমিক স্কুল ক্লাস ও কম্পিউটার/ডিজিটাল লার্নিং</span>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">দুপুর ১:৩০ - ৩:৩০</span>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">দুপুর ১:৩০ - ৩:৩০</span>
               <span>জোহরের নামাজ, পুষ্টিকর মধ্যাহ্নভোজ ও বিশ্রাম</span>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">বিকাল ৪:০০ - ৫:৩০</span>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">বিকাল ৪:০০ - ৫:৩০</span>
               <span>আসরের নামাজ, হালকা শরীরচর্চা, খেলাধুলা ও সান্ধ্য টিফিন</span>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">সন্ধ্যা ৬:০০ - ৯:০০</span>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">সন্ধ্যা ৬:০০ - ৯:০০</span>
               <span>মাগরিব, নিবিড় সান্ধ্যকালীন স্টাডি ও শিক্ষিকা গাইডেন্স</span>
             </div>
-            <div class="flex items-center gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
-              <span class="font-mono text-amber-300 font-bold w-24">রাত ৯:০০ - ১০:০০</span>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4 bg-slate-800/60 p-3 rounded-xl border border-slate-700">
+              <span class="font-mono text-amber-300 font-bold sm:w-28 shrink-0">রাত ৯:০০ - ১০:০০</span>
               <span>এশার নামাজ, রাতের খাবার এবং শয়ন</span>
             </div>
           </div>
@@ -856,14 +858,14 @@
   </section>
 
   <!-- ADMISSION 2027 SECTION & CHECKLIST -->
-  <section id="admissions" class="py-16 md:py-24 bg-emerald-950 text-white relative overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
+  <section id="admissions" class="py-14 md:py-24 bg-emerald-950 text-white relative overflow-hidden w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10 relative z-10">
       
       <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
         <span class="bg-amber-400 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
           ভর্তি বিজ্ঞপ্তি ২০২৭
         </span>
-        <h2 class="text-3xl md:text-5xl font-extrabold text-white">
+        <h2 class="text-2xl sm:text-3xl md:text-5xl font-extrabold text-white">
           ২০২৭ শিক্ষাবর্ষে ভর্তি চলছে
         </h2>
         <p class="text-emerald-200 text-sm md:text-base">
@@ -874,12 +876,12 @@
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         
         <div class="lg:col-span-7 bg-emerald-900/80 backdrop-blur-md p-6 md:p-8 rounded-3xl border border-emerald-700 shadow-xl space-y-6">
-          <h3 class="text-xl font-bold text-amber-300 flex items-center gap-2">
+          <h3 class="text-lg sm:text-xl font-bold text-amber-300 flex items-center gap-2">
             <i class="fa-solid fa-clipboard-check"></i>
             ভর্তির প্রয়োজনীয় নথিপত্র (Required Documents):
           </h3>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs md:text-sm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs md:text-sm">
             <div class="flex items-start gap-2.5 bg-emerald-950/60 p-3 rounded-xl border border-emerald-800">
               <i class="fa-solid fa-check-circle text-amber-400 mt-0.5"></i>
               <span>শিক্ষার্থীর Birth Certificate-এর জেরক্স কপি</span>
@@ -911,12 +913,12 @@
               <span class="text-amber-300 font-bold block">ভর্তি সংক্রান্ত হেল্পলাইন:</span>
               <span class="text-slate-200">সরাসরি কথা বলুন অ্যাডমিশন সেলের সাথে</span>
             </div>
-            <div class="flex items-center gap-2">
-              <a id="adm-phone-link-1" href="tel:9775123096" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1 font-mono">
-                <i class="fa-solid fa-phone"></i> <span id="adm-phone-1">9775123096</span>
+            <div class="flex flex-wrap items-center gap-2">
+              <a id="adm-phone-link-1" href="#contact" class="bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1 font-mono">
+                <i class="fa-solid fa-phone"></i> <span id="adm-phone-1">লোড হচ্ছে...</span>
               </a>
-              <a id="adm-phone-link-2" href="tel:9647109481" class="bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1 font-mono">
-                <i class="fa-solid fa-phone"></i> <span id="adm-phone-2">9647109481</span>
+              <a id="adm-phone-link-2" href="#contact" class="hidden bg-emerald-700 hover:bg-emerald-600 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition items-center gap-1 font-mono">
+                <i class="fa-solid fa-phone"></i> <span id="adm-phone-2"></span>
               </a>
             </div>
           </div>
@@ -947,36 +949,32 @@
   </section>
 
   <!-- NOTICE BOARD & CIRCULARS (Syncs from Published CSV / Apps Script) -->
-  <section id="notices" class="py-16 bg-slate-100">
-    <div class="max-w-7xl mx-auto px-4">
+  <section id="notices" class="py-14 md:py-20 bg-slate-100 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
             বিজ্ঞপ্তি ও নোটিশ বোর্ড
           </span>
           <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mt-1">সাম্প্রতিক নোটিশ ও পরিপত্র</h2>
-          <p class="text-xs text-slate-500 mt-1">ইকরা অ্যাকাডেমির সকল নোটিশ অ্যাডমিন প্যানেল থেকে সরাসরি লাইভ আপডেট হয়।</p>
+          <p class="text-xs text-slate-500 mt-1">ইকরা অ্যাকাডেমির সকল প্রাতিষ্ঠানিক নোটিশ এখানে সরাসরি রিয়েল-টাইমে প্রকাশিত হয়।</p>
         </div>
-        <a href="https://iqraacademy.co.in/admin.html" class="text-xs font-bold bg-white hover:bg-emerald-50 text-emerald-800 px-3.5 py-2 rounded-xl border border-slate-200 transition shadow-sm flex items-center gap-1.5 self-start md:self-auto">
-          <i class="fa-solid fa-lock text-amber-600"></i>
-          <span>অ্যাডমিন পোর্টাল</span>
-        </a>
       </div>
 
-      <div id="public-notice-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="p-8 text-center text-slate-400 text-sm col-span-2 bg-white rounded-2xl border border-slate-200">নোটিশ লোড হচ্ছে...</div>
+      <div id="public-notice-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="p-8 text-center text-slate-400 text-sm col-span-full bg-white rounded-2xl border border-slate-200">নোটিশ লোড হচ্ছে...</div>
       </div>
     </div>
   </section>
 
   <!-- PHOTO GALLERY -->
-  <section id="gallery" class="py-16 md:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
+  <section id="gallery" class="py-14 md:py-20 bg-white w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
       <div class="text-center max-w-3xl mx-auto mb-10 space-y-2">
         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           ক্যাম্পাস জীবন ও চিত্রশালা
         </span>
-        <h2 class="text-3xl font-extrabold text-slate-900">ফটো গ্যালারি</h2>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">ফটো গ্যালারি</h2>
         <p class="text-slate-600 text-xs md:text-sm">ইকরা অ্যাকাডেমির পরিবেশ, পাঠদান, শৃঙ্খলা ও সহশিক্ষা কার্যক্রমের খণ্ডচিত্র।</p>
       </div>
 
@@ -1022,14 +1020,14 @@
   </section>
 
   <!-- CONTACT SECTION -->
-  <section id="contact" class="py-16 md:py-24 bg-slate-50 border-t border-slate-200">
-    <div class="max-w-7xl mx-auto px-4">
+  <section id="contact" class="py-14 md:py-24 bg-slate-50 border-t border-slate-200 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10">
       
       <div class="text-center max-w-3xl mx-auto mb-12 space-y-2">
         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           আমাদের সাথে যোগাযোগ
         </span>
-        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900">সরাসরি যোগাযোগ করুন</h2>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900">সরাসরি যোগাযোগ করুন</h2>
         <p class="text-slate-600 text-sm">যেকোনো তথ্য, ভর্তি অনুসন্ধান বা পরামর্শের জন্য আমাদের সাথে যোগাযোগ করতে পারেন।</p>
       </div>
 
@@ -1041,7 +1039,7 @@
               <img 
                 src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" 
                 alt="Iqra Logo" 
-                class="w-12 h-12 rounded-full border border-amber-400 bg-white object-cover"
+                class="w-12 h-12 rounded-full border border-amber-400 bg-white object-cover shrink-0"
               />
               <div>
                 <h3 class="text-lg font-bold">ইকরা অ্যাকাডেমি</h3>
@@ -1061,11 +1059,11 @@
               <div class="flex items-start gap-3">
                 <i class="fa-solid fa-phone text-amber-400 text-base mt-0.5"></i>
                 <div>
-                  <span class="font-bold block text-slate-200">ফোন নম্বর:</span>
-                  <div class="flex items-center gap-2 mt-0.5 font-mono">
-                    <a id="contact-phone-link-1" href="tel:9775123096" class="hover:text-amber-300 font-bold"><span id="contact-phone-1">9775123096</span></a>
-                    <span>/</span>
-                    <a id="contact-phone-link-2" href="tel:9647109481" class="hover:text-amber-300 font-bold"><span id="contact-phone-2">9647109481</span></a>
+                  <span class="font-bold block text-slate-200">ফোন নম্বর (হেল্পলাইন):</span>
+                  <div class="flex flex-wrap items-center gap-2 mt-0.5 font-mono">
+                    <a id="contact-phone-link-1" href="#contact" class="hover:text-amber-300 font-bold"><span id="contact-phone-1">লোড হচ্ছে...</span></a>
+                    <span id="contact-phone-sep" class="hidden">/</span>
+                    <a id="contact-phone-link-2" href="#contact" class="hidden hover:text-amber-300 font-bold"><span id="contact-phone-2"></span></a>
                   </div>
                 </div>
               </div>
@@ -1089,7 +1087,7 @@
           </div>
 
           <div class="pt-4 border-t border-emerald-800">
-            <a id="contact-whatsapp-link" href="https://wa.me/919775123096" target="_blank" rel="noopener" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-sm transition shadow">
+            <a id="contact-whatsapp-link" href="#contact" target="_blank" rel="noopener" class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 text-sm transition shadow">
               <i class="fa-brands fa-whatsapp text-lg"></i>
               <span>হোয়াটসঅ্যাপে সরাসরি চ্যাট করুন</span>
             </a>
@@ -1097,7 +1095,7 @@
         </div>
 
         <div class="lg:col-span-7 bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between mb-2">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
             <h3 class="text-xl font-bold text-slate-900">বার্তা বা অনুসন্ধান পাঠান</h3>
             <span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
               <i class="fa-solid fa-shield-halved"></i> বট সুরক্ষিত (Anti-Bot Protected)
@@ -1161,18 +1159,18 @@
   </section>
 
   <!-- Public Footer -->
-  <footer id="app-download-section" class="scroll-mt-24 bg-slate-950 text-slate-300 pt-12 pb-6 border-t-4 border-amber-500">
-    <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+  <footer id="app-download-section" class="scroll-mt-24 bg-slate-950 text-slate-300 pt-12 pb-6 border-t-4 border-amber-500 w-full">
+    <div class="w-full px-4 sm:px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
       <div class="space-y-4">
         <div class="flex items-center gap-3">
           <img 
             src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" 
             alt="Iqra Logo" 
-            class="w-12 h-12 rounded-full border border-amber-400 bg-white object-cover"
+            class="w-12 h-12 rounded-full border border-amber-400 bg-white object-cover shrink-0"
           />
           <div>
             <h4 class="text-white font-bold text-lg leading-tight">ইকরা অ্যাকাডেমি</h4>
-            <p class="text-amber-400 text-xs font-semibold">আবাসিক গার্লস মিশন (Estd: 2015)</p>
+            <p class="text-amber-400 text-xs font-semibold">আবাসিক গার্লস মিশন</p>
           </div>
         </div>
         <p class="text-xs text-slate-400 leading-relaxed">
@@ -1251,11 +1249,11 @@
             <i class="fa-solid fa-map-pin text-amber-400 mt-0.5"></i>
             <span>Dakshin Shibpur, Jadurhati, Baduria, North 24 Parganas, PIN-743293</span>
           </li>
-          <li class="flex items-center gap-2.5">
+          <li class="flex items-center gap-2.5 flex-wrap">
             <i class="fa-solid fa-phone text-amber-400"></i>
-            <a id="footer-phone-link-1" href="tel:9775123096" class="hover:text-white font-semibold font-mono"><span id="footer-phone-1">9775123096</span></a>
-            <span>/</span>
-            <a id="footer-phone-link-2" href="tel:9647109481" class="hover:text-white font-semibold font-mono"><span id="footer-phone-2">9647109481</span></a>
+            <a id="footer-phone-link-1" href="#contact" class="hover:text-white font-semibold font-mono"><span id="footer-phone-1">লোড হচ্ছে...</span></a>
+            <span id="footer-phone-sep" class="hidden">/</span>
+            <a id="footer-phone-link-2" href="#contact" class="hidden hover:text-white font-semibold font-mono"><span id="footer-phone-2"></span></a>
           </li>
           <li class="flex items-center gap-2.5">
             <i class="fa-solid fa-envelope text-amber-400"></i>
@@ -1263,7 +1261,7 @@
           </li>
         </ul>
         <div class="pt-2 flex items-center gap-2">
-          <a id="footer-whatsapp-link" href="https://wa.me/919775123096" target="_blank" rel="noopener" class="bg-green-700 hover:bg-green-600 text-white px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition">
+          <a id="footer-whatsapp-link" href="#contact" target="_blank" rel="noopener" class="bg-green-700 hover:bg-green-600 text-white px-3 py-1.5 rounded text-xs font-semibold flex items-center gap-1.5 transition">
             <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp চ্যাট
           </a>
           <button id="btn-scroll-top" class="bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white px-2.5 py-1.5 rounded text-xs transition ml-auto cursor-pointer" title="উপরে যান">
@@ -1273,8 +1271,8 @@
       </div>
     </div>
 
-    <div class="border-t border-slate-800 pt-6 px-4">
-      <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
+    <div class="border-t border-slate-800 pt-6 px-4 sm:px-6 lg:px-10">
+      <div class="w-full flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
         <p>© 2026 <b>PVT. IQRA ACADEMY (ইকরা অ্যাকাডেমি)</b> | সর্বস্বত্ব সংরক্ষিত।</p>
         <div style="display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
           <span>Developed By</span>
@@ -1294,24 +1292,24 @@
   </footer>
   
   <!-- In-Browser Student Admission Form Modal -->
-  <div id="inbrowser-admission-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-    <div class="bg-white text-slate-800 rounded-3xl max-w-3xl w-full p-6 sm:p-8 shadow-2xl relative border border-slate-200 my-8 max-h-[90vh] overflow-y-auto">
+  <div id="inbrowser-admission-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+    <div class="bg-white text-slate-800 rounded-3xl max-w-3xl w-full p-5 sm:p-8 shadow-2xl relative border border-slate-200 my-4 sm:my-8 max-h-[92vh] overflow-y-auto">
       
-      <button id="btn-close-inbrowser-admission" onclick="closeAdmissionModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-900 text-2xl w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center focus:outline-none cursor-pointer z-10 transition">
+      <button id="btn-close-inbrowser-admission" onclick="closeAdmissionModal()" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-900 text-2xl w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center focus:outline-none cursor-pointer z-10 transition">
         &times;
       </button>
 
       <!-- Modal Header -->
-      <div class="text-center pb-6 border-b border-slate-100 space-y-1">
+      <div class="text-center pb-5 border-b border-slate-100 space-y-1">
         <span class="inline-block bg-amber-100 text-amber-900 text-xs font-bold px-3 py-0.5 rounded-full border border-amber-200">
           ২০২৭ শিক্ষাবর্ষে অনলাইনে ভর্তি আবেদন
         </span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-emerald-950">PVT. IQRA ACADEMY</h2>
+        <h2 class="text-xl sm:text-3xl font-extrabold text-emerald-950">PVT. IQRA ACADEMY</h2>
         <p class="text-xs sm:text-sm text-slate-600 font-medium">আবাসিক গার্লস মিশন · ডে-বোর্ডিং · অনাবাসিক</p>
       </div>
 
       <!-- Admission Form -->
-      <form id="inbrowser-saf-form" class="space-y-6 pt-6">
+      <form id="inbrowser-saf-form" class="space-y-5 pt-5">
         <!-- Anti-Bot Honeypot Field -->
         <div class="hp-trap" aria-hidden="true">
           <label>Do not fill this if you are human</label>
@@ -1420,10 +1418,10 @@
         <!-- ৪. ছবি আপলোড ও প্রিভিউ -->
         <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-2 text-xs">
           <p class="font-bold text-slate-700">শিক্ষার্থীর ছবি আপলোড (পাসপোর্ট সাইজ - ঐচ্ছিক):</p>
-          <input type="file" id="in-saf-photo" accept="image/jpeg, image/png, image/webp" onchange="inSafPreviewPhoto(event)" class="text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-800 file:text-white cursor-pointer">
+          <input type="file" id="in-saf-photo" accept="image/jpeg, image/png, image/webp" onchange="inSafPreviewPhoto(event)" class="text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-800 file:text-white cursor-pointer max-w-full">
           <div id="in-saf-photo-preview" class="hidden flex justify-center pt-2">
             <div class="w-24 h-28 border-2 border-emerald-600 rounded-xl overflow-hidden shadow">
-              <img id="in-saf-preview-img" src="#" class="w-full h-full object-cover">
+              <img id="in-saf-preview-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview" class="w-full h-full object-cover">
             </div>
           </div>
         </div>
@@ -1589,6 +1587,11 @@
     if (btnMobileToggle && mobileNav) {
       btnMobileToggle.addEventListener('click', () => {
         mobileNav.classList.toggle('hidden');
+      });
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.add('hidden');
+        });
       });
     }
 
@@ -1810,15 +1813,16 @@
 
   <!-- ================= 100% SECURE ZERO-FIREBASE DATA ENGINE ================= -->
   <script>
-    // =========================================================================
-    // ১. আপনার ধাপ ৩-এ পাওয়া Read-Only Published CSV লিংকগুলো নিচে বসান:
-    // (যদি এখনও না বসান, তবে ব্যাকআপ হিসেবে স্ক্রিপ্ট সরাসরি Apps Script GET থেকে ডেটা আনবে)
-    // =========================================================================
     const PUBLISHED_CONFIG_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9Fu2Bt1p1NjO7znbKQ0JdK4TIOOw6vjbaQEBnvS1JyV1OiS2jVUTq_o3xPHWiqv77YvOM8BIdpa92/pub?gid=1105423945&single=true&output=csv";
     const PUBLISHED_NOTICES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9Fu2Bt1p1NjO7znbKQ0JdK4TIOOw6vjbaQEBnvS1JyV1OiS2jVUTq_o3xPHWiqv77YvOM8BIdpa92/pub?gid=1424982307&single=true&output=csv";
-
-    // ২. ধাপ ২-এ পাওয়া Apps Script Web App URL (শুধুমাত্র ফর্ম সাবমিশনের জন্য):
     const APPS_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyYA85M0O1yPJQg8wKiUYqOzDLGgWfvTv9N2pFwFXVlr24rN7nh0Po7uGPwS-MmAkRb/exec";
+
+    // Store dynamic helpline & stats for receipt and UI
+    window.liveConfigData = {
+      phone1: '',
+      phone2: '',
+      estd: ''
+    };
 
     // Helper: Strict XSS Escape
     function escapeHtml(raw) {
@@ -1900,48 +1904,58 @@
       return p;
     }
 
-    // Helper: update phone numbers everywhere
+    // Helper: update phone numbers everywhere from real-time sheet data
     function updatePhoneNumbers(phone1, phone2) {
-      if (!phone1) return;
-      const cleanPhone1 = String(phone1).replace(/[^0-9]/g, '');
-      const cleanPhone2 = phone2 ? String(phone2).replace(/[^0-9]/g, '') : cleanPhone1;
+      const p1 = String(phone1 || '').trim();
+      const p2 = String(phone2 || '').trim();
+      window.liveConfigData.phone1 = p1;
+      window.liveConfigData.phone2 = p2;
+
+      const cleanPhone1 = p1.replace(/[^0-9]/g, '');
+      const cleanPhone2 = p2.replace(/[^0-9]/g, '');
 
       const setEl = (id, text, href) => {
         const el = document.getElementById(id);
-        if (el && text) el.innerText = text;
-        if (el && href) el.href = href;
+        if (!el) return;
+        if (text !== null && text !== undefined) el.innerText = text;
+        if (href) el.href = href;
       };
 
-      setEl('top-phone-1', phone1);
-      setEl('top-phone-link-1', null, `tel:${cleanPhone1}`);
-      if (phone2) {
-        setEl('top-phone-2', phone2);
-        setEl('top-phone-link-2', null, `tel:${cleanPhone2}`);
+      if (p1) {
+        setEl('top-phone-1', p1);
+        setEl('top-phone-link-1', null, `tel:${cleanPhone1}`);
+        setEl('adm-phone-1', p1);
+        setEl('adm-phone-link-1', null, `tel:${cleanPhone1}`);
+        setEl('contact-phone-1', p1);
+        setEl('contact-phone-link-1', null, `tel:${cleanPhone1}`);
+        setEl('footer-phone-1', p1);
+        setEl('footer-phone-link-1', null, `tel:${cleanPhone1}`);
+        setEl('contact-whatsapp-link', null, `https://wa.me/91${cleanPhone1}`);
+        setEl('footer-whatsapp-link', null, `https://wa.me/91${cleanPhone1}`);
       }
 
-      setEl('contact-whatsapp-link', null, `https://wa.me/91${cleanPhone1}`);
-      setEl('footer-whatsapp-link', null, `https://wa.me/91${cleanPhone1}`);
+      const showOrHideP2 = (linkId, textId, sepId, displayClass = 'inline-block') => {
+        const linkEl = document.getElementById(linkId);
+        const textEl = document.getElementById(textId);
+        const sepEl = sepId ? document.getElementById(sepId) : null;
+        if (p2) {
+          if (textEl) textEl.innerText = p2;
+          if (linkEl) {
+            linkEl.href = `tel:${cleanPhone2}`;
+            linkEl.classList.remove('hidden');
+            linkEl.classList.add(displayClass);
+          }
+          if (sepEl) sepEl.classList.remove('hidden');
+        } else {
+          if (linkEl) linkEl.classList.add('hidden');
+          if (sepEl) sepEl.classList.add('hidden');
+        }
+      };
 
-      setEl('adm-phone-1', phone1);
-      setEl('adm-phone-link-1', null, `tel:${cleanPhone1}`);
-      if (phone2) {
-        setEl('adm-phone-2', phone2);
-        setEl('adm-phone-link-2', null, `tel:${cleanPhone2}`);
-      }
-
-      setEl('contact-phone-1', phone1);
-      setEl('contact-phone-link-1', null, `tel:${cleanPhone1}`);
-      if (phone2) {
-        setEl('contact-phone-2', phone2);
-        setEl('contact-phone-link-2', null, `tel:${cleanPhone2}`);
-      }
-
-      setEl('footer-phone-1', phone1);
-      setEl('footer-phone-link-1', null, `tel:${cleanPhone1}`);
-      if (phone2) {
-        setEl('footer-phone-2', phone2);
-        setEl('footer-phone-link-2', null, `tel:${cleanPhone2}`);
-      }
+      showOrHideP2('top-phone-link-2', 'top-phone-2', 'top-phone-sep', 'sm:inline-block');
+      showOrHideP2('adm-phone-link-2', 'adm-phone-2', null, 'flex');
+      showOrHideP2('contact-phone-link-2', 'contact-phone-2', 'contact-phone-sep', 'inline-block');
+      showOrHideP2('footer-phone-link-2', 'footer-phone-2', 'footer-phone-sep', 'inline-block');
     }
 
     // Render Public Notices
@@ -1950,7 +1964,7 @@
       if (!noticeContainer) return;
       if (!Array.isArray(noticesArray) || noticesArray.length === 0) {
         noticeContainer.innerHTML = `
-          <div class="col-span-2 bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-500 text-sm">
+          <div class="col-span-full bg-white p-8 rounded-2xl border border-slate-200 text-center text-slate-500 text-sm">
             বর্তমানে কোনো নতুন নোটিশ নেই।
           </div>
         `;
@@ -1959,7 +1973,7 @@
       noticeContainer.innerHTML = noticesArray.map(n => `
         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-start justify-between gap-4 card-hover">
           <div class="space-y-1">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
               <span class="text-[10px] font-bold px-2 py-0.5 rounded ${
                 n.priority === 'জরুরি' ? 'bg-red-100 text-red-700' : 
                 n.priority === 'উচ্চ' ? 'bg-amber-100 text-amber-800' : 
@@ -1979,16 +1993,34 @@
 
     function applyConfig(cfg) {
       if (!cfg) return;
-      if (cfg.marquee) {
+      if (cfg.marquee !== undefined) {
         const marEl = document.getElementById('dynamic-mar');
-        if (marEl) marEl.innerHTML = formatTextWithLinks(cfg.marquee, cfg.marqueeLinkUrl, cfg.marqueeLinkText);
+        if (marEl && cfg.marquee) {
+          marEl.innerHTML = formatTextWithLinks(cfg.marquee, cfg.marqueeLinkUrl, cfg.marqueeLinkText);
+        }
       }
-      if (cfg.phone1) updatePhoneNumbers(cfg.phone1, cfg.phone2);
+      if (cfg.phone1 || cfg.phone2) {
+        updatePhoneNumbers(cfg.phone1, cfg.phone2);
+      }
 
-      if (cfg.estd && document.getElementById('stat-estd')) document.getElementById('stat-estd').innerText = cfg.estd;
-      if (cfg.students && document.getElementById('stat-students')) document.getElementById('stat-students').innerText = cfg.students;
-      if (cfg.teachers && document.getElementById('stat-teachers')) document.getElementById('stat-teachers').innerText = cfg.teachers;
-      if (cfg.passRate && document.getElementById('stat-pass')) document.getElementById('stat-pass').innerText = cfg.passRate;
+      if (cfg.estd !== undefined) {
+        window.liveConfigData.estd = cfg.estd;
+        const statEstd = document.getElementById('stat-estd');
+        if (statEstd) statEstd.innerText = cfg.estd || '-';
+        const topEstd = document.getElementById('top-estd-badge');
+        if (topEstd) topEstd.innerText = cfg.estd || '-';
+        const hdrEstd = document.getElementById('header-estd-text');
+        if (hdrEstd) hdrEstd.innerText = cfg.estd || '-';
+      }
+      if (cfg.students !== undefined && document.getElementById('stat-students')) {
+        document.getElementById('stat-students').innerText = cfg.students || '-';
+      }
+      if (cfg.teachers !== undefined && document.getElementById('stat-teachers')) {
+        document.getElementById('stat-teachers').innerText = cfg.teachers || '-';
+      }
+      if (cfg.passRate !== undefined && document.getElementById('stat-pass')) {
+        document.getElementById('stat-pass').innerText = cfg.passRate || '-';
+      }
 
       // 5 Banners sync (with automatic Google Drive high-res fallback)
       for (let i = 0; i < 5; i++) {
@@ -2010,70 +2042,77 @@
       }
     }
 
-    // Load Public Data:
-    // Google's "Publish to web (.csv)" caches changes for ~5 minutes, whereas Apps Script GET (doGet) reads live Sheet data with 0-second delay.
-    // We load both in parallel so CSV provides instant cache fallback while Apps Script GET guarantees instant 0-second live updates!
-    async function loadPublicDataFromCloud() {
-      let liveLoaded = false;
+    function parseConfigCSVRows(rows) {
+      const cfg = {};
+      for (let i = 1; i < rows.length; i++) {
+        if (rows[i][0]) cfg[rows[i][0].trim()] = rows[i][1] || '';
+      }
+      return cfg;
+    }
 
-      // 1. Primary Instant Real-Time Read (0-second delay from Apps Script doGet)
+    function parseNoticesCSVRows(rows) {
+      const list = [];
+      for (let i = 1; i < rows.length; i++) {
+        if (!rows[i][0]) continue;
+        list.push({
+          id: rows[i][0],
+          date: rows[i][1] || '',
+          category: rows[i][2] || '',
+          priority: rows[i][3] || '',
+          title: rows[i][4] || '',
+          linkUrl: rows[i][5] || '',
+          linkText: rows[i][6] || '',
+          timestamp: Number(rows[i][7] || 0)
+        });
+      }
+      list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+      return list;
+    }
+
+    // Real-Time Concurrent Data Engine:
+    // Fetches both Published CSV and Live Apps Script endpoint concurrently and polls periodically for real-time updates
+    async function loadPublicDataFromCloud() {
+      const cacheBuster = Date.now();
+
+      // 1. Fetch CSV concurrently for immediate display
+      if (PUBLISHED_CONFIG_CSV_URL && PUBLISHED_CONFIG_CSV_URL !== "PASTE_YOUR_CONFIG_CSV_URL_HERE") {
+        fetch(PUBLISHED_CONFIG_CSV_URL + "&t=" + cacheBuster, { cache: "no-store" })
+          .then(r => r.text())
+          .then(text => {
+            const cfg = parseConfigCSVRows(parseCSV(text));
+            if (Object.keys(cfg).length > 0) applyConfig(cfg);
+          })
+          .catch(() => {});
+      }
+
+      if (PUBLISHED_NOTICES_CSV_URL && PUBLISHED_NOTICES_CSV_URL !== "PASTE_YOUR_NOTICES_CSV_URL_HERE") {
+        fetch(PUBLISHED_NOTICES_CSV_URL + "&t=" + cacheBuster, { cache: "no-store" })
+          .then(r => r.text())
+          .then(text => {
+            const list = parseNoticesCSVRows(parseCSV(text));
+            renderPublicNotices(list);
+          })
+          .catch(() => {});
+      }
+
+      // 2. Fetch Live 0-Second Apps Script GET endpoint to override with freshest sheet data
       if (APPS_SCRIPT_WEBAPP_URL && APPS_SCRIPT_WEBAPP_URL !== "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
         try {
-          const res = await fetch(APPS_SCRIPT_WEBAPP_URL + "?t=" + Date.now(), { cache: "no-store" });
+          const res = await fetch(APPS_SCRIPT_WEBAPP_URL + "?t=" + cacheBuster, { cache: "no-store" });
           const data = await res.json();
           if (data && data.status === "success") {
             if (data.config) applyConfig(data.config);
             if (Array.isArray(data.notices)) renderPublicNotices(data.notices);
-            liveLoaded = true;
           }
         } catch (err) {
-          console.warn("Live Apps Script GET note, falling back to Published CSV:", err);
-        }
-      }
-
-      // 2. Fallback to Published CSV if live endpoint wasn't reached
-      if (!liveLoaded) {
-        if (PUBLISHED_CONFIG_CSV_URL && PUBLISHED_CONFIG_CSV_URL !== "PASTE_YOUR_CONFIG_CSV_URL_HERE") {
-          try {
-            const res = await fetch(PUBLISHED_CONFIG_CSV_URL + "&t=" + Date.now(), { cache: "no-store" });
-            const text = await res.text();
-            const rows = parseCSV(text);
-            const cfg = {};
-            for (let i = 1; i < rows.length; i++) {
-              if (rows[i][0]) cfg[rows[i][0].trim()] = rows[i][1] || '';
-            }
-            applyConfig(cfg);
-          } catch (e) {}
-        }
-
-        if (PUBLISHED_NOTICES_CSV_URL && PUBLISHED_NOTICES_CSV_URL !== "PASTE_YOUR_NOTICES_CSV_URL_HERE") {
-          try {
-            const res = await fetch(PUBLISHED_NOTICES_CSV_URL + "&t=" + Date.now(), { cache: "no-store" });
-            const text = await res.text();
-            const rows = parseCSV(text);
-            const list = [];
-            for (let i = 1; i < rows.length; i++) {
-              if (!rows[i][0]) continue;
-              list.push({
-                id: rows[i][0],
-                date: rows[i][1] || '',
-                category: rows[i][2] || '',
-                priority: rows[i][3] || '',
-                title: rows[i][4] || '',
-                linkUrl: rows[i][5] || '',
-                linkText: rows[i][6] || '',
-                timestamp: Number(rows[i][7] || 0)
-              });
-            }
-            list.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-            renderPublicNotices(list);
-          } catch (e) {}
+          // CSV already handled fallback
         }
       }
     }
 
     loadPublicDataFromCloud();
-    // Auto-refresh public data when user switches back to tab
+    // Auto-refresh public data every 30 seconds for real-time updates & when user switches back to tab
+    setInterval(loadPublicDataFromCloud, 30000);
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") loadPublicDataFromCloud();
     });
@@ -2100,6 +2139,8 @@
 
       const appId = data.appId || 'N/A';
       const formNo = data.formNo || appId;
+      const helplineStr = [window.liveConfigData.phone1, window.liveConfigData.phone2].filter(Boolean).join(' / ') || '-';
+      const estdStr = window.liveConfigData.estd || '-';
 
       container.innerHTML = `
         <div style="font-family: 'Hind Siliguri', 'Inter', Arial, sans-serif; max-width: 195mm; margin: 0 auto; padding: 14px; background: #ffffff; color: #111827; border: 2px solid #064e3b; border-radius: 10px; box-sizing: border-box;">
@@ -2110,12 +2151,12 @@
               </td>
               <td style="text-align: center; vertical-align: middle; padding: 0 8px;">
                 <div style="font-size: 10px; font-weight: bold; background: #064e3b; color: #ffffff; display: inline-block; padding: 2px 10px; border-radius: 12px; letter-spacing: 0.5px;">
-                  UDISE: 19111008505 | স্থাপিত: ২০১৫ | WBBSE কারিকুলাম
+                  UDISE: 19111008505 | স্থাপিত: ${escapeHtml(estdStr)} | WBBSE কারিকুলাম
                 </div>
                 <h1 style="margin: 3px 0 0 0; font-size: 21px; font-weight: 800; color: #064e3b; line-height: 1.2;">PVT. IQRA ACADEMY</h1>
                 <h2 style="margin: 2px 0 0 0; font-size: 13px; font-weight: 700; color: #1f2937;">ইকরা অ্যাকাডেমি — আবাসিক গার্লস মিশন</h2>
                 <p style="margin: 2px 0 0 0; font-size: 10px; color: #4b5563;">
-                  দক্ষিণ শিবপুর, যদুরহাটি, বাদুড়িয়া, উত্তর ২৪ পরগনা, পিন-৭৪৩২৯৩ | 📞 ৯৭৭৫১২৩০৯৬ / ৯৬৪৭১০৯৪৮১
+                  দক্ষিণ শিবপুর, যদুরহাটি, বাদুড়িয়া, উত্তর ২৪ পরগনা, পিন-৭৪৩২৯৩ | 📞 ${escapeHtml(helplineStr)}
                 </p>
               </td>
               <td style="width: 70px; vertical-align: middle; text-align: right;">
