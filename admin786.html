@@ -17,39 +17,9 @@
       background-color: #f1f5f9;
       color: #0f172a;
     }
-
-    @media print {
-      @page {
-        size: A4 portrait;
-        margin: 8mm;
-      }
-      html, body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-      body > *:not(#print-container) {
-        display: none !important;
-      }
-      #print-container {
-        display: block !important;
-        visibility: visible !important;
-        position: static !important;
-        width: 100% !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-      }
-      #print-container * {
-        visibility: visible !important;
-      }
-    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-
-  <!-- Printable A4 Slip Container -->
-  <div id="print-container" class="hidden"></div>
 
   <!-- Toast Container -->
   <div id="admin-toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
@@ -160,12 +130,7 @@
       <!-- Navigation Tabs -->
       <div class="bg-emerald-900/90 border-t border-emerald-800 px-4">
         <div class="max-w-7xl mx-auto flex items-center gap-1 overflow-x-auto py-1.5 text-xs font-bold">
-          <button type="button" data-tab="tab-admissions" class="admin-nav-btn bg-amber-400 text-slate-950 px-4 py-2 rounded-xl transition flex items-center gap-2 shrink-0 cursor-pointer font-extrabold">
-            <i class="fa-solid fa-user-graduate"></i>
-            <span>ভর্তি আবেদন রেজিস্টার</span>
-            <span id="badge-admissions-count" class="bg-slate-950 text-amber-300 px-2 py-0.5 rounded-full text-[10px] font-mono">0</span>
-          </button>
-          <button type="button" data-tab="tab-settings" class="admin-nav-btn text-emerald-100 hover:bg-emerald-800 px-4 py-2 rounded-xl transition flex items-center gap-2 shrink-0 cursor-pointer">
+          <button type="button" data-tab="tab-settings" class="admin-nav-btn bg-amber-400 text-slate-950 px-4 py-2 rounded-xl transition flex items-center gap-2 shrink-0 cursor-pointer font-extrabold">
             <i class="fa-solid fa-sliders"></i>
             <span>পরিসংখ্যান ও ব্যানার আপলোড</span>
           </button>
@@ -186,27 +151,7 @@
     <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 space-y-6">
 
       <!-- Quick KPI Summary Cards -->
-      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-          <div>
-            <span class="text-xs font-bold text-slate-500 block">মোট ভর্তি আবেদন</span>
-            <span id="kpi-total-adm" class="text-2xl font-extrabold text-emerald-900 font-mono">0</span>
-          </div>
-          <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl">
-            <i class="fa-solid fa-users"></i>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
-          <div>
-            <span class="text-xs font-bold text-slate-500 block">আবাসিক গার্লস মিশন</span>
-            <span id="kpi-res-adm" class="text-2xl font-extrabold text-teal-700 font-mono">0</span>
-          </div>
-          <div class="w-11 h-11 rounded-xl bg-teal-100 text-teal-700 flex items-center justify-center text-xl">
-            <i class="fa-solid fa-hotel"></i>
-          </div>
-        </div>
-
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
           <div>
             <span class="text-xs font-bold text-slate-500 block">প্রকাশিত নোটিশ</span>
@@ -228,100 +173,8 @@
         </div>
       </div>
 
-      <!-- ================= TAB 1: ADMISSIONS REGISTER ================= -->
-      <section id="tab-admissions" class="admin-tab-section space-y-4">
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-            <div>
-              <h2 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
-                <i class="fa-solid fa-user-check text-emerald-700"></i>
-                অনলাইন ভর্তি আবেদন রেজিস্টার
-              </h2>
-              <p class="text-xs text-slate-500">সকল অনলাইন ও অফিস ডেস্ক ভর্তি আবেদনের তালিকা।</p>
-            </div>
-            <div class="flex flex-wrap items-center gap-2">
-              <button type="button" id="btn-delete-all-admissions" class="bg-rose-700 hover:bg-rose-800 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer shadow-sm border border-rose-500">
-                <i class="fa-solid fa-trash-can"></i> সকল আবেদন ডিলিট করুন (Delete All)
-              </button>
-              <button type="button" id="btn-open-manual-entry" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer shadow-sm">
-                <i class="fa-solid fa-plus text-amber-300"></i> নতুন আবেদন যোগ করুন
-              </button>
-              <button type="button" id="btn-export-csv" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition flex items-center gap-1.5 cursor-pointer shadow-sm">
-                <i class="fa-solid fa-file-csv text-emerald-400"></i> Excel / CSV ডাউনলোড
-              </button>
-            </div>
-          </div>
-
-          <!-- Filters -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-            <div>
-              <label class="block font-bold text-slate-600 mb-1">নাম, ফর্ম নম্বর বা মোবাইল অনুসন্ধান</label>
-              <input type="text" id="filter-search" placeholder="খুঁজুন..." class="w-full px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-600">
-            </div>
-            <div>
-              <label class="block font-bold text-slate-600 mb-1">বিভাগ (Stream)</label>
-              <select id="filter-stream" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600">
-                <option value="ALL">সকল বিভাগ</option>
-                <option value="Residential">আবাসিক বালিকা মিশন</option>
-                <option value="Day-Boarding">ডে-বোর্ডিং</option>
-                <option value="Non-Residential">অনাবাসিক</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-600 mb-1">শ্রেণি (Class)</label>
-              <select id="filter-class" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600">
-                <option value="ALL">সকল শ্রেণি</option>
-                <option value="Pre-Nursery">Pre-Nursery</option>
-                <option value="Nursery">Nursery</option>
-                <option value="LKG">LKG</option>
-                <option value="UKG">UKG</option>
-                <option value="Class I">Class I</option>
-                <option value="Class II">Class II</option>
-                <option value="Class III">Class III</option>
-                <option value="Class IV">Class IV</option>
-                <option value="Class V">Class V</option>
-                <option value="Class VI">Class VI</option>
-                <option value="Class VII">Class VII</option>
-                <option value="Class VIII">Class VIII</option>
-                <option value="Class IX">Class IX</option>
-              </select>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-600 mb-1">আবেদনের স্ট্যাটাস</label>
-              <select id="filter-status" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-600">
-                <option value="ALL">সকল স্ট্যাটাস</option>
-                <option value="নতুন আবেদন">নতুন আবেদন</option>
-                <option value="যাচাইকৃত">যাচাইকৃত</option>
-                <option value="ভর্তি নিশ্চিত">ভর্তি নিশ্চিত</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Admissions Table -->
-          <div class="overflow-x-auto rounded-xl border border-slate-200">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 border-b border-slate-200 font-bold">
-                  <th class="p-3">ফর্ম নং ও তারিখ</th>
-                  <th class="p-3">শিক্ষার্থী ও পিতা</th>
-                  <th class="p-3">বিভাগ ও শ্রেণি</th>
-                  <th class="p-3">মোবাইল ও ঠিকানা</th>
-                  <th class="p-3">স্ট্যাটাস</th>
-                  <th class="p-3 text-right">অ্যাকশন</th>
-                </tr>
-              </thead>
-              <tbody id="admin-admissions-tbody" class="divide-y divide-slate-200">
-                <tr>
-                  <td colspan="6" class="p-8 text-center text-slate-400">ডেটা লোড হচ্ছে...</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <!-- ================= TAB 2: STATS, 5 BANNER FILE UPLOAD & BACKUP ================= -->
-      <section id="tab-settings" class="admin-tab-section hidden space-y-6">
+      <!-- ================= TAB 1: STATS, 5 BANNER FILE UPLOAD & BACKUP ================= -->
+      <section id="tab-settings" class="admin-tab-section space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           <!-- Stats & Phone Settings (5 cols) -->
@@ -483,7 +336,7 @@
         </div>
       </section>
 
-      <!-- ================= TAB 3: MARQUEE & NOTICE BOARD ================= -->
+      <!-- ================= TAB 2: MARQUEE & NOTICE BOARD ================= -->
       <section id="tab-notices" class="admin-tab-section hidden space-y-6">
         <!-- Marquee Editor -->
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
@@ -593,7 +446,7 @@
         </div>
       </section>
 
-      <!-- ================= TAB 4: CONTACT MESSAGES INBOX ================= -->
+      <!-- ================= TAB 3: CONTACT MESSAGES INBOX ================= -->
       <section id="tab-messages" class="admin-tab-section hidden space-y-4">
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
@@ -631,7 +484,7 @@
             <i class="fa-solid fa-up-right-from-square text-[10px] opacity-80"></i>
           </a>
 
-          <a href="/i-card.html" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2">
+          <a href="https://iqraacademy.co.in/i-card.html" target="_blank" rel="noopener noreferrer" class="bg-amber-500 hover:bg-amber-400 text-slate-950 px-4 py-2.5 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2">
             <i class="fa-solid fa-file-award"></i>
             <span>Make Student ID Card</span>
             <i class="fa-solid fa-up-right-from-square text-[10px] opacity-80"></i>
@@ -651,71 +504,6 @@
         </div>
       </div>
     </footer>
-  </div>
-
-  <!-- Manual Admission Entry Modal (For Admin Desk) -->
-  <div id="admin-manual-adm-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4 overflow-y-auto">
-    <div class="bg-white rounded-3xl max-w-xl w-full p-6 shadow-2xl border border-slate-200 space-y-4 my-8">
-      <div class="flex items-center justify-between border-b pb-3">
-        <h3 class="text-lg font-extrabold text-emerald-950">অফিস ডেস্ক থেকে নতুন ভর্তি এন্ট্রি</h3>
-        <button type="button" id="btn-close-manual-adm" class="text-slate-400 hover:text-slate-800 text-2xl font-bold cursor-pointer">&times;</button>
-      </div>
-      <form id="form-admin-manual-adm" class="space-y-3 text-xs">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold mb-1">শিক্ষার্থীর নাম *</label>
-            <input type="text" id="m-adm-name" required class="w-full p-2.5 rounded-xl border border-slate-300">
-          </div>
-          <div>
-            <label class="block font-bold mb-1">পিতার নাম *</label>
-            <input type="text" id="m-adm-father" required class="w-full p-2.5 rounded-xl border border-slate-300">
-          </div>
-          <div>
-            <label class="block font-bold mb-1">মোবাইল নম্বর (১০ ডিজিট) *</label>
-            <input type="tel" id="m-adm-phone" required pattern="[0-9]{10}" placeholder="9876543210" class="w-full p-2.5 rounded-xl border border-slate-300 font-mono">
-          </div>
-          <div>
-            <label class="block font-bold mb-1">আধার নম্বর</label>
-            <input type="text" id="m-adm-aadhaar" class="w-full p-2.5 rounded-xl border border-slate-300 font-mono">
-          </div>
-          <div>
-            <label class="block font-bold mb-1">বিভাগ *</label>
-            <select id="m-adm-stream" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white">
-              <option value="Residential Girls Mission (আবাসিক)">আবাসিক বালিকা মিশন</option>
-              <option value="Day-Boarding (ডে-বোর্ডিং)">ডে-বোর্ডিং</option>
-              <option value="Non-Residential (অনাবাসিক)">অনাবাসিক</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold mb-1">শ্রেণি *</label>
-            <select id="m-adm-class" class="w-full p-2.5 rounded-xl border border-slate-300 bg-white">
-              <option value="Pre-Nursery">Pre-Nursery</option>
-              <option value="Nursery">Nursery</option>
-              <option value="LKG">LKG</option>
-              <option value="UKG">UKG</option>
-              <option value="Class I">Class I</option>
-              <option value="Class II">Class II</option>
-              <option value="Class III">Class III</option>
-              <option value="Class IV">Class IV</option>
-              <option value="Class V" selected>Class V</option>
-              <option value="Class VI">Class VI</option>
-              <option value="Class VII">Class VII</option>
-              <option value="Class VIII">Class VIII</option>
-              <option value="Class IX">Class IX</option>
-            </select>
-          </div>
-          <div class="sm:col-span-2">
-            <label class="block font-bold mb-1">গ্রাম ও ঠিকানা *</label>
-            <input type="text" id="m-adm-addr" required placeholder="গ্রাম, পোস্ট অফিস, থানা" class="w-full p-2.5 rounded-xl border border-slate-300">
-          </div>
-        </div>
-        <div class="pt-3 flex justify-end gap-2">
-          <button type="submit" id="btn-submit-manual-adm" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-6 py-2.5 rounded-xl cursor-pointer">
-            সেভ করুন
-          </button>
-        </div>
-      </form>
-    </div>
   </div>
 
   <!-- Inline Link Insertion Helper Modal -->
@@ -746,35 +534,6 @@
     </div>
   </div>
 
-  <!-- Delete All Admissions Confirmation Modal -->
-  <div id="admin-delete-all-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-red-200 space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-        <h3 class="text-base font-extrabold text-red-700 flex items-center gap-2">
-          <i class="fa-solid fa-triangle-exclamation text-red-600"></i>
-          সকল ভর্তি আবেদন ডিলিট নিশ্চিতকরণ
-        </h3>
-        <button type="button" id="btn-close-delete-all-modal" class="text-slate-400 hover:text-slate-800 text-2xl font-bold cursor-pointer">&times;</button>
-      </div>
-      <div class="space-y-3 text-xs text-slate-700">
-        <p class="leading-relaxed">
-          আপনি কি নিশ্চিতভাবে <b>অনলাইন ভর্তি আবেদন রেজিস্টার</b> থেকে মোট <span id="delete-all-count-badge" class="font-mono font-extrabold text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">0</span>টি আবেদন স্থায়ীভাবে মুছে ফেলতে চান?
-        </p>
-        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-[11px] text-amber-900">
-          <i class="fa-solid fa-circle-info mr-1"></i> এই অ্যাকশনটি সম্পন্ন হলে Google Sheet থেকে সমস্ত ভর্তি আবেদন একসাথে মুছে যাবে।
-        </div>
-        <div class="pt-2 flex justify-end gap-2">
-          <button type="button" id="btn-cancel-delete-all" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2.5 rounded-xl cursor-pointer">
-            বাতিল করুন
-          </button>
-          <button type="button" id="btn-confirm-delete-all-admissions" class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-5 py-2.5 rounded-xl cursor-pointer flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-trash-can"></i> হ্যাঁ, সব আবেদন মুছে ফেলুন
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- ================= 100% APPS SCRIPT SERVER-VERIFIED ADMIN LOGIC ================= -->
   <script>
     // =========================================================================
@@ -783,7 +542,6 @@
     const DEFAULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyYA85M0O1yPJQg8wKiUYqOzDLGgWfvTv9N2pFwFXVlr24rN7nh0Po7uGPwS-MmAkRb/exec";
 
     let sessionAdminPassword = "";
-    let allAdmissions = [];
     let allNotices = [];
     let allMessages = [];
     let currentMainConfig = {};
@@ -964,7 +722,6 @@
 
     function lockDashboardSession() {
       sessionAdminPassword = "";
-      allAdmissions = [];
       allNotices = [];
       allMessages = [];
       document.getElementById('admin-dashboard').classList.add('hidden');
@@ -1054,7 +811,6 @@
     function applyAdminDataToUI(data) {
       currentMainConfig = data.config || {};
       allNotices = Array.isArray(data.notices) ? data.notices : [];
-      allAdmissions = Array.isArray(data.admissions) ? data.admissions : [];
       allMessages = Array.isArray(data.messages) ? data.messages : [];
 
       // Populate Config & Stats
@@ -1077,15 +833,10 @@
       }
 
       // Update KPI Counters
-      document.getElementById('badge-admissions-count').textContent = String(allAdmissions.length);
-      document.getElementById('kpi-total-adm').textContent = String(allAdmissions.length);
-      const resCount = allAdmissions.filter(a => String(a.stream || '').includes('Residential')).length;
-      document.getElementById('kpi-res-adm').textContent = String(resCount);
       document.getElementById('kpi-notices').textContent = String(allNotices.length);
       document.getElementById('badge-messages-count').textContent = String(allMessages.length);
       document.getElementById('kpi-messages').textContent = String(allMessages.length);
 
-      renderAdmissionsTable();
       renderAdminNotices();
       renderAdminMessages();
     }
@@ -1225,285 +976,6 @@
         btn.disabled = false;
       }
     });
-
-    // ================= RENDER & MANAGE ADMISSIONS =================
-    function renderAdmissionsTable() {
-      const tbody = document.getElementById('admin-admissions-tbody');
-      const q = (document.getElementById('filter-search')?.value || '').toLowerCase();
-      const stFilter = document.getElementById('filter-stream')?.value || 'ALL';
-      const clFilter = document.getElementById('filter-class')?.value || 'ALL';
-      const statusFilter = document.getElementById('filter-status')?.value || 'ALL';
-
-      const filtered = allAdmissions.filter(item => {
-        const matchQ = !q ||
-          String(item.name || '').toLowerCase().includes(q) ||
-          String(item.fatherName || '').toLowerCase().includes(q) ||
-          String(item.phone || '').toLowerCase().includes(q) ||
-          String(item.formNo || item.id || '').toLowerCase().includes(q);
-
-        const matchStream = stFilter === 'ALL' || String(item.stream || '').includes(stFilter);
-        const matchClass = clFilter === 'ALL' || item.className === clFilter;
-        const curStatus = item.status || 'নতুন আবেদন';
-        const matchStatus = statusFilter === 'ALL' || curStatus === statusFilter;
-
-        return matchQ && matchStream && matchClass && matchStatus;
-      });
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-8 text-center text-slate-400">কোনো ভর্তি আবেদন পাওয়া যায়নি।</td></tr>`;
-        return;
-      }
-
-      tbody.innerHTML = filtered.map(item => {
-        const safeFormNo = escapeHtml(item.formNo || item.id || 'N/A');
-        const safeDate = escapeHtml(item.date || '');
-        const safeName = escapeHtml(item.name || '-');
-        const safeFather = escapeHtml(item.fatherName || '-');
-        const safeAadhaar = escapeHtml(item.aadhaar || '-');
-        const safeClass = escapeHtml(item.className || '-');
-        const safeStream = escapeHtml(item.stream || '-');
-        const safePhone = escapeHtml(item.phone || '-');
-        const safeAddr = escapeHtml(item.address || '-');
-        const safePhoto = sanitizeUrl(item.photo);
-
-        const curStatus = item.status || 'নতুন আবেদন';
-        const statusBadgeClass = curStatus === 'ভর্তি নিশ্চিত'
-          ? 'bg-emerald-100 text-emerald-800 border-emerald-300'
-          : curStatus === 'যাচাইকৃত'
-          ? 'bg-amber-100 text-amber-800 border-amber-300'
-          : 'bg-blue-100 text-blue-800 border-blue-300';
-
-        return `
-          <tr class="hover:bg-slate-50 transition">
-            <td class="p-3 align-top">
-              <span class="font-mono font-bold text-emerald-900 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 block w-fit">${safeFormNo}</span>
-              <span class="text-[11px] text-slate-400 block mt-1">${safeDate}</span>
-            </td>
-            <td class="p-3 align-top">
-              <div class="flex items-center gap-2.5">
-                ${safePhoto ? `<img src="${safePhoto}" class="w-9 h-11 rounded object-cover border border-slate-300 shrink-0 max-w-full h-auto">` : `<div class="w-9 h-11 rounded bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-400 shrink-0"><i class="fa-solid fa-user"></i></div>`}
-                <div>
-                  <div class="font-bold text-slate-900 text-sm">${safeName}</div>
-                  <div class="text-slate-500">পিতা: ${safeFather}</div>
-                  <div class="text-[11px] font-mono text-amber-700">আধার: ${safeAadhaar}</div>
-                </div>
-              </div>
-            </td>
-            <td class="p-3 align-top">
-              <span class="font-bold text-emerald-800 block">${safeClass}</span>
-              <span class="text-[11px] text-slate-600">${safeStream}</span>
-            </td>
-            <td class="p-3 align-top">
-              <a href="tel:${safePhone}" class="font-mono font-bold text-slate-900 hover:text-emerald-700 block"><i class="fa-solid fa-phone text-[10px] mr-1 text-emerald-600"></i>${safePhone}</a>
-              <span class="text-[11px] text-slate-500 block mt-0.5 max-w-xs">${safeAddr}</span>
-            </td>
-            <td class="p-3 align-top">
-              <select data-id="${escapeHtml(item.id)}" class="status-select text-xs font-bold px-2.5 py-1 rounded-lg border ${statusBadgeClass} cursor-pointer block">
-                <option value="নতুন আবেদন" ${curStatus === 'নতুন আবেদন' ? 'selected' : ''}>নতুন আবেদন</option>
-                <option value="যাচাইকৃত" ${curStatus === 'যাচাইকৃত' ? 'selected' : ''}>যাচাইকৃত</option>
-                <option value="ভর্তি নিশ্চিত" ${curStatus === 'ভর্তি নিশ্চিত' ? 'selected' : ''}>ভর্তি নিশ্চিত</option>
-              </select>
-            </td>
-            <td class="p-3 align-top text-right space-x-1 whitespace-nowrap">
-              <button type="button" data-id="${escapeHtml(item.id)}" class="btn-print-adm bg-slate-800 hover:bg-slate-700 text-white px-2.5 py-1.5 rounded-lg text-xs cursor-pointer" title="A4 ফর্ম প্রিন্ট">
-                <i class="fa-solid fa-print"></i> প্রিন্ট
-              </button>
-              <button type="button" data-id="${escapeHtml(item.id)}" class="btn-del-adm bg-red-50 hover:bg-red-600 text-red-600 hover:text-white px-2.5 py-1.5 rounded-lg text-xs border border-red-200 transition cursor-pointer" title="ডিলিট করুন">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      tbody.querySelectorAll('.status-select').forEach(sel => {
-        sel.addEventListener('change', async (e) => {
-          const id = sel.getAttribute('data-id');
-          const newStatus = e.target.value;
-          try {
-            await callAdminServer({ action: "updateAdmissionStatus", id, status: newStatus });
-            const target = allAdmissions.find(a => a.id === id);
-            if (target) target.status = newStatus;
-            renderAdmissionsTable();
-            showAdminToast(`আবেদনের স্ট্যাটাস "${newStatus}"-এ আপডেট হয়েছে!`);
-          } catch (err) {
-            showAdminToast("স্ট্যাটাস আপডেট ব্যর্থ: " + err.message, false);
-          }
-        });
-      });
-
-      tbody.querySelectorAll('.btn-print-adm').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const id = btn.getAttribute('data-id');
-          const found = allAdmissions.find(a => a.id === id);
-          if (found) printAdmissionSlipFromAdmin(found);
-        });
-      });
-
-      tbody.querySelectorAll('.btn-del-adm').forEach(btn => {
-        btn.addEventListener('click', async () => {
-          const id = btn.getAttribute('data-id');
-          try {
-            await callAdminServer({ action: "deleteAdmission", id });
-            allAdmissions = allAdmissions.filter(a => a.id !== id);
-            document.getElementById('badge-admissions-count').textContent = String(allAdmissions.length);
-            document.getElementById('kpi-total-adm').textContent = String(allAdmissions.length);
-            renderAdmissionsTable();
-            showAdminToast("আবেদনটি ডিলিট করা হয়েছে।");
-          } catch (err) {
-            showAdminToast("ডিলিট করতে সমস্যা হয়েছে: " + err.message, false);
-          }
-        });
-      });
-    }
-
-    ['filter-search', 'filter-stream', 'filter-class', 'filter-status'].forEach(id => {
-      document.getElementById(id)?.addEventListener('input', renderAdmissionsTable);
-      document.getElementById(id)?.addEventListener('change', renderAdmissionsTable);
-    });
-
-    // Delete ALL Admissions Modal
-    const deleteAllModal = document.getElementById('admin-delete-all-modal');
-    const closeDeleteAllModal = () => deleteAllModal?.classList.add('hidden');
-
-    document.getElementById('btn-delete-all-admissions')?.addEventListener('click', () => {
-      if (allAdmissions.length === 0) {
-        showAdminToast("মুছে ফেলার মতো কোনো ভর্তি আবেদন রেজিস্টারে নেই!", false);
-        return;
-      }
-      document.getElementById('delete-all-count-badge').textContent = String(allAdmissions.length);
-      deleteAllModal?.classList.remove('hidden');
-    });
-
-    document.getElementById('btn-close-delete-all-modal')?.addEventListener('click', closeDeleteAllModal);
-    document.getElementById('btn-cancel-delete-all')?.addEventListener('click', closeDeleteAllModal);
-
-    document.getElementById('btn-confirm-delete-all-admissions')?.addEventListener('click', async () => {
-      const confirmBtn = document.getElementById('btn-confirm-delete-all-admissions');
-      confirmBtn.disabled = true;
-      confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> ডিলিট হচ্ছে...';
-      try {
-        await callAdminServer({ action: "deleteAllAdmissions" });
-        allAdmissions = [];
-        document.getElementById('badge-admissions-count').textContent = "0";
-        document.getElementById('kpi-total-adm').textContent = "0";
-        document.getElementById('kpi-res-adm').textContent = "0";
-        renderAdmissionsTable();
-        closeDeleteAllModal();
-        showAdminToast("সকল ভর্তি আবেদন সফলভাবে মুছে ফেলা হয়েছে!");
-      } catch (err) {
-        showAdminToast("ডিলিট করতে ত্রুটি: " + err.message, false);
-      } finally {
-        confirmBtn.disabled = false;
-        confirmBtn.innerHTML = '<i class="fa-solid fa-trash-can"></i> হ্যাঁ, সব আবেদন মুছে ফেলুন';
-      }
-    });
-
-    // Export Admissions to CSV
-    document.getElementById('btn-export-csv').addEventListener('click', () => {
-      if (allAdmissions.length === 0) {
-        showAdminToast("ডাউনলোড করার মতো কোনো ডেটা নেই!", false);
-        return;
-      }
-      const headers = ["Form_No", "App_ID", "Date", "Student_Name", "Father_Name", "Aadhaar", "Class", "Stream", "Phone", "Address", "Status"];
-      const rows = allAdmissions.map(a => [
-        a.formNo || '',
-        a.id || '',
-        a.date || '',
-        a.name || '',
-        a.fatherName || '',
-        a.aadhaar || '',
-        a.className || '',
-        a.stream || '',
-        a.phone || '',
-        a.address || '',
-        a.status || 'নতুন আবেদন'
-      ].map(v => `"${String(v).replace(/"/g, '""')}"`).join(','));
-
-      const csvContent = "\uFEFF" + [headers.join(','), ...rows].join('\n');
-      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `IQRA_Admissions_${new Date().toISOString().slice(0,10)}.csv`;
-      a.click();
-      showAdminToast("Excel / CSV ফাইল ডাউনলোড হয়েছে!");
-    });
-
-    // Manual Admission Entry
-    const manualModal = document.getElementById('admin-manual-adm-modal');
-    document.getElementById('btn-open-manual-entry').addEventListener('click', () => manualModal.classList.remove('hidden'));
-    document.getElementById('btn-close-manual-adm').addEventListener('click', () => manualModal.classList.add('hidden'));
-
-    document.getElementById('form-admin-manual-adm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const btn = document.getElementById('btn-submit-manual-adm');
-      btn.disabled = true;
-      try {
-        await callAdminServer({
-          action: "addManualAdmission",
-          name: document.getElementById('m-adm-name').value.trim(),
-          fatherName: document.getElementById('m-adm-father').value.trim(),
-          phone: document.getElementById('m-adm-phone').value.trim(),
-          aadhaar: document.getElementById('m-adm-aadhaar').value.trim() || '-',
-          stream: document.getElementById('m-adm-stream').value,
-          className: document.getElementById('m-adm-class').value,
-          address: document.getElementById('m-adm-addr').value.trim(),
-          date: new Date().toLocaleDateString('bn-BD')
-        });
-        const refreshed = await callAdminServer({ action: "getAdminData" });
-        applyAdminDataToUI(refreshed);
-        manualModal.classList.add('hidden');
-        e.target.reset();
-        showAdminToast("নতুন ভর্তি এন্ট্রি সফলভাবে যোগ করা হয়েছে!");
-      } catch (err) {
-        showAdminToast("ত্রুটি: " + err.message, false);
-      } finally {
-        btn.disabled = false;
-      }
-    });
-
-    function printAdmissionSlipFromAdmin(data) {
-      const container = document.getElementById('print-container');
-      const safePhoto = sanitizeUrl(data.photo);
-      const photoHtml = safePhoto
-        ? `<img src="${safePhoto}" style="width: 100%; height: 100%; object-fit: cover;">`
-        : `<span style="color: #94a3b8; font-size: 9px; font-weight: bold;">ছবি</span>`;
-
-      container.innerHTML = `
-        <div style="font-family: 'Hind Siliguri', Arial, sans-serif; max-width: 195mm; margin: 0 auto; padding: 16px; border: 2px solid #064e3b; border-radius: 10px;">
-          <div style="text-align: center; border-bottom: 2px solid #064e3b; padding-bottom: 8px; margin-bottom: 10px;">
-            <h1 style="margin: 0; font-size: 22px; color: #064e3b;">PVT. IQRA ACADEMY (ইকরা অ্যাকাডেমি)</h1>
-            <p style="margin: 2px 0; font-size: 11px;">আবাসিক গার্লস মিশন | UDISE: 19111008505 | দক্ষিণ শিবপুর, যদুরহাটি, বাদুড়িয়া</p>
-            <div style="font-weight: bold; font-size: 12px; margin-top: 4px; color: #92400e;">অ্যাডমিন যাচাইকৃত ভর্তি ফর্ম — ফর্ম নং: ${escapeHtml(data.formNo || data.id)}</div>
-          </div>
-          <table style="width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 12px;" border="1" cellpadding="6">
-            <tr>
-              <td><b>শিক্ষার্থীর নাম:</b> ${escapeHtml(data.name || '-')}</td>
-              <td><b>পিতার নাম:</b> ${escapeHtml(data.fatherName || '-')}</td>
-              <td rowspan="4" style="width: 80px; text-align: center;">${photoHtml}</td>
-            </tr>
-            <tr>
-              <td><b>শ্রেণি:</b> ${escapeHtml(data.className || '-')}</td>
-              <td><b>বিভাগ:</b> ${escapeHtml(data.stream || '-')}</td>
-            </tr>
-            <tr>
-              <td><b>মোবাইল:</b> ${escapeHtml(data.phone || '-')}</td>
-              <td><b>আধার নম্বর:</b> ${escapeHtml(data.aadhaar || '-')}</td>
-            </tr>
-            <tr>
-              <td colspan="2"><b>ঠিকানা:</b> ${escapeHtml(data.address || '-')} | <b>স্ট্যাটাস:</b> ${escapeHtml(data.status || 'নতুন আবেদন')}</td>
-            </tr>
-          </table>
-          <div style="margin-top: 35px; display: flex; justify-content: space-between; font-size: 11px; font-weight: bold;">
-            <span>অভিভাবকের স্বাক্ষর</span>
-            <span>অ্যাডমিশন অফিসার</span>
-            <span>পরিচালক / সিলমোহর</span>
-          </div>
-        </div>
-      `;
-      window.print();
-    }
 
     // ================= MARQUEE & NOTICES MANAGEMENT =================
     let activeLinkTargetTextareaId = 'admin-marquee-input';
@@ -1695,7 +1167,6 @@
       const payload = {
         exportedAt: new Date().toISOString(),
         main_config: currentMainConfig,
-        admissions: allAdmissions,
         notices: allNotices,
         contact_messages: allMessages
       };
