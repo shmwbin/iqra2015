@@ -1,1 +1,318 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faculty & Staff Management - Admin | PVT. IQRA ACADEMY</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Hind Siliguri', sans-serif; background-color: #f1f5f9; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-800 p-4 md:p-8">
+  <div class="max-w-5xl mx-auto space-y-6">
 
+    <!-- Header Bar -->
+    <div class="bg-emerald-950 text-white p-6 rounded-2xl flex flex-wrap justify-between items-center gap-4 shadow-lg border border-emerald-800">
+      <div class="flex items-center gap-3">
+        <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="Logo" class="w-12 h-12 rounded-full border border-amber-400 bg-white object-cover">
+        <div>
+          <h1 class="text-xl md:text-2xl font-bold">Faculty & Staff Management</h1>
+          <p class="text-xs md:text-sm text-emerald-300">PVT. IQRA ACADEMY · Admin Console</p>
+        </div>
+      </div>
+      <a href="faculty-staff.html" target="_blank" class="bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs md:text-sm font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        <span>Public Directory Dekhun</span>
+      </a>
+    </div>
+
+    <!-- Entry Form -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-4">
+        <h2 id="formTitle" class="text-lg font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-user-plus text-emerald-600"></i>
+          <span>Notun Teacher / Staff Entry</span>
+        </h2>
+        <span id="editModeBadge" class="hidden text-xs bg-amber-100 text-amber-800 font-bold px-3 py-1 rounded-full border border-amber-300">Edit Mode</span>
+      </div>
+
+      <form id="facultyForm" class="space-y-4">
+        <input type="hidden" id="facultyId">
+        <input type="hidden" id="existingPhotoUrl">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Admin Password *</label>
+            <input type="password" id="adminPass" required placeholder="Worker-e set kora secret password" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Name *</label>
+            <input type="text" id="facName" required placeholder="Shikshok ba kormir naam" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Designation (Editable) *</label>
+            <input type="text" id="facDesignation" required placeholder="e.g. Teacher, Assistant Teacher, Office Staff, Headmaster" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Subject Assigned</label>
+            <input type="text" id="facSubject" placeholder="e.g. Mathematics, Bengali, English, Arabic" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Educational Qualification</label>
+            <input type="text" id="facEduQual" placeholder="e.g. B.A (Hons), M.A, B.Ed" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Technical Qualification if any</label>
+            <input type="text" id="facTechQual" placeholder="e.g. DITA, PGDCA, Computer Certificate" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Other's Qualification</label>
+            <input type="text" id="facOtherQual" placeholder="e.g. Hafiz-e-Quran, Sports, Art" class="w-full p-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600">
+          </div>
+        </div>
+
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Passport Size Photo (Max 5MB - JPG, PNG, WEBP)</label>
+          <input type="file" id="facPhotoInput" accept="image/jpeg,image/png,image/webp" class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white cursor-pointer">
+          <p id="currentPhotoNotice" class="text-[11px] text-slate-500 mt-1 hidden"></p>
+        </div>
+
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button type="submit" id="btnSave" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition flex items-center gap-2 cursor-pointer shadow">
+            <i class="fa-solid fa-floppy-disk text-amber-300"></i>
+            <span id="saveBtnText">Save Record</span>
+          </button>
+          <button type="button" onclick="resetForm()" class="bg-slate-600 hover:bg-slate-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition cursor-pointer">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Table of Current Members -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+      <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i class="fa-solid fa-users text-emerald-700"></i>
+          <span>Faculty & Staff Directory Table</span>
+        </h2>
+        <button onclick="loadFacultyData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg font-bold transition flex items-center gap-1 cursor-pointer">
+          <i class="fa-solid fa-rotate"></i>
+          <span>Refresh</span>
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 border-b">
+              <th class="p-3">Photo</th>
+              <th class="p-3">Name</th>
+              <th class="p-3">Designation</th>
+              <th class="p-3">Subject</th>
+              <th class="p-3">Qualifications</th>
+              <th class="p-3 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="facultyTableBody">
+            <tr><td colspan="6" class="p-4 text-center text-slate-400">Loading faculty data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const API_WORKER_URL = "https://iqra-api-worker.tarikul-aisj.workers.dev";
+    let allFaculty = [];
+    let currentPhotoBase64 = "";
+
+    document.getElementById('facPhotoInput').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) {
+        currentPhotoBase64 = "";
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Chobir size shorboccho 5MB-r moddhe hote hobe!");
+        e.target.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = ev => currentPhotoBase64 = ev.target.result;
+      reader.readAsDataURL(file);
+    });
+
+    async function loadFacultyData() {
+      const tbody = document.getElementById('facultyTableBody');
+      tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">Loading faculty data...</td></tr>`;
+      try {
+        const res = await fetch(`${API_WORKER_URL}?action=getAllFaculty`);
+        const data = await res.json();
+        if (data && data.success && Array.isArray(data.faculty)) {
+          allFaculty = data.faculty;
+          renderTable();
+        } else {
+          tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">Kono data load kora jayni.</td></tr>`;
+        }
+      } catch (err) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-red-500">Connection error: ${err.message}</td></tr>`;
+      }
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('facultyTableBody');
+      if (allFaculty.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">Ekhono kono teacher ba staff entry kora hoyni.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = allFaculty.map(f => `
+        <tr class="border-b hover:bg-slate-50">
+          <td class="p-3">
+            <img src="${f.photoUrl || 'https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg'}" class="w-10 h-10 rounded-full object-cover border border-slate-300" alt="Photo" referrerpolicy="no-referrer">
+          </td>
+          <td class="p-3 font-bold text-slate-900">${f.name}</td>
+          <td class="p-3 text-emerald-800 font-semibold">${f.designation}</td>
+          <td class="p-3 text-slate-700">${f.subject || '-'}</td>
+          <td class="p-3 text-slate-500 space-y-0.5">
+            <div><strong>Edu:</strong> ${f.eduQual || '-'}</div>
+            ${f.techQual ? `<div><strong>Tech:</strong> ${f.techQual}</div>` : ''}
+            ${f.otherQual ? `<div><strong>Other:</strong> ${f.otherQual}</div>` : ''}
+          </td>
+          <td class="p-3 text-right space-x-2">
+            <button onclick="editFaculty('${f.id}')" class="text-blue-600 hover:text-blue-800 font-bold cursor-pointer">Edit</button>
+            <button onclick="deleteFacultyRow('${f.id}')" class="text-red-600 hover:text-red-800 font-bold cursor-pointer">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    document.getElementById('facultyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSave');
+      const pass = document.getElementById('adminPass').value.trim();
+      if (!pass) {
+        alert("Doya kore Admin Password likhun!");
+        return;
+      }
+
+      btn.disabled = true;
+      document.getElementById('saveBtnText').innerText = "Saving to Google Drive & Sheet...";
+
+      const payload = {
+        action: "saveFaculty",
+        adminPassword: pass,
+        data: {
+          id: document.getElementById('facultyId').value,
+          name: document.getElementById('facName').value.trim(),
+          designation: document.getElementById('facDesignation').value.trim(),
+          subject: document.getElementById('facSubject').value.trim(),
+          eduQual: document.getElementById('facEduQual').value.trim(),
+          techQual: document.getElementById('facTechQual').value.trim(),
+          otherQual: document.getElementById('facOtherQual').value.trim(),
+          photoBase64: currentPhotoBase64,
+          existingPhotoUrl: document.getElementById('existingPhotoUrl').value
+        }
+      };
+
+      try {
+        const res = await fetch(API_WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+        const result = await res.json();
+        if (result && result.success) {
+          alert(result.message || "Record successfully save hoyeche!");
+          resetForm();
+          loadFacultyData();
+        } else {
+          alert(result.error || result.message || "Save korte shomoshya hoyeche!");
+        }
+      } catch (err) {
+        alert("Network Error: " + err.message);
+      } finally {
+        btn.disabled = false;
+        document.getElementById('saveBtnText').innerText = "Save Record";
+      }
+    });
+
+    function editFaculty(id) {
+      const f = allFaculty.find(x => x.id === id);
+      if (!f) return;
+      document.getElementById('facultyId').value = f.id;
+      document.getElementById('facName').value = f.name;
+      document.getElementById('facDesignation').value = f.designation;
+      document.getElementById('facSubject').value = f.subject;
+      document.getElementById('facEduQual').value = f.eduQual;
+      document.getElementById('facTechQual').value = f.techQual;
+      document.getElementById('facOtherQual').value = f.otherQual;
+      document.getElementById('existingPhotoUrl').value = f.photoUrl;
+
+      document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-500"></i> Edit Profile (${f.name})`;
+      document.getElementById('editModeBadge').classList.remove('hidden');
+
+      const notice = document.getElementById('currentPhotoNotice');
+      if (f.photoUrl) {
+        notice.classList.remove('hidden');
+        notice.innerHTML = `Current Photo: <a href="${f.photoUrl}" target="_blank" class="text-blue-600 underline font-semibold">View Existing Image</a> (Notun photo upload na korle ager photo-i thakbe)`;
+      } else {
+        notice.classList.add('hidden');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function deleteFacultyRow(id) {
+      const pass = prompt("Delete korte Admin Password likhun:");
+      if (!pass) return;
+
+      try {
+        const res = await fetch(API_WORKER_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "deleteFaculty", id: id, adminPassword: pass })
+        });
+        const result = await res.json();
+        if (result && result.success) {
+          alert("Record delete kora hoyeche!");
+          loadFacultyData();
+        } else {
+          alert(result.error || result.message || "Delete fail hoyeche!");
+        }
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('facultyId').value = "";
+      document.getElementById('existingPhotoUrl').value = "";
+      document.getElementById('facName').value = "";
+      document.getElementById('facDesignation').value = "";
+      document.getElementById('facSubject').value = "";
+      document.getElementById('facEduQual').value = "";
+      document.getElementById('facTechQual').value = "";
+      document.getElementById('facOtherQual').value = "";
+      document.getElementById('facPhotoInput').value = "";
+      currentPhotoBase64 = "";
+      document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-user-plus text-emerald-600"></i> Notun Teacher / Staff Entry`;
+      document.getElementById('editModeBadge').classList.add('hidden');
+      document.getElementById('currentPhotoNotice').classList.add('hidden');
+    }
+
+    loadFacultyData();
+  </script>
+</body>
+</html>
