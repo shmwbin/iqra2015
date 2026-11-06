@@ -13,10 +13,10 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
 
-  <!-- Toast Notification Box -->
+  <!-- টোস্ট নোটিফিকেশন কন্টেইনার -->
   <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- ================= 1. SECURE LOGIN SCREEN ================= -->
+  <!-- ================= ১. সিকিউর লগইন স্ক্রিন ================= -->
   <div id="loginScreen" class="fixed inset-0 z-50 bg-slate-950 flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-5 text-slate-100">
       
@@ -31,98 +31,98 @@
         <p class="text-xs text-slate-400">PVT. IQRA ACADEMY · Cloudflare Shielded</p>
       </div>
 
-      <!-- Lockout Alert Banner -->
+      <!-- ব্রুট-ফোর্স লকআউট ব্যানার -->
       <div id="lockoutBanner" class="hidden bg-red-950/90 border border-red-700 rounded-2xl p-3.5 text-xs text-red-200 flex items-center gap-3">
         <i class="fa-solid fa-ban text-red-400 text-xl shrink-0"></i>
         <div>
-          <div class="font-bold text-red-300">Security Lockout Active</div>
-          <div>Bar-bar bhul chestar karone access bondho ache. <span id="lockoutTimer" class="font-mono font-bold text-amber-300">60</span> seconds por abar chesta korun.</div>
+          <div class="font-bold text-red-300">নিরাপত্তা লক সক্রিয়</div>
+          <div>একাধিক ভুল চেষ্টার কারণে লগইন সাময়িকভাবে বন্ধ। <span id="lockoutTimer" class="font-mono font-bold text-amber-300">60</span> সেকেন্ড পর আবার চেষ্টা করুন।</div>
         </div>
       </div>
 
-      <!-- Verification Badge -->
+      <!-- সিকিউরিটি ব্যাজ -->
       <div class="bg-slate-950 p-2.5 rounded-xl border border-emerald-800/80 text-xs font-bold text-center text-emerald-300 flex items-center justify-center gap-2">
         <i class="fa-solid fa-lock text-amber-400"></i>
-        <span>Authorized Personnel Only</span>
+        <span>অনুমোদিত অ্যাডমিন কেবল প্রবেশযোগ্য</span>
       </div>
 
-      <!-- Anti-Bot Math Challenge -->
+      <!-- অ্যান্টি-বট গাণিতিক চ্যালেঞ্জ -->
       <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-3.5 space-y-2">
         <div class="flex items-center justify-between text-xs">
           <span class="text-emerald-400 font-bold flex items-center gap-1.5">
-            <i class="fa-solid fa-robot"></i> Verification (Anti-Bot) *
+            <i class="fa-solid fa-robot"></i> নিরাপত্তা যাচাই (Anti-Bot) *
           </span>
           <button type="button" onclick="generateCaptcha()" class="text-slate-400 hover:text-amber-300 text-xs flex items-center gap-1 cursor-pointer">
-            <i class="fa-solid fa-rotate"></i> Change
+            <i class="fa-solid fa-rotate"></i> পরিবর্তন
           </button>
         </div>
         <div class="flex items-center gap-3">
           <div id="captchaBox" class="bg-slate-900 border border-slate-700 px-3.5 py-2 rounded-xl font-mono font-extrabold text-amber-300 text-sm tracking-wider select-none shrink-0">
             8 + 5 = ?
           </div>
-          <input type="number" id="captchaInput" placeholder="Uttor likhun" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-400 font-mono">
+          <input type="number" id="captchaInput" placeholder="উত্তর লিখুন" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-400 font-mono">
         </div>
       </div>
 
-      <!-- Login Form -->
+      <!-- লগইন ফর্ম -->
       <form id="loginForm" class="space-y-4">
         <div>
-          <label class="block text-xs font-bold text-slate-300 mb-1">Gopon Admin Password *</label>
-          <input type="password" id="loginPasswordInput" required placeholder="Enter secret password" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-400">
+          <label class="block text-xs font-bold text-slate-300 mb-1">গোপন অ্যাডমিন পাসওয়ার্ড *</label>
+          <input type="password" id="loginPasswordInput" required placeholder="Cloudflare-এ সেট করা সিক্রেট পাসওয়ার্ড দিন" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm focus:outline-none focus:border-emerald-400">
         </div>
 
         <button type="submit" id="btnLoginSubmit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 rounded-xl transition text-sm flex items-center justify-center gap-2 cursor-pointer shadow-lg shadow-emerald-950">
           <i class="fa-solid fa-right-to-bracket"></i>
-          <span>Verify & Unlock Console</span>
+          <span>যাচাই ও কনসোল আনলক করুন</span>
         </button>
       </form>
 
       <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-xs text-slate-500">
         <a href="faculty-staff.html" class="hover:text-amber-400 flex items-center gap-1 transition">
-          <i class="fa-solid fa-arrow-left"></i> Public Directory
+          <i class="fa-solid fa-arrow-left"></i> পাবলিক ডিরেক্টরি
         </a>
         <span>UDISE: 19111008505</span>
       </div>
     </div>
   </div>
 
-  <!-- ================= 2. PROTECTED ADMIN DASHBOARD ================= -->
+  <!-- ================= ২. সুরক্ষিত মূল অ্যাডমিন ড্যাশবোর্ড ================= -->
   <div id="adminDashboard" class="hidden flex-1 flex flex-col justify-between bg-slate-100 text-slate-800">
     
-    <!-- Top Nav Header -->
+    <!-- টপ নেভবার -->
     <header class="bg-emerald-950 text-white p-4 sm:p-6 shadow-md border-b border-emerald-800 sticky top-0 z-40">
       <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center gap-3.5">
           <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="Logo" class="w-11 h-11 rounded-full border-2 border-amber-400 bg-white object-cover">
           <div>
             <h1 class="text-lg sm:text-xl font-bold leading-tight">Faculty & Staff Control Panel</h1>
-            <p class="text-xs text-emerald-300">PVT. IQRA ACADEMY · Authenticated Session</p>
+            <p class="text-xs text-emerald-300">PVT. IQRA ACADEMY · সুরক্ষিত অ্যাক্টিভ সেশন</p>
           </div>
         </div>
         <div class="flex items-center gap-2.5">
           <a href="faculty-staff.html" target="_blank" class="bg-emerald-900 hover:bg-emerald-800 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition border border-emerald-700 flex items-center gap-1.5">
             <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            <span class="hidden sm:inline">Live Directory</span>
+            <span class="hidden sm:inline">পাবলিক পেজ দেখুন</span>
           </a>
           <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 cursor-pointer shadow">
             <i class="fa-solid fa-power-off"></i>
-            <span>Lock / Logout</span>
+            <span>লক / লগআউট</span>
           </button>
         </div>
       </div>
     </header>
 
-    <!-- Main Content Form & Table -->
+    <!-- মূল ফর্ম ও টেবিল কন্টেইনার -->
     <main class="max-w-6xl mx-auto w-full p-4 sm:p-6 space-y-6 flex-1">
       
-      <!-- Entry Card -->
+      <!-- এন্ট্রি ফর্ম কার্ড -->
       <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200">
         <div class="flex justify-between items-center border-b border-slate-100 pb-3 mb-5">
           <h2 id="formTitle" class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
             <i class="fa-solid fa-user-plus text-emerald-700"></i>
-            <span>Notun Shikshok / Kormi Entry</span>
+            <span>নতুন শিক্ষক / কর্মী এন্ট্রি</span>
           </h2>
-          <span id="editModeBadge" class="hidden text-xs bg-amber-100 text-amber-900 font-bold px-3 py-1 rounded-full border border-amber-300">Edit Mode</span>
+          <span id="editModeBadge" class="hidden text-xs bg-amber-100 text-amber-900 font-bold px-3 py-1 rounded-full border border-amber-300">এডিট মোড সক্রিয়</span>
         </div>
 
         <form id="facultyForm" class="space-y-4">
@@ -131,45 +131,45 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Name (Shikshok ba Kormir Naam) *</label>
-              <input type="text" id="facName" required placeholder="e.g. Moulana Abdul Matin" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
+              <label class="block text-xs font-bold text-slate-700 mb-1">শিক্ষক বা কর্মীর নাম *</label>
+              <input type="text" id="facName" required placeholder="যেমন: তারিকুল ইসলাম" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Designation (Editable) *</label>
-              <input type="text" id="facDesignation" required placeholder="e.g. Headmaster, Assistant Teacher, Office Staff" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
+              <label class="block text-xs font-bold text-slate-700 mb-1">পদবি (Designation - পরিবর্তনযোগ্য) *</label>
+              <input type="text" id="facDesignation" required placeholder="যেমন: Headmaster, Teacher, Office Staff" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Subject Assigned</label>
-              <input type="text" id="facSubject" placeholder="e.g. Mathematics, English, Arabic, Bengali" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
+              <label class="block text-xs font-bold text-slate-700 mb-1">নির্ধারিত বিষয় (Subject Assigned)</label>
+              <input type="text" id="facSubject" placeholder="যেমন: গণিত, ইংরেজি, বাংলা, আরবি" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Educational Qualification</label>
-              <input type="text" id="facEduQual" placeholder="e.g. M.A., B.Ed., Kamil" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
+              <label class="block text-xs font-bold text-slate-700 mb-1">শিক্ষাগত যোগ্যতা (Educational Qualification)</label>
+              <input type="text" id="facEduQual" placeholder="যেমন: M.A., B.Ed., Kamil" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Technical Qualification if any</label>
-              <input type="text" id="facTechQual" placeholder="e.g. DITA, PGDCA, Computer Certificate" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
+              <label class="block text-xs font-bold text-slate-700 mb-1">কারিগরি যোগ্যতা (Technical Qualification if any)</label>
+              <input type="text" id="facTechQual" placeholder="যেমন: DITA, PGDCA, Computer Certificate" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
             </div>
             <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Other's Qualification</label>
-              <input type="text" id="facOtherQual" placeholder="e.g. Hafiz-e-Quran, Sports Coach, Art" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
+              <label class="block text-xs font-bold text-slate-700 mb-1">অন্যান্য যোগ্যতা (Other's Qualification)</label>
+              <input type="text" id="facOtherQual" placeholder="যেমন: হাফেজ, স্পোর্টস কোচ, অঙ্কন" class="w-full p-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white">
             </div>
           </div>
 
-          <!-- Photo Upload with Preview -->
+          <!-- ছবি আপলোড ও তাৎক্ষণিক প্রিভিউ -->
           <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <div class="w-20 h-20 rounded-xl bg-slate-200 border border-slate-300 overflow-hidden shrink-0 flex items-center justify-center">
               <img id="photoPreviewImg" src="" alt="Preview" class="hidden w-full h-full object-cover">
               <i id="photoPlaceholderIcon" class="fa-solid fa-image text-slate-400 text-2xl"></i>
             </div>
             <div class="flex-1 w-full space-y-1">
-              <label class="block text-xs font-bold text-slate-700">Passport Size Photo (Max 5MB - JPG, PNG, WEBP)</label>
+              <label class="block text-xs font-bold text-slate-700">পাসপোর্ট সাইজ ছবি (সর্বোচ্চ ৫ মেগাবাইট - JPG, PNG, WEBP)</label>
               <input type="file" id="facPhotoInput" accept="image/jpeg,image/png,image/webp" class="w-full text-xs p-2 rounded-lg border border-slate-300 bg-white cursor-pointer">
               <p id="currentPhotoNotice" class="text-[11px] text-slate-500 hidden"></p>
             </div>
@@ -178,26 +178,26 @@
           <div class="flex flex-wrap gap-3 pt-2">
             <button type="submit" id="btnSave" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-7 py-3 rounded-xl text-sm transition flex items-center gap-2 cursor-pointer shadow">
               <i class="fa-solid fa-cloud-arrow-up text-amber-300"></i>
-              <span id="saveBtnText">Save Record (Sheet & Drive)</span>
+              <span id="saveBtnText">রেকর্ড সংরক্ষণ করুন (Sheet & Drive)</span>
             </button>
             <button type="button" onclick="resetForm()" class="bg-slate-600 hover:bg-slate-700 text-white font-bold px-6 py-3 rounded-xl text-sm transition cursor-pointer">
-              Reset Form
+              ফর্ম ক্লিয়ার করুন
             </button>
           </div>
         </form>
       </div>
 
-      <!-- Registered Faculty Directory Table -->
+      <!-- তালিকা টেবিল -->
       <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 space-y-4">
         <div class="flex flex-wrap justify-between items-center border-b border-slate-100 pb-3 gap-2">
           <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
             <i class="fa-solid fa-list-check text-emerald-700"></i>
-            <span>Registered Faculty Directory</span>
+            <span>নিবন্ধিত শিক্ষক ও কর্মচারীদের তালিকা</span>
             <span id="facultyCountBadge" class="bg-emerald-100 text-emerald-800 text-xs px-2.5 py-0.5 rounded-full font-bold">0</span>
           </h2>
           <button onclick="loadFacultyData()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-1.5 rounded-xl font-bold transition flex items-center gap-1.5 cursor-pointer">
             <i class="fa-solid fa-rotate"></i>
-            <span>Refresh Table</span>
+            <span>রিফ্রেশ করুন</span>
           </button>
         </div>
 
@@ -205,16 +205,16 @@
           <table class="w-full text-left text-xs border-collapse">
             <thead>
               <tr class="bg-slate-100 text-slate-700 border-b">
-                <th class="p-3">Photo</th>
-                <th class="p-3">Name</th>
-                <th class="p-3">Designation</th>
-                <th class="p-3">Subject</th>
-                <th class="p-3">Qualifications</th>
-                <th class="p-3 text-right">Actions</th>
+                <th class="p-3">ছবি</th>
+                <th class="p-3">নাম</th>
+                <th class="p-3">পদবি</th>
+                <th class="p-3">বিষয়</th>
+                <th class="p-3">যোগ্যতা</th>
+                <th class="p-3 text-right">অ্যাকশন</th>
               </tr>
             </thead>
             <tbody id="facultyTableBody">
-              <tr><td colspan="6" class="p-6 text-center text-slate-400">Loading data...</td></tr>
+              <tr><td colspan="6" class="p-6 text-center text-slate-400">ডেটা লোড হচ্ছে...</td></tr>
             </tbody>
           </table>
         </div>
@@ -223,11 +223,11 @@
     </main>
 
     <footer class="bg-slate-900 text-slate-400 text-center py-5 text-xs border-t border-slate-800">
-      © 2026 PVT. IQRA ACADEMY | Secure Cloudflare Admin Layer Active
+      © 2026 PVT. IQRA ACADEMY | Cloudflare Shielded Admin Protection
     </footer>
   </div>
 
-  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <!-- স্ক্রিপ্ট অংশ -->
   <script>
     const API_WORKER_URL = "https://iqra-api-worker.tarikul-aisj.workers.dev";
     
@@ -235,7 +235,7 @@
     let allFaculty = [];
     let currentPhotoBase64 = "";
 
-    // Security & Lockout State
+    // সিকিউরিটি ভেরিয়েবল
     let captchaExpected = 13;
     let failedAttempts = 0;
     let lockoutUntil = 0;
@@ -288,7 +288,7 @@
       if (inactivityTimer) clearTimeout(inactivityTimer);
       inactivityTimer = setTimeout(() => {
         logoutAdmin();
-        showToast("15 minute inactivity-r karone session auto-locked!", false);
+        showToast("১৫ মিনিট নিষ্ক্রিয় থাকায় সেশন স্বয়ংক্রিয়ভাবে বন্ধ করা হয়েছে!", false);
       }, 15 * 60 * 1000);
     }
     ['click', 'keydown', 'mousemove'].forEach(ev => window.addEventListener(ev, resetInactivityTimer, { passive: true }));
@@ -302,18 +302,18 @@
       generateCaptcha();
     }
 
-    // Login Form Submit with Cloudflare Worker Handshake
+    // ক্লাউডফ্লেয়ার ওয়ার্কারের সাথে লগইন যাচাই
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       if (Date.now() < lockoutUntil) {
-        showToast("Access locked! Kichukhon opekkha korun.", false);
+        showToast("লগইন সাময়িকভাবে লক করা আছে! অপেক্ষা করুন।", false);
         return;
       }
 
       const userAns = parseInt(document.getElementById('captchaInput').value || "0", 10);
       if (userAns !== captchaExpected) {
-        showToast("Verification (Math Answer) bhul hoyeche!", false);
+        showToast("নিরাপত্তা যাচাইয়ের (যোগফল) উত্তর ভুল হয়েছে!", false);
         generateCaptcha();
         return;
       }
@@ -321,44 +321,42 @@
       const pass = document.getElementById('loginPasswordInput').value.trim();
       const btn = document.getElementById('btnLoginSubmit');
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>Verifying with Cloudflare...</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>সার্ভার যাচাই করছে...</span>`;
 
       try {
-        // Authenticate with Cloudflare Worker by attempting a secure action
         const res = await fetch(API_WORKER_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            action: "getAllDrivers", // Lightweight handshake verification
+            action: "getAllDrivers",
             adminPassword: pass
           })
         });
 
         const data = await res.json();
         if (data && data.code === "UNAUTHORIZED") {
-          throw new Error("Bhul Admin Password!");
+          throw new Error("ভুল অ্যাডমিন পাসওয়ার্ড!");
         }
 
-        // Verified
         sessionAdminPassword = pass;
         failedAttempts = 0;
         document.getElementById('loginScreen').classList.add('hidden');
         document.getElementById('adminDashboard').classList.remove('hidden');
         resetInactivityTimer();
-        showToast("Verification shofol! Faculty Console Unlocked.");
+        showToast("যাচাই সফল! অ্যাডমিন কনসোল আনলক হয়েছে।");
         loadFacultyData();
       } catch (err) {
         failedAttempts++;
         generateCaptcha();
         if (failedAttempts >= 3) triggerLockout();
-        showToast(err.message || "Login fail hoyeche!", false);
+        showToast(err.message || "লগইন ব্যর্থ হয়েছে!", false);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> <span>Verify & Unlock Console</span>`;
+        btn.innerHTML = `<i class="fa-solid fa-right-to-bracket"></i> <span>যাচাই ও কনসোল আনলক করুন</span>`;
       }
     });
 
-    // File to Base64 with Preview
+    // ছবি নির্বাচন ও প্রিভিউ
     document.getElementById('facPhotoInput').addEventListener('change', function(e) {
       const file = e.target.files[0];
       const previewImg = document.getElementById('photoPreviewImg');
@@ -372,7 +370,7 @@
       }
 
       if (file.size > 5 * 1024 * 1024) {
-        showToast("Chobir size shorboccho 5MB hote hobe!", false);
+        showToast("ছবির সাইজ সর্বোচ্চ ৫ মেগাবাইটের মধ্যে হতে হবে!", false);
         e.target.value = "";
         return;
       }
@@ -387,10 +385,10 @@
       reader.readAsDataURL(file);
     });
 
-    // Load Faculty Data
+    // শিক্ষক ডেটা ফেচ করা
     async function loadFacultyData() {
       const tbody = document.getElementById('facultyTableBody');
-      tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Loading directory...</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">ডেটা লোড হচ্ছে...</td></tr>`;
 
       try {
         const res = await fetch(`${API_WORKER_URL}?action=getAllFaculty`);
@@ -401,17 +399,17 @@
           document.getElementById('facultyCountBadge').innerText = String(allFaculty.length);
           renderTable();
         } else {
-          tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Kono data pawa jayni.</td></tr>`;
+          tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">কোনো তথ্য পাওয়া যায়নি।</td></tr>`;
         }
       } catch (err) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-red-500">Connection Error: ${err.message}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-red-500">কানেকশন এরর: ${err.message}</td></tr>`;
       }
     }
 
     function renderTable() {
       const tbody = document.getElementById('facultyTableBody');
       if (allFaculty.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Ekhono kono teacher ba staff entry kora hoyni.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">এখনো কোনো শিক্ষক বা কর্মীর এন্ট্রি দেওয়া হয়নি।</td></tr>`;
         return;
       }
 
@@ -424,19 +422,19 @@
           <td class="p-3 text-emerald-800 font-semibold">${f.designation}</td>
           <td class="p-3 text-slate-700 font-medium">${f.subject || '-'}</td>
           <td class="p-3 text-slate-500 space-y-0.5">
-            <div><strong>Edu:</strong> ${f.eduQual || '-'}</div>
-            ${f.techQual ? `<div><strong>Tech:</strong> ${f.techQual}</div>` : ''}
-            ${f.otherQual ? `<div><strong>Other:</strong> ${f.otherQual}</div>` : ''}
+            <div><strong>শিক্ষাগত:</strong> ${f.eduQual || '-'}</div>
+            ${f.techQual ? `<div><strong>টেকনিক্যাল:</strong> ${f.techQual}</div>` : ''}
+            ${f.otherQual ? `<div><strong>অন্যান্য:</strong> ${f.otherQual}</div>` : ''}
           </td>
           <td class="p-3 text-right space-x-2">
-            <button onclick="editFaculty('${f.id}')" class="text-blue-600 hover:text-blue-800 font-bold cursor-pointer">Edit</button>
-            <button onclick="deleteFacultyRow('${f.id}')" class="text-red-600 hover:text-red-800 font-bold cursor-pointer">Delete</button>
+            <button onclick="editFaculty('${f.id}')" class="text-blue-600 hover:text-blue-800 font-bold cursor-pointer">এডিট</button>
+            <button onclick="deleteFacultyRow('${f.id}')" class="text-red-600 hover:text-red-800 font-bold cursor-pointer">মুছুন</button>
           </td>
         </tr>
       `).join('');
     }
 
-    // Save Form
+    // ডেটা সেভ করা
     document.getElementById('facultyForm').addEventListener('submit', async function(e) {
       e.preventDefault();
       if (!sessionAdminPassword) {
@@ -446,7 +444,7 @@
 
       const btn = document.getElementById('btnSave');
       btn.disabled = true;
-      document.getElementById('saveBtnText').innerText = "Uploading to Drive & Sheet...";
+      document.getElementById('saveBtnText').innerText = "ড্রাইভ ও শিটে আপলোড হচ্ছে...";
 
       const payload = {
         action: "saveFaculty",
@@ -473,17 +471,17 @@
         const result = await res.json();
 
         if (result && result.success) {
-          showToast(result.message || "Record successfully save hoyeche!");
+          showToast(result.message || "রেকর্ড সফলভাবে সংরক্ষণ করা হয়েছে!");
           resetForm();
           loadFacultyData();
         } else {
-          showToast(result.error || result.message || "Save korte shomoshya hoyeche!", false);
+          showToast(result.error || result.message || "সংরক্ষণ করতে সমস্যা হয়েছে!", false);
         }
       } catch (err) {
-        showToast("Error: " + err.message, false);
+        showToast("এরর: " + err.message, false);
       } finally {
         btn.disabled = false;
-        document.getElementById('saveBtnText').innerText = "Save Record (Sheet & Drive)";
+        document.getElementById('saveBtnText').innerText = "রেকর্ড সংরক্ষণ করুন (Sheet & Drive)";
       }
     });
 
@@ -500,7 +498,7 @@
       document.getElementById('facOtherQual').value = f.otherQual;
       document.getElementById('existingPhotoUrl').value = f.photoUrl;
 
-      document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-500"></i> Edit Profile (${f.name})`;
+      document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-pen-to-square text-amber-500"></i> প্রোফাইল এডিট (${f.name})`;
       document.getElementById('editModeBadge').classList.remove('hidden');
 
       const notice = document.getElementById('currentPhotoNotice');
@@ -509,7 +507,7 @@
 
       if (f.photoUrl) {
         notice.classList.remove('hidden');
-        notice.innerHTML = `Current Photo: <a href="${f.photoUrl}" target="_blank" class="text-blue-600 underline font-semibold">View Existing Image</a> (Notun photo select na korle purono photo-i thakbe)`;
+        notice.innerHTML = `বর্তমান ছবি: <a href="${f.photoUrl}" target="_blank" class="text-blue-600 underline font-semibold">আগের ছবি দেখুন</a> (নতুন ছবি সিলেক্ট না করলে আগের ছবিই সংরক্ষিত থাকবে)`;
         previewImg.src = f.photoUrl;
         previewImg.classList.remove('hidden');
         placeholder.classList.add('hidden');
@@ -523,7 +521,7 @@
     }
 
     async function deleteFacultyRow(id) {
-      if (!confirm("Apni ki nishchit ei faculty profile-ti delete korte chan?")) return;
+      if (!confirm("আপনি কি নিশ্চিতভাবে এই প্রোফাইলটি মুছে ফেলতে চান?")) return;
 
       try {
         const res = await fetch(API_WORKER_URL, {
@@ -538,13 +536,13 @@
         const result = await res.json();
 
         if (result && result.success) {
-          showToast("Profile successfully delete hoyeche!");
+          showToast("প্রোফাইল সফলভাবে ডিলিট করা হয়েছে!");
           loadFacultyData();
         } else {
-          showToast(result.error || result.message || "Delete fail hoyeche!", false);
+          showToast(result.error || result.message || "ডিলিট করতে ব্যর্থ হয়েছে!", false);
         }
       } catch (err) {
-        showToast("Network Error: " + err.message, false);
+        showToast("নেটওয়ার্ক এরর: " + err.message, false);
       }
     }
 
@@ -553,7 +551,7 @@
       document.getElementById('existingPhotoUrl').value = "";
       document.getElementById('facultyForm').reset();
       currentPhotoBase64 = "";
-      document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-user-plus text-emerald-700"></i> Notun Shikshok / Kormi Entry`;
+      document.getElementById('formTitle').innerHTML = `<i class="fa-solid fa-user-plus text-emerald-700"></i> নতুন শিক্ষক / কর্মী এন্ট্রি`;
       document.getElementById('editModeBadge').classList.add('hidden');
       document.getElementById('currentPhotoNotice').classList.add('hidden');
       document.getElementById('photoPreviewImg').classList.add('hidden');
