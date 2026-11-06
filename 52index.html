@@ -59,44 +59,9 @@
       z-index: -1 !important;
       pointer-events: none !important;
     }
-
-    @media print {
-      @page {
-        size: A4 portrait;
-        margin: 8mm;
-      }
-      html, body {
-        background: #ffffff !important;
-        color: #000000 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        height: auto !important;
-        min-height: 0 !important;
-        overflow: visible !important;
-      }
-      body > *:not(#print-container) {
-        display: none !important;
-      }
-      #print-container {
-        display: block !important;
-        visibility: visible !important;
-        position: static !important;
-        width: 100% !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-        background: #ffffff !important;
-        color: #000000 !important;
-      }
-      #print-container * {
-        visibility: visible !important;
-      }
-    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-600 selection:text-white min-h-screen w-full flex flex-col justify-between">
-
-  <!-- Printable A4 Slip Container -->
-  <div id="print-container" class="hidden"></div>
 
   <!-- TOP BAR & QUICK ACTIONS -->
   <div class="bg-slate-900 text-slate-200 text-xs sm:text-sm py-2 px-4 sm:px-6 lg:px-12 border-b border-slate-800 sticky top-0 z-50 shadow-md w-full">
@@ -119,7 +84,6 @@
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span><span class="hidden md:inline">Live from Academy</span></span>
         </a>
-      
       </div>
     </div>
   </div>
@@ -191,10 +155,10 @@
           <span class="text-xs text-slate-500 uppercase font-bold block">২০২৭ শিক্ষাবর্ষ</span>
           <span class="text-base font-extrabold text-amber-700">ভর্তি চলছে (Pre-Nursery - IX)</span>
         </div>
-        <button type="button" id="btn-open-admission-header" onclick="openAdmissionModal()" class="bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-800 hover:to-emerald-950 text-white font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2.5 text-base transform hover:-translate-y-0.5 cursor-pointer">
+        <a href="#" target="_blank" rel="noopener noreferrer" id="btn-open-admission-header" class="bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-800 hover:to-emerald-950 text-white font-bold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition flex items-center gap-2.5 text-base transform hover:-translate-y-0.5 cursor-pointer">
           <i class="fa-solid fa-file-pen text-amber-300"></i>
           <span>অনলাইনে ভর্তি আবেদন</span>
-        </button>
+        </a>
       </div>
 
       <!-- Mobile Menu Toggle Button -->
@@ -248,10 +212,10 @@
           </a>
         </div>
 
-        <button type="button" onclick="openAdmissionModal()" class="px-5 py-2 rounded-xl text-sm font-extrabold transition flex items-center gap-2 bg-amber-500 text-slate-950 hover:bg-amber-400 shadow cursor-pointer">
+        <a href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-xl text-sm font-extrabold transition flex items-center gap-2 bg-amber-500 text-slate-950 hover:bg-amber-400 shadow cursor-pointer">
           <i class="fa-solid fa-file-pen"></i>
           <span>ভর্তি ফরম ২০২৭</span>
-        </button>
+        </a>
       </div>
     </div>
 
@@ -267,9 +231,9 @@
       <a href="#gallery" class="mobile-nav-link block px-3 py-2.5 rounded text-base text-emerald-100 hover:bg-emerald-800">গ্যালারি ও ক্যাম্পাস</a>
       <a href="#contact" class="mobile-nav-link block px-3 py-2.5 rounded text-base text-emerald-100 hover:bg-emerald-800">যোগাযোগ</a>
       <div class="pt-2 border-t border-emerald-800 flex flex-col gap-2">
-        <button type="button" id="btn-mobile-apply" onclick="openAdmissionModal()" class="w-full text-center py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-base block cursor-pointer shadow">
+        <a href="#" target="_blank" rel="noopener noreferrer" id="btn-mobile-apply" class="w-full text-center py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-base block cursor-pointer shadow">
           <i class="fa-solid fa-file-pen mr-1"></i> ভর্তি আবেদন করুন
-        </button>
+        </a>
       </div>
     </div>
   </nav>
@@ -334,10 +298,10 @@
             </p>
 
             <div class="flex flex-wrap items-center gap-3 pt-2">
-              <button type="button" id="btn-hero-apply" onclick="openAdmissionModal()" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2.5 text-sm sm:text-base md:text-lg cursor-pointer">
+              <a href="#" target="_blank" rel="noopener noreferrer" id="btn-hero-apply" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-extrabold px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl shadow-xl transition transform hover:-translate-y-0.5 flex items-center gap-2.5 text-sm sm:text-base md:text-lg cursor-pointer">
                 <i class="fa-solid fa-paper-plane text-slate-900"></i>
                 <span>ভর্তি আবেদন করুন ২০২৭</span>
-              </button>
+              </a>
               <a href="#admissions" class="bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl border border-white/30 transition flex items-center gap-2.5 text-sm sm:text-base md:text-lg">
                 <i class="fa-solid fa-file-pdf text-amber-300"></i>
                 <span>ভর্তি নির্দেশিকা ও তথ্য</span>
@@ -651,10 +615,10 @@
           </div>
 
           <div class="flex flex-wrap items-center gap-4 pt-2">
-            <button type="button" id="btn-about-apply" onclick="openAdmissionModal()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-7 py-3.5 rounded-xl transition shadow flex items-center gap-2.5 text-base cursor-pointer">
+            <a href="#" target="_blank" rel="noopener noreferrer" id="btn-about-apply" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-7 py-3.5 rounded-xl transition shadow flex items-center gap-2.5 text-base cursor-pointer">
               <i class="fa-solid fa-file-pen text-amber-300"></i>
               <span>ভর্তি ফরম পূরণ করুন</span>
-            </button>
+            </a>
             <a href="#contact" class="text-emerald-800 hover:text-emerald-950 font-bold text-base flex items-center gap-1.5 underline decoration-2 underline-offset-4">
               <span>আমাদের সাথে যোগাযোগ করুন</span>
               <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -839,10 +803,10 @@
             </div>
           </div>
 
-          <button type="button" id="btn-residential-apply" onclick="openAdmissionModal('Residential Girls Mission')" class="inline-flex bg-teal-700 hover:bg-teal-800 text-white font-bold px-7 py-3.5 rounded-xl transition shadow items-center gap-2.5 text-base cursor-pointer">
+          <a href="#" target="_blank" rel="noopener noreferrer" id="btn-residential-apply" class="inline-flex bg-teal-700 hover:bg-teal-800 text-white font-bold px-7 py-3.5 rounded-xl transition shadow items-center gap-2.5 text-base cursor-pointer">
             <i class="fa-solid fa-bed text-amber-300"></i>
             <span>আবাসিক সিটের জন্য আবেদন করুন</span>
-          </button>
+          </a>
         </div>
 
         <div class="lg:col-span-6 bg-slate-900 text-slate-100 p-6 sm:p-8 lg:p-10 rounded-3xl shadow-xl border border-slate-800">
@@ -964,10 +928,10 @@
             ঘরে বসেই অনলাইনের মাধ্যমে আপনার সন্তানের ভর্তি আবেদন পত্রটি পূরণ করে জমা দিন। আমাদের প্রতিনিধি ২৪ ঘণ্টার মধ্যে যোগাযোগ করবেন।
           </p>
           <div class="pt-2">
-            <button type="button" id="btn-open-admission-modal" onclick="openAdmissionModal()" class="w-full bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-800 hover:to-emerald-950 text-white font-extrabold py-4 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5 text-base sm:text-lg cursor-pointer">
+            <a href="#" target="_blank" rel="noopener noreferrer" id="btn-open-admission-modal" class="w-full bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-800 hover:to-emerald-950 text-white font-extrabold py-4 px-6 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2.5 text-base sm:text-lg cursor-pointer">
               <i class="fa-solid fa-pen-nib text-amber-300"></i>
               <span>ভর্তি ফরম পূরণ শুরু করুন</span>
-            </button>
+            </a>
           </div>
           <p class="text-xs text-slate-400">
             * কোনো আবেদন ফি নেই। ফর্ম পূরণ পরবর্তী সময়ে অফিসে এসে যাচাই করতে পারবেন।
@@ -1321,205 +1285,6 @@
       </div>
     </div>
   </footer>
-  
-  <!-- In-Browser Student Admission Form Modal -->
-  <div id="inbrowser-admission-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
-    <div class="bg-white text-slate-800 rounded-3xl max-w-3xl w-full p-5 sm:p-8 shadow-2xl relative border border-slate-200 my-4 sm:my-8 max-h-[92vh] overflow-y-auto">
-      
-      <button id="btn-close-inbrowser-admission" onclick="closeAdmissionModal()" class="absolute top-4 right-4 sm:top-5 sm:right-5 text-slate-400 hover:text-slate-900 text-2xl w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center focus:outline-none cursor-pointer z-10 transition">
-        &times;
-      </button>
-
-      <!-- Modal Header -->
-      <div class="text-center pb-5 border-b border-slate-100 space-y-1">
-        <span class="inline-block bg-amber-100 text-amber-900 text-xs font-bold px-3 py-0.5 rounded-full border border-amber-200">
-          ২০২৭ শিক্ষাবর্ষে অনলাইনে ভর্তি আবেদন
-        </span>
-        <h2 class="text-xl sm:text-3xl font-extrabold text-emerald-950">PVT. IQRA ACADEMY</h2>
-        <p class="text-xs sm:text-sm text-slate-600 font-medium">আবাসিক গার্লস মিশন · ডে-বোর্ডিং · অনাবাসিক</p>
-      </div>
-
-      <!-- Admission Form -->
-      <form id="inbrowser-saf-form" class="space-y-5 pt-5">
-        <!-- Anti-Bot Honeypot Field -->
-        <div class="hp-trap" aria-hidden="true">
-          <label>Do not fill this if you are human</label>
-          <input type="text" id="in-saf-hp-field" tabindex="-1" autocomplete="off">
-        </div>
-
-        <!-- ১. ব্যক্তিগত তথ্য -->
-        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3">
-          <h4 class="text-sm font-bold text-emerald-900 border-b border-slate-200 pb-2 flex items-center gap-2">
-            <span>👤</span> ১. Personal Information — ব্যক্তিগত তথ্য
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">শিক্ষার্থীর নাম (Student Name) *</label>
-              <input type="text" id="in-saf-name" placeholder="পুরো নাম" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">পিতার নাম (Father's Name) *</label>
-              <input type="text" id="in-saf-father" placeholder="পিতার নাম" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">অভিভাবকের নাম (Guardian) *</label>
-              <input type="text" id="in-saf-guardian" placeholder="অভিভাবকের নাম" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">আধার কার্ড নম্বর (Aadhaar) *</label>
-              <input type="text" id="in-saf-aadhaar" placeholder="১২ সংখ্যার আধার নম্বর" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white font-mono" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">জন্ম তারিখ (Date of Birth) *</label>
-              <input type="date" id="in-saf-dob" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">শিক্ষাবর্ষ (Academic Year) *</label>
-              <select id="in-saf-year" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-                <option value="2027" selected>2027</option>
-                <option value="2026">2026</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- ২. বিভাগ ও শ্রেণি -->
-        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3">
-          <h4 class="text-sm font-bold text-emerald-900 border-b border-slate-200 pb-2 flex items-center gap-2">
-            <span>🏫</span> ২. Admission Category — বিভাগ ও শ্রেণি
-          </h4>
-          <div>
-            <label class="block font-bold text-xs sm:text-sm text-slate-700 mb-2">বিভাগ নির্বাচন করুন *</label>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs sm:text-sm">
-              <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-300 rounded-xl cursor-pointer hover:border-emerald-600">
-                <input type="radio" name="in_saf_cat" value="Non-Residential (অনাবাসিক)" onchange="inSafUpdateClasses('Non-Residential')">
-                <span class="font-medium">অনাবাসিক</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-300 rounded-xl cursor-pointer hover:border-emerald-600">
-                <input type="radio" name="in_saf_cat" value="Day-Boarding (ডে-বোর্ডিং)" onchange="inSafUpdateClasses('Day-Boarding')">
-                <span class="font-medium">ডে-বোর্ডিং</span>
-              </label>
-              <label class="flex items-center gap-2 p-2.5 bg-white border border-emerald-500 rounded-xl cursor-pointer bg-emerald-50/40">
-                <input type="radio" name="in_saf_cat" value="Residential Girls Mission (আবাসিক)" checked onchange="inSafUpdateClasses('Residential Girls Mission')">
-                <span class="font-medium">আবাসিক বালিকা মিশন</span>
-              </label>
-            </div>
-          </div>
-
-          <div class="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
-            <label class="block font-bold text-xs sm:text-sm text-slate-700 mb-1">ভর্তির শ্রেণি (Applying for Class) *</label>
-            <select id="in-saf-class" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs sm:text-sm focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </select>
-          </div>
-        </div>
-
-        <!-- ৩. যোগাযোগ ও ঠিকানা -->
-        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl border border-slate-200 space-y-3">
-          <h4 class="text-sm font-bold text-emerald-900 border-b border-slate-200 pb-2 flex items-center gap-2">
-            <span>📞</span> ৩. Contact & Address — যোগাযোগ ও ঠিকানা
-          </h4>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm">
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">মোবাইল নম্বর *</label>
-              <input type="tel" id="in-saf-phone" required pattern="[0-9]{10}" placeholder="১০ সংখ্যার মোবাইল নম্বর" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white font-mono">
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">WhatsApp নম্বর</label>
-              <input type="tel" id="in-saf-whatsapp" placeholder="হোয়াটসঅ্যাপ নম্বর" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white font-mono">
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">গ্রাম (Village) *</label>
-              <input type="text" id="in-saf-village" placeholder="গ্রামের নাম" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">পোস্ট অফিস (Post Office) *</label>
-              <input type="text" id="in-saf-po" placeholder="পোস্ট অফিস" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">থানা (Police Station) *</label>
-              <input type="text" id="in-saf-ps" placeholder="থানা" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white" required>
-            </div>
-            <div>
-              <label class="block font-bold text-slate-700 mb-1">পিন কোড (Pin Code) *</label>
-              <input type="text" id="in-saf-pin" placeholder="পিন নম্বর" class="w-full border border-slate-300 rounded-xl p-2.5 focus:ring-2 focus:ring-emerald-600 outline-none bg-white font-mono" required>
-            </div>
-          </div>
-        </div>
-
-        <!-- ৪. ছবি আপলোড ও প্রিভিউ -->
-        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-2 text-xs sm:text-sm">
-          <p class="font-bold text-slate-700">শিক্ষার্থীর ছবি আপলোড (পাসপোর্ট সাইজ - ঐচ্ছিক):</p>
-          <input type="file" id="in-saf-photo" accept="image/jpeg, image/png, image/webp" onchange="inSafPreviewPhoto(event)" class="text-xs text-slate-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-800 file:text-white cursor-pointer max-w-full">
-          <div id="in-saf-photo-preview" class="hidden flex justify-center pt-2">
-            <div class="w-24 h-28 border-2 border-emerald-600 rounded-xl overflow-hidden shadow">
-              <img id="in-saf-preview-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Preview" class="w-full h-full object-cover">
-            </div>
-          </div>
-        </div>
-
-        <!-- ৫. Anti-Bot ক্যাপচা এবং স্বীকারোক্তি -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 items-center">
-          <div class="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs sm:text-sm flex items-center justify-between gap-2">
-            <span class="font-bold text-emerald-950"><i class="fa-solid fa-shield-halved mr-1"></i>বট যাচাই: <span id="saf-captcha-label" class="font-mono bg-white px-2 py-0.5 rounded border border-emerald-300"></span> = ?</span>
-            <input type="number" id="saf-captcha-ans" required placeholder="উত্তর" class="w-20 p-1.5 rounded-lg border border-slate-300 font-mono text-center bg-white">
-          </div>
-          <div class="p-3 bg-amber-50 rounded-xl border border-amber-200 text-xs sm:text-sm flex items-start gap-2">
-            <input type="checkbox" id="in-saf-declaration" class="mt-0.5 rounded text-emerald-700" required>
-            <label for="in-saf-declaration" class="cursor-pointer font-medium text-slate-800">
-              আমি প্রতিষ্ঠানের সকল নিয়ম-শৃঙ্খলা মেনে চলতে সম্মত।
-            </label>
-          </div>
-        </div>
-
-        <!-- Submit Button -->
-        <div class="text-center pt-2">
-          <button type="submit" id="btn-in-saf-submit" class="w-full sm:w-auto bg-gradient-to-r from-emerald-800 to-teal-800 hover:from-emerald-900 hover:to-teal-900 text-white font-extrabold text-sm sm:text-base px-10 py-3.5 rounded-2xl shadow-xl transition transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2 mx-auto">
-            <i class="fa-solid fa-paper-plane text-amber-300"></i>
-            <span>আবেদন ফর্ম জমা দিন (Submit Form)</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- In-Browser Success Modal -->
-  <div id="inbrowser-success-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden flex items-center justify-center p-4">
-    <div class="bg-white text-slate-900 rounded-3xl max-w-md w-full p-6 md:p-8 shadow-2xl relative border border-slate-200 text-center space-y-4">
-      <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center text-3xl mx-auto shadow-inner">
-        <i class="fa-solid fa-circle-check"></i>
-      </div>
-      <h3 class="text-2xl font-bold text-emerald-950">ভর্তি আবেদন সফলভাবে জমা হয়েছে!</h3>
-      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-left space-y-2 text-xs sm:text-sm">
-        <div class="flex justify-between border-b pb-1">
-          <span class="text-slate-500">ফর্ম নম্বর:</span>
-          <span id="in-res-app-id" class="font-mono font-bold text-emerald-800"></span>
-        </div>
-        <div class="flex justify-between border-b pb-1">
-          <span class="text-slate-500">শিক্ষার্থীর নাম:</span>
-          <span id="in-res-name" class="font-bold text-slate-900"></span>
-        </div>
-        <div class="flex justify-between border-b pb-1">
-          <span class="text-slate-500">বিভাগ ও শ্রেণি:</span>
-          <span id="in-res-class" class="font-semibold text-emerald-700"></span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-slate-500">যোগাযোগ নম্বর:</span>
-          <span id="in-res-phone" class="font-mono font-bold text-slate-800"></span>
-        </div>
-      </div>
-      <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
-        আমাদের ভর্তি সেল থেকে শীঘ্রই আপনার সাথে যোগাযোগ করা হবে। আবেদনটি প্রাতিষ্ঠানিক ডাটাবেসে সরাসরি সংরক্ষিত হয়েছে।
-      </p>
-      <div class="flex gap-2 justify-center pt-2">
-        <button type="button" onclick="printPublicAdmissionReceipt()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer">
-          <i class="fa-solid fa-print"></i> প্রিন্ট স্লিপ (A4)
-        </button>
-        <button onclick="closeSuccessModal()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm cursor-pointer">
-          ঠিক আছে
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- Stream Details Modal -->
   <div id="stream-details-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden flex items-center justify-center p-4">
@@ -1529,28 +1294,17 @@
       </button>
       <div id="stream-modal-content" class="space-y-4"></div>
       <div class="pt-4 border-t border-slate-100 mt-4 flex justify-end">
-        <button type="button" id="btn-stream-modal-apply" onclick="openAdmissionFromStream()" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-1.5 cursor-pointer">
+        <a href="#" target="_blank" rel="noopener noreferrer" id="btn-stream-modal-apply" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-file-pen text-amber-300"></i> এই বিভাগে আবেদন করুন
-        </button>
+        </a>
       </div>
     </div>
   </div>
 
   <!-- UI Interactions & Anti-Bot Captcha Generator -->
   <script>
-    // Anti-Bot Math Challenges
-    window.safCaptchaExpected = 7;
+    // Anti-Bot Math Challenge for Contact Form
     window.contactCaptchaExpected = 9;
-
-    window.refreshSafCaptcha = function() {
-      const a = Math.floor(Math.random() * 8) + 2;
-      const b = Math.floor(Math.random() * 8) + 1;
-      window.safCaptchaExpected = a + b;
-      const lbl = document.getElementById('saf-captcha-label');
-      if (lbl) lbl.innerText = `${a} + ${b}`;
-      const inp = document.getElementById('saf-captcha-ans');
-      if (inp) inp.value = '';
-    };
 
     window.refreshContactCaptcha = function() {
       const a = Math.floor(Math.random() * 9) + 2;
@@ -1713,132 +1467,9 @@
         if (streamModal) streamModal.classList.add('hidden');
       });
     }
-  
-    // ================= IN-BROWSER ADMISSION MODAL SYSTEM =================
-    window.inSafPhotoBase64 = "";
-    window.inSafPhotoMime = "";
-
-    window.inSafUpdateClasses = function(category) {
-      const classSelect = document.getElementById('in-saf-class');
-      if (!classSelect) return;
-      classSelect.innerHTML = "";
-      
-      let classes = [];
-      if (category.indexOf('Non-Residential') !== -1 || category.indexOf('Day-Boarding') !== -1) {
-        classes = [
-          "Pre-Nursery", "Nursery", "LKG", "UKG",
-          "Class I", "Class II", "Class III", "Class IV",
-          "Class V", "Class VI", "Class VII", "Class VIII", "Class IX"
-        ];
-      } else {
-        classes = [
-          "Class V", "Class VI", "Class VII", "Class VIII", "Class IX"
-        ];
-      }
-      
-      classes.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c;
-        opt.innerText = c;
-        classSelect.appendChild(opt);
-      });
-    };
-
-    window.openAdmissionModal = function(category) {
-      const modal = document.getElementById('inbrowser-admission-modal');
-      if (!modal) return;
-      window.refreshSafCaptcha();
-      
-      if (category) {
-        const radios = document.getElementsByName('in_saf_cat');
-        for (let i = 0; i < radios.length; i++) {
-          if (radios[i].value.indexOf(category) !== -1) {
-            radios[i].checked = true;
-            break;
-          }
-        }
-      }
-      
-      let chosen = "Residential Girls Mission (আবাসিক)";
-      const checkedRadio = document.querySelector('input[name="in_saf_cat"]:checked');
-      if (checkedRadio) chosen = checkedRadio.value;
-      
-      window.inSafUpdateClasses(chosen);
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-    };
-
-    window.closeAdmissionModal = function() {
-      const modal = document.getElementById('inbrowser-admission-modal');
-      if (modal) {
-        modal.classList.add('hidden');
-        document.body.style.overflow = 'auto';
-      }
-    };
-
-    window.closeSuccessModal = function() {
-      const sm = document.getElementById('inbrowser-success-modal');
-      if (sm) sm.classList.add('hidden');
-      document.body.style.overflow = 'auto';
-    };
-
-    window.openAdmissionFromStream = function() {
-      const sModal = document.getElementById('stream-details-modal');
-      if (sModal) sModal.classList.add('hidden');
-      window.openAdmissionModal();
-    };
-
-    window.inSafPreviewPhoto = function(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      if (file.size > 5 * 1024 * 1024) {
-        if(window.showPublicToast) window.showPublicToast("ছবির সাইজ ৫ MB এর কম হতে হবে!", false);
-        event.target.value = "";
-        return;
-      }
-      window.inSafPhotoMime = file.type || "image/jpeg";
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-          const canvas = document.createElement('canvas');
-          const maxW = 500;
-          const scale = Math.min(1, maxW / img.width);
-          canvas.width = img.width * scale;
-          canvas.height = img.height * scale;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
-          window.inSafPhotoBase64 = dataUrl.split(",")[1];
-          const previewDiv = document.getElementById('in-saf-photo-preview');
-          const previewImg = document.getElementById('in-saf-preview-img');
-          if (previewImg && previewDiv) {
-            previewImg.src = dataUrl;
-            previewDiv.classList.remove('hidden');
-          }
-        };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    };
 
     document.addEventListener('DOMContentLoaded', function() {
-      window.inSafUpdateClasses('Residential Girls Mission');
-      window.refreshSafCaptcha();
       window.refreshContactCaptcha();
-
-      const admModal = document.getElementById('inbrowser-admission-modal');
-      if (admModal) {
-        admModal.addEventListener('click', function(e) {
-          if (e.target === admModal) window.closeAdmissionModal();
-        });
-      }
-      const succModal = document.getElementById('inbrowser-success-modal');
-      if (succModal) {
-        succModal.addEventListener('click', function(e) {
-          if (e.target === succModal) window.closeSuccessModal();
-        });
-      }
     });
   </script>
 
@@ -1848,7 +1479,7 @@
     const PUBLISHED_NOTICES_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vT9Fu2Bt1p1NjO7znbKQ0JdK4TIOOw6vjbaQEBnvS1JyV1OiS2jVUTq_o3xPHWiqv77YvOM8BIdpa92/pub?gid=1424982307&single=true&output=csv";
     const APPS_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbyYA85M0O1yPJQg8wKiUYqOzDLGgWfvTv9N2pFwFXVlr24rN7nh0Po7uGPwS-MmAkRb/exec";
 
-    // Store dynamic helpline & stats for receipt and UI
+    // Store dynamic helpline & stats for UI
     window.liveConfigData = {
       phone1: '',
       phone2: '',
@@ -2207,246 +1838,6 @@
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") loadPublicDataFromCloud();
     });
-
-    // ================= DEDICATED A4 ADMISSION SLIP PRINTER =================
-    let lastSubmittedAdmissionData = null;
-
-    window.printPublicAdmissionReceipt = function() {
-      if (!lastSubmittedAdmissionData) {
-        showPublicToast("কোনো ভর্তি আবেদনের তথ্য পাওয়া যায়নি!", false);
-        return;
-      }
-      renderAndPrintAdmissionSlip(lastSubmittedAdmissionData);
-    };
-
-    function renderAndPrintAdmissionSlip(data) {
-      const container = document.getElementById('print-container');
-      if (!container) return;
-
-      const addrStr = data.address || '';
-      const photoHtml = data.photo 
-        ? `<img src="${data.photo}" style="width: 100%; height: 100%; object-fit: cover;">`
-        : `<span style="color: #94a3b8; font-size: 9px; font-weight: bold; text-align: center; display: block; padding: 4px;">পাসপোর্ট সাইজ ছবি</span>`;
-
-      const appId = data.appId || 'N/A';
-      const formNo = data.formNo || appId;
-      const helplineStr = [window.liveConfigData.phone1, window.liveConfigData.phone2].filter(Boolean).join(' / ') || '-';
-      const estdStr = window.liveConfigData.estd || '-';
-
-      container.innerHTML = `
-        <div style="font-family: 'Hind Siliguri', 'Inter', Arial, sans-serif; max-width: 195mm; margin: 0 auto; padding: 14px; background: #ffffff; color: #111827; border: 2px solid #064e3b; border-radius: 10px; box-sizing: border-box;">
-          <table style="width: 100%; border-bottom: 2px solid #064e3b; padding-bottom: 8px; margin-bottom: 8px;">
-            <tr>
-              <td style="width: 70px; vertical-align: middle;">
-                <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" style="width: 65px; height: 65px; border-radius: 50%; border: 2px solid #064e3b; object-fit: cover;" alt="Logo">
-              </td>
-              <td style="text-align: center; vertical-align: middle; padding: 0 8px;">
-                <div style="font-size: 10px; font-weight: bold; background: #064e3b; color: #ffffff; display: inline-block; padding: 2px 10px; border-radius: 12px; letter-spacing: 0.5px;">
-                  UDISE: 19111008505 | স্থাপিত: ${escapeHtml(estdStr)} | WBBSE কারিকুলাম
-                </div>
-                <h1 style="margin: 3px 0 0 0; font-size: 21px; font-weight: 800; color: #064e3b; line-height: 1.2;">PVT. IQRA ACADEMY</h1>
-                <h2 style="margin: 2px 0 0 0; font-size: 13px; font-weight: 700; color: #1f2937;">ইকরা অ্যাকাডেমি — আবাসিক গার্লস মিশন</h2>
-                <p style="margin: 2px 0 0 0; font-size: 10px; color: #4b5563;">
-                  দক্ষিণ শিবপুর, যদুরহাটি, বাদুড়িয়া, উত্তর ২৪ পরগনা, পিন-৭৪৩২৯৩ | 📞 ${escapeHtml(helplineStr)}
-                </p>
-              </td>
-              <td style="width: 70px; vertical-align: middle; text-align: right;">
-                <div style="width: 65px; height: 80px; border: 1.5px dashed #9ca3af; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; background: #f8fafc; overflow: hidden;">
-                  ${photoHtml}
-                </div>
-              </td>
-            </tr>
-          </table>
-
-          <table style="width: 100%; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 6px; margin-bottom: 8px; font-size: 11px;">
-            <tr>
-              <td style="padding: 5px 8px;">
-                <span style="color: #4b5563;">শিক্ষাবর্ষ:</span> <b style="color: #064e3b;">${escapeHtml(data.academicYear || '2027')}</b>
-                &nbsp;|&nbsp;
-                <span style="color: #4b5563;">ফর্ম নম্বর:</span> <b style="color: #92400e; font-family: monospace; font-size: 13px; background: #fef3c7; padding: 1px 6px; border-radius: 4px; border: 1px solid #fcd34d;">${escapeHtml(formNo)}</b>
-                &nbsp;|&nbsp;
-                <span style="color: #4b5563;">আইডি:</span> <b style="color: #1e293b; font-family: monospace;">${escapeHtml(appId)}</b>
-              </td>
-              <td style="text-align: right; padding: 5px 8px; color: #4b5563;">
-                আবেদনের তারিখ: <b style="color: #111827;">${escapeHtml(data.date || '-')}</b>
-              </td>
-            </tr>
-          </table>
-
-          <div style="text-align: center; font-weight: bold; font-size: 12px; color: #064e3b; border-bottom: 1.5px solid #e2e8f0; padding-bottom: 4px; margin-bottom: 8px; letter-spacing: 0.5px;">
-            ভর্তি আবেদন পত্র ও প্রাপ্তিস্বীকার রসিদ (ADMISSION APPLICATION & ACKNOWLEDGEMENT SLIP)
-          </div>
-
-          <table style="width: 100%; border-collapse: collapse; font-size: 11px; margin-bottom: 8px; border: 1px solid #cbd5e1;">
-            <tbody>
-              <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="width: 25%; padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">শিক্ষার্থীর নাম</td>
-                <td style="width: 25%; padding: 5px 8px; font-weight: bold; border-right: 1px solid #cbd5e1; color: #0f172a;">${escapeHtml(data.name || '-')}</td>
-                <td style="width: 25%; padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">জন্ম তারিখ</td>
-                <td style="width: 25%; padding: 5px 8px; font-family: monospace; color: #0f172a;">${escapeHtml(data.dob || '-')}</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">পিতার নাম</td>
-                <td style="padding: 5px 8px; border-right: 1px solid #cbd5e1; color: #0f172a;">${escapeHtml(data.fatherName || '-')}</td>
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">আধার কার্ড নম্বর</td>
-                <td style="padding: 5px 8px; font-family: monospace; font-weight: bold; color: #92400e;">${escapeHtml(data.aadhaar || '-')}</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">অভিভাবকের নাম</td>
-                <td style="padding: 5px 8px; border-right: 1px solid #cbd5e1; color: #0f172a;">${escapeHtml(data.guardian || '-')}</td>
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">ভর্তির শ্রেণি</td>
-                <td style="padding: 5px 8px; font-weight: bold; color: #064e3b;">${escapeHtml(data.className || '-')}</td>
-              </tr>
-              <tr style="border-bottom: 1px solid #e2e8f0;">
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">মোবাইল নম্বর</td>
-                <td style="padding: 5px 8px; font-family: monospace; font-weight: bold; border-right: 1px solid #cbd5e1; color: #0f172a;">${escapeHtml(data.phone || '-')}</td>
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">শিক্ষাধারা / বিভাগ</td>
-                <td style="padding: 5px 8px; font-weight: bold; color: #064e3b;">${escapeHtml(data.stream || '-')}</td>
-              </tr>
-              <tr>
-                <td style="padding: 5px 8px; background: #f8fafc; font-weight: bold; border-right: 1px solid #cbd5e1; color: #334155;">স্থায়ী ঠিকানা</td>
-                <td colspan="3" style="padding: 5px 8px; color: #1e293b; line-height: 1.4;">${escapeHtml(addrStr)}</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 6px; padding: 6px 10px; margin-bottom: 12px; font-size: 10px; line-height: 1.4; color: #78350f;">
-            <b style="color: #92400e; display: block; margin-bottom: 2px;">📌 ভর্তির সময় প্রয়োজনীয় নির্দেশাবলী:</b>
-            <span>১. এই প্রিন্ট স্লিপটি ভর্তি প্রক্রিয়ার সময় বিদ্যালয় অফিসে প্রদর্শন করতে হবে।</span><br>
-            <span>২. শিক্ষার্থীর জন্ম সার্টিফিকেট ও আধার কার্ডের মূল কপি ও জেরক্স সাথে আনতে হবে।</span><br>
-            <span>৩. ৫ কপি পাসপোর্ট সাইজ রঙিন ছবি এবং পূর্ববর্তী ক্লাসের মার্কশিট/টি.সি. অফিসে জমা দিতে হবে।</span>
-          </div>
-
-          <table style="width: 100%; margin-top: 18px; text-align: center; font-size: 10px;">
-            <tr>
-              <td style="width: 33%; vertical-align: bottom;">
-                <div style="border-top: 1px solid #1f2937; margin: 0 15px; padding-top: 3px; font-weight: bold; color: #1f2937;">অভিভাবকের স্বাক্ষর</div>
-                <div style="font-size: 8.5px; color: #6b7280;">Signature of Guardian</div>
-              </td>
-              <td style="width: 33%; vertical-align: bottom;">
-                <div style="border-top: 1px solid #1f2937; margin: 0 15px; padding-top: 3px; font-weight: bold; color: #1f2937;">যাচাইকারী আধিকারিক</div>
-                <div style="font-size: 8.5px; color: #6b7280;">Verified By Admission Cell</div>
-              </td>
-              <td style="width: 33%; vertical-align: bottom;">
-                <div style="border-top: 1px solid #1f2937; margin: 0 15px; padding-top: 3px; font-weight: bold; color: #1f2937;">পরিচালক / প্রধান শিক্ষক</div>
-                <div style="font-size: 8.5px; color: #6b7280;">Director / Seal</div>
-              </td>
-            </tr>
-          </table>
-        </div>
-      `;
-
-      window.print();
-    }
-
-    // ================= ADMISSION FORM SUBMISSION TO APPS SCRIPT =================
-    const inSafForm = document.getElementById('inbrowser-saf-form');
-    if (inSafForm) {
-      inSafForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        // Honeypot check
-        const hpVal = (document.getElementById('in-saf-hp-field')?.value || "").trim();
-        if (hpVal !== "") return;
-
-        // Captcha check
-        const userAns = parseInt(document.getElementById('saf-captcha-ans')?.value || "0", 10);
-        if (userAns !== window.safCaptchaExpected) {
-          showPublicToast("নিরাপত্তা যাচাইয়ের (যোগফল) উত্তর সঠিক হয়নি! আবার চেষ্টা করুন।", false);
-          window.refreshSafCaptcha();
-          return;
-        }
-
-        if (!APPS_SCRIPT_WEBAPP_URL || APPS_SCRIPT_WEBAPP_URL === "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
-          showPublicToast("Apps Script Web App URL কনফিগার করা হয়নি!", false);
-          return;
-        }
-
-        const submitBtn = document.getElementById('btn-in-saf-submit');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> আবেদন জমা হচ্ছে...';
-
-        try {
-          const studentName = document.getElementById('in-saf-name').value.trim();
-          const fatherName = document.getElementById('in-saf-father').value.trim();
-          const guardian = document.getElementById('in-saf-guardian').value.trim();
-          const aadhaar = document.getElementById('in-saf-aadhaar').value.trim();
-          const dob = document.getElementById('in-saf-dob').value;
-          const academicYear = document.getElementById('in-saf-year').value;
-
-          const catRadios = document.getElementsByName('in_saf_cat');
-          let selectedCategory = "Residential Girls Mission (আবাসিক)";
-          for (const r of catRadios) {
-            if (r.checked) { selectedCategory = r.value; break; }
-          }
-
-          const className = document.getElementById('in-saf-class').value;
-          const phone = document.getElementById('in-saf-phone').value.trim();
-          const village = document.getElementById('in-saf-village').value.trim();
-          const po = document.getElementById('in-saf-po').value.trim();
-          const ps = document.getElementById('in-saf-ps').value.trim();
-          const pin = document.getElementById('in-saf-pin').value.trim();
-          const fullAddress = `গ্রাম: ${village}, পো: ${po}, থানা: ${ps}, পিন: ${pin}`;
-
-          const payload = {
-            action: "submitPublicAdmission",
-            name: studentName,
-            fatherName: fatherName,
-            guardian: guardian,
-            aadhaar: aadhaar,
-            dob: dob,
-            academicYear: academicYear,
-            stream: selectedCategory,
-            className: className,
-            phone: phone,
-            address: fullAddress,
-            photoBase64: window.inSafPhotoBase64 || "",
-            photoMimeType: window.inSafPhotoMime || ""
-          };
-
-          const res = await fetch(APPS_SCRIPT_WEBAPP_URL, {
-            method: "POST",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
-          });
-          const result = await res.json();
-
-          if (result.status !== "success") {
-            throw new Error(result.message || "ফর্ম জমা দিতে সমস্যা হয়েছে।");
-          }
-
-          const formNo = result.formNo || `2027-${Date.now().toString().slice(-4)}`;
-          const appId = result.appId || `IQRA-${formNo}`;
-
-          lastSubmittedAdmissionData = {
-            ...payload,
-            formNo,
-            appId,
-            date: new Date().toLocaleDateString('bn-BD'),
-            photo: window.inSafPhotoBase64 ? `data:${window.inSafPhotoMime};base64,${window.inSafPhotoBase64}` : ''
-          };
-
-          document.getElementById('inbrowser-admission-modal').classList.add('hidden');
-          document.getElementById('in-res-app-id').innerText = formNo;
-          document.getElementById('in-res-name').innerText = studentName;
-          document.getElementById('in-res-class').innerText = `${className} (${selectedCategory})`;
-          document.getElementById('in-res-phone').innerText = phone;
-          document.getElementById('inbrowser-success-modal').classList.remove('hidden');
-
-          inSafForm.reset();
-          window.inSafPhotoBase64 = "";
-          window.inSafPhotoMime = "";
-          document.getElementById('in-saf-photo-preview')?.classList.add('hidden');
-          window.refreshSafCaptcha();
-          showPublicToast("ভর্তি আবেদন সফলভাবে জমা হয়েছে!");
-        } catch (err) {
-          showPublicToast("ত্রুটি: " + err.message, false);
-        } finally {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-amber-300"></i> <span>আবেদন ফর্ম জমা দিন (Submit Form)</span>';
-        }
-      });
-    }
 
     // ================= CONTACT FORM SUBMISSION TO APPS SCRIPT =================
     const contactForm = document.getElementById('public-contact-form');
