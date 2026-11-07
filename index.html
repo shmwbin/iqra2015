@@ -1112,7 +1112,7 @@
               </div>
               <div>
                 <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-1">মোবাইল নম্বর *</label>
-                <input type="tel" id="contact-phone" required pattern="[0-9]{10}" placeholder="১০ সংখ্যার মোবাইল নম্বর" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-emerald-600 font-mono">
+                <input type="tel" id="contact-phone" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="১০ সংখ্যার মোবাইল নম্বর" class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-emerald-600 font-mono">
               </div>
             </div>
 
@@ -1304,12 +1304,13 @@
   <!-- UI Interactions & Anti-Bot Captcha Generator -->
   <script>
     // Anti-Bot Math Challenge for Contact Form
-    window.contactCaptchaExpected = 9;
+    window.contactCaptcha = { num1: 0, num2: 0 };
 
     window.refreshContactCaptcha = function() {
-      const a = Math.floor(Math.random() * 9) + 2;
-      const b = Math.floor(Math.random() * 7) + 1;
-      window.contactCaptchaExpected = a + b;
+      const a = Math.floor(Math.random() * 8) + 2;
+      const b = Math.floor(Math.random() * 8) + 1;
+      window.contactCaptcha.num1 = a;
+      window.contactCaptcha.num2 = b;
       const lbl = document.getElementById('contact-captcha-label');
       if (lbl) lbl.innerText = `${a} + ${b}`;
       const inp = document.getElementById('contact-captcha-ans');
@@ -1717,7 +1718,6 @@
         document.getElementById('stat-teachers').innerText = teachersVal;
       }
 
-      // Robust lookup for সাফল্য ও নৈতিক বিকাশ (handles passRate, pass, pass_rate, successRate, result, etc.)
       const passVal = pickCfgVal(cfg, [
         'passRate', 'pass', 'pass_rate', 'passrate', 'stat_pass', 'statPass',
         'successRate', 'success_rate', 'success', 'result', 'passPercentage',
@@ -1727,7 +1727,7 @@
         document.getElementById('stat-pass').innerText = passVal;
       }
 
-      // 5 Banners sync (with automatic Google Drive high-res fallback)
+      // 5 Banners sync
       for (let i = 0; i < 5; i++) {
         const rawUrl = pickCfgVal(cfg, [`banner${i + 1}`, `banner_${i + 1}`, `slide${i + 1}`]) || "";
         if (rawUrl) {
@@ -1747,12 +1747,11 @@
       }
     }
 
-    // Supports both Vertical Key-Value CSV (Row-based) and Horizontal Header-Value CSV (Column-based)
+    // Supports both Vertical Key-Value CSV and Horizontal Header-Value CSV
     function parseConfigCSVRows(rows) {
       const cfg = {};
       if (!rows || rows.length === 0) return cfg;
 
-      // If 2 rows and multiple columns, also map horizontal headers -> values
       if (rows.length >= 2 && rows[0].length > 2) {
         for (let c = 0; c < rows[0].length; c++) {
           const h = String(rows[0][c] || '').trim();
@@ -1761,7 +1760,6 @@
         }
       }
 
-      // Standard vertical key -> value pairs (including row 0 if it's a data key rather than "key"/"field")
       for (let i = 0; i < rows.length; i++) {
         const k = String(rows[i][0] || '').trim();
         const v = String(rows[i][1] ?? '').trim();
@@ -1791,8 +1789,6 @@
       return list;
     }
 
-    // Real-Time Concurrent Data Engine:
-    // Merges Published CSV and Live Apps Script endpoint so no field is ever lost if one source omits a key
     async function loadPublicDataFromCloud() {
       const cacheBuster = Date.now();
 
@@ -1817,7 +1813,7 @@
           .catch(() => {});
       }
 
-      // 2. Fetch Live 0-Second Apps Script GET endpoint to override with freshest sheet data
+      // 2. Fetch Live Apps Script GET endpoint
       if (APPS_SCRIPT_WEBAPP_URL && APPS_SCRIPT_WEBAPP_URL !== "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE") {
         try {
           const res = await fetch(APPS_SCRIPT_WEBAPP_URL + "?t=" + cacheBuster, { cache: "no-store" });
@@ -1827,13 +1823,12 @@
             if (Array.isArray(data.notices)) renderPublicNotices(data.notices);
           }
         } catch (err) {
-          // CSV already handled fallback
+          // Fallback handled
         }
       }
     }
 
     loadPublicDataFromCloud();
-    // Auto-refresh public data every 30 seconds for real-time updates & when user switches back to tab
     setInterval(loadPublicDataFromCloud, 30000);
     document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "visible") loadPublicDataFromCloud();
@@ -1845,15 +1840,36 @@
       contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Honeypot check
+        // 1. Honeypot check
         const hpVal = (document.getElementById('contact-hp-field')?.value || "").trim();
         if (hpVal !== "") return;
 
-        // Captcha check
+        // 2. Client-side Captcha Validation
         const userAns = parseInt(document.getElementById('contact-captcha-ans')?.value || "0", 10);
-        if (userAns !== window.contactCaptchaExpected) {
+        const expectedAns = window.contactCaptcha.num1 + window.contactCaptcha.num2;
+        if (userAns !== expectedAns) {
           showPublicToast("নিরাপত্তা যাচাইয়ের (যোগফল) উত্তর সঠিক হয়নি!", false);
           window.refreshContactCaptcha();
+          return;
+        }
+
+        const name = document.getElementById('contact-name').value.trim();
+        const rawPhone = document.getElementById('contact-phone').value.trim();
+        const phoneDigits = rawPhone.replace(/[^0-9]/g, "");
+        const subject = document.getElementById('contact-subject').value;
+        const message = document.getElementById('contact-message').value.trim();
+
+        // 3. Additional Input Validations
+        if (name.length < 3) {
+          showPublicToast("অনুগ্রহ করে আপনার পুরো নাম লিখুন।", false);
+          return;
+        }
+        if (phoneDigits.length !== 10 || !/^[6-9]\d{9}$/.test(phoneDigits)) {
+          showPublicToast("অনুগ্রহ করে সঠিক ১০ সংখ্যার ভারতীয় মোবাইল নম্বর দিন।", false);
+          return;
+        }
+        if (message.length < 3) {
+          showPublicToast("অনুগ্রহ করে বার্তা বিস্তারিত লিখুন।", false);
           return;
         }
 
@@ -1863,21 +1879,20 @@
         }
 
         const submitBtn = document.getElementById('btn-contact-submit');
-        const name = document.getElementById('contact-name').value.trim();
-        const phone = document.getElementById('contact-phone').value.trim();
-        const subject = document.getElementById('contact-subject').value;
-        const message = document.getElementById('contact-message').value.trim();
-
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> প্রেরণ করা হচ্ছে...';
 
         try {
           const payload = {
             action: "submitPublicMessage",
-            name,
-            phone,
-            subject,
-            message
+            name: name,
+            phone: phoneDigits,
+            subject: subject,
+            message: message,
+            bot_honeypot: hpVal, // Server-side honeypot check
+            captchaA: window.contactCaptcha.num1,
+            captchaB: window.contactCaptcha.num2,
+            captchaAns: userAns
           };
 
           const res = await fetch(APPS_SCRIPT_WEBAPP_URL, {
@@ -1896,6 +1911,7 @@
           window.refreshContactCaptcha();
         } catch (err) {
           showPublicToast("বার্তা পাঠাতে সমস্যা হয়েছে: " + err.message, false);
+          window.refreshContactCaptcha();
         } finally {
           submitBtn.disabled = false;
           submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-amber-300"></i> <span>বার্তা প্রেরণ করুন</span>';
