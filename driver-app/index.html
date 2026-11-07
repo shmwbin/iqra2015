@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IQRA ACADEMY - Driver Live GPS PWA</title>
+    <title>IQRA ACADEMY - Driver Manual GPS Portal</title>
     <link rel="icon" type="image/jpeg" href="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg">
-    <!-- PWA Manifest Link -->
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1e3a8a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background: #f1f5f9; color: #1e293b; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 1rem; }
@@ -25,16 +21,6 @@
         .header-card h1 { font-size: 1.35rem; font-weight: 800; letter-spacing: 0.5px; }
         .header-card p { font-size: 0.8rem; color: #bfdbfe; margin-top: 2px; }
 
-        /* অভিভাবক ও অ্যাডমিন অ্যাপের আদলে আকর্ষণীয় ইনস্টল ব্যানার বাটন */
-        .pwa-install-btn {
-            background: #fef08a; color: #065f46; border: none; padding: 0.6rem 1.1rem;
-            border-radius: 99px; font-weight: 800; font-size: 0.82rem; cursor: pointer;
-            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2); width: 100%; margin-bottom: 1rem;
-            transition: 0.2s;
-        }
-        .pwa-install-btn:hover { background: #fde047; }
-
         .card {
             background: white; padding: 1.35rem; border-radius: 16px;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06); border: 1px solid #e2e8f0; margin-bottom: 1rem;
@@ -47,7 +33,7 @@
             width: 100%; padding: 0.7rem 0.85rem; border: 1.5px solid #cbd5e1; border-radius: 10px;
             font-size: 0.95rem; outline: none; transition: 0.2s; background: #f8fafc;
         }
-        input:focus { border-color: #2563eb; background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        input:focus { border-color: #2563eb; background: #fff; }
 
         .btn {
             width: 100%; padding: 0.85rem 1rem; border: none; border-radius: 12px;
@@ -56,10 +42,10 @@
         }
         .btn-login { background: #2563eb; }
         .btn-login:hover { background: #1d4ed8; }
-        .btn-login:disabled { background: #94a3b8; cursor: not-allowed; }
-        .btn-start { background: #059669; box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3); font-size: 1.05rem; padding: 1rem; }
-        .btn-stop { background: #dc2626; box-shadow: 0 6px 16px rgba(220, 38, 38, 0.3); font-size: 1.05rem; padding: 1rem; }
-        .btn-logout { background: #64748b; font-size: 0.82rem; padding: 0.5rem 0.8rem; width: auto; border-radius: 8px; }
+        .btn-sync { background: #059669; box-shadow: 0 6px 16px rgba(5, 150, 105, 0.3); font-size: 1.05rem; padding: 1rem; }
+        .btn-sync:hover { background: #047857; }
+        .btn-offline { background: #dc2626; margin-top: 0.6rem; font-size: 0.85rem; padding: 0.65rem; }
+        .btn-logout { background: #64748b; font-size: 0.82rem; padding: 0.45rem 0.8rem; width: auto; border-radius: 8px; }
 
         .driver-badge {
             background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: 12px;
@@ -68,25 +54,10 @@
         .driver-badge-info h3 { font-size: 1.05rem; color: #1e3a8a; font-family: monospace; }
         .driver-badge-info p { font-size: 0.82rem; color: #475569; font-weight: 600; }
 
-        .radar-box {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 1.25rem; border-radius: 14px; background: #f8fafc; border: 1.5px dashed #cbd5e1; margin-bottom: 1rem;
-        }
-        .pulse-dot {
-            width: 22px; height: 22px; border-radius: 50%; background: #94a3b8;
-            margin-bottom: 0.6rem; position: relative;
-        }
-        .pulse-active { background: #10b981; animation: pulseAnim 1.5s infinite; }
-        @keyframes pulseAnim {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
-            70% { box-shadow: 0 0 0 18px rgba(16, 185, 129, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
         .gps-stats {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 0.75rem;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; margin-top: 0.75rem; margin-bottom: 1rem;
         }
-        .stat-box { background: #fff; border: 1px solid #e2e8f0; padding: 0.55rem; border-radius: 8px; text-align: center; }
+        .stat-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.55rem; border-radius: 8px; text-align: center; }
         .stat-box span { display: block; font-size: 0.7rem; color: #64748b; font-weight: 600; }
         .stat-box strong { font-size: 0.88rem; color: #0f172a; font-family: monospace; }
 
@@ -96,72 +67,43 @@
         }
         .status-ok { background: #dcfce7; color: #166534; }
         .status-err { background: #fee2e2; color: #991b1b; }
-        .api-settings { font-size: 0.75rem; color: #64748b; text-align: center; margin-top: 0.5rem; cursor: pointer; text-decoration: underline; }
     </style>
 </head>
 <body>
 
 <div class="app-container">
     <div class="header-card">
-        <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" crossorigin="anonymous" alt="Logo">
+        <img src="https://res.cloudinary.com/u0z4riei/image/upload/v1792241337/WhatsApp_Image_2026-10-17_at_6.14.01_PM.jpg" alt="Logo">
         <h1>IQRA ACADEMY</h1>
-        <p>🚐 স্কুল পুল-কার ও ভ্যান ড্রাইভার লাইভ জিপিএস পোর্টাল</p>
+        <p>🚐 ড্রাইভার ম্যানুয়াল লোকেশন আপডেট পোর্টাল</p>
     </div>
 
-    <!-- PWA Install Button Container -->
-    <div id="installAppContainer">
-        <button id="installAppBtn" class="pwa-install-btn" onclick="installDriverPWA()">
-            📲 ড্রাইভার অ্যাপটি ফোনে ইনস্টল করুন (Install App)
-        </button>
-    </div>
-
-    <!-- API কনফিগারেশন বক্স -->
-    <div class="card" id="apiConfigBox" style="display:none;">
-        <div class="card-title">🔗 Google Script URL সেটিংস</div>
-        <div class="form-group">
-            <label>Web App URL</label>
-            <input type="text" id="gasUrlInput" value="https://iqra-api-worker.tarikul-aisj.workers.dev">
-        </div>
-        <button class="btn btn-login" onclick="saveGasUrl()">সেভ করুন</button>
-    </div>
-
-    <!-- ১. ড্রাইভার সিকিউর লগইন স্ক্রিন -->
+    <!-- ১. ড্রাইভার লগইন -->
     <div class="card" id="loginView">
-        <div class="card-title">🔐 ড্রাইভার সিকিউর লগইন</div>
+        <div class="card-title">🔐 ড্রাইভার প্রোফাইল সেটআপ</div>
         <div class="form-group">
             <label>ড্রাইভার কোড (Driver Code) *</label>
-            <input type="text" id="dCode" list="codeList" placeholder="যেমন: DRV-001" style="text-transform:uppercase; font-weight:700; color:#1e3a8a;">
-            <datalist id="codeList">
-                <option value="DRV-001">Driver 1</option>
-                <option value="DRV-002">Driver 2</option>
-                <option value="DRV-003">Driver 3</option>
-                <option value="DRV-004">Driver 4</option>
-            </datalist>
+            <input type="text" id="dCode" placeholder="যেমন: DRV-001" style="text-transform:uppercase; font-weight:700; color:#1e3a8a;">
         </div>
         <div class="form-group">
             <label>ড্রাইভারের নাম *</label>
             <input type="text" id="dName" placeholder="আপনার নাম লিখুন">
         </div>
         <div class="form-group">
-            <label>গাড়ির নাম বা নম্বর (Vehicle No) *</label>
+            <label>গাড়ির বিবরণ *</label>
             <input type="text" id="dVehicle" placeholder="যেমন: Car 1 / WB-25-XXXX">
         </div>
         <div class="form-group">
             <label>মোবাইল নম্বর *</label>
             <input type="text" id="dPhone" placeholder="যেমন: 9876543210">
         </div>
-        <div class="form-group">
-            <label style="color:#b91c1c;">🔑 ড্রাইভার গোপন পাসওয়ার্ড (Secret Password) *</label>
-            <input type="password" id="dSecretPass" placeholder="স্কুল প্রদত্ত গোপন পাসওয়ার্ড লিখুন" required>
-        </div>
-        <button class="btn btn-login" id="btnDriverLoginSubmit" onclick="handleDriverLogin()">✅ যাচাই ও লগইন করুন</button>
-        <div id="loginErrorMsg" class="status-banner status-err"></div>
+        <button class="btn btn-login" onclick="saveDriverProfile()">✅ ড্যাশবোর্ডে প্রবেশ করুন</button>
     </div>
 
-    <!-- ২. লাইভ জিপিএস ড্যাশবোর্ড স্ক্রিন -->
+    <!-- ২. ম্যানুয়াল জিপিএস ড্যাশবোর্ড -->
     <div class="card" id="dashboardView" style="display:none;">
         <div class="card-title">
-            <span>📡 লাইভ লোকেশন ট্র্যাকার</span>
+            <span>📡 লোকেশন পাঠানো</span>
             <button class="btn btn-logout" onclick="handleLogout()">লগআউট</button>
         </div>
 
@@ -173,131 +115,56 @@
             <span style="font-size:1.6rem;">🚐</span>
         </div>
 
-        <div class="radar-box">
-            <div id="pulseIndicator" class="pulse-dot"></div>
-            <strong id="gpsStateTitle" style="font-size:0.95rem; color:#334155;">জিপিএস বন্ধ আছে (Offline)</strong>
-            <p id="gpsSubText" style="font-size:0.76rem; color:#64748b; margin-top:3px; text-align:center;">
-                গাড়ি চালানো শুরু করার আগে নিচের সবুজ বাটনে চাপ দিয়ে লোকেশন অন করুন।
-            </p>
+        <p style="font-size:0.8rem; color:#475569; margin-bottom:0.75rem; text-align:center;">
+            গাড়ি যখন কোনো স্টপেজে পৌঁছাবে বা লোকেশন আপডেট করার প্রয়োজন হবে, নিচের বাটনে চাপ দিন:
+        </p>
 
-            <div class="gps-stats">
-                <div class="stat-box">
-                    <span>LATITUDE</span>
-                    <strong id="latVal">--.------</strong>
-                </div>
-                <div class="stat-box">
-                    <span>LONGITUDE</span>
-                    <strong id="lngVal">--.------</strong>
-                </div>
-                <div class="stat-box">
-                    <span>ACCURACY</span>
-                    <strong id="accVal">-- m</strong>
-                </div>
-                <div class="stat-box">
-                    <span>LAST SYNC</span>
-                    <strong id="syncTimeVal">--:--:--</strong>
-                </div>
+        <div class="gps-stats">
+            <div class="stat-box">
+                <span>LATITUDE</span>
+                <strong id="latVal">--.------</strong>
+            </div>
+            <div class="stat-box">
+                <span>LONGITUDE</span>
+                <strong id="lngVal">--.------</strong>
+            </div>
+            <div class="stat-box">
+                <span>ACCURACY</span>
+                <strong id="accVal">-- m</strong>
+            </div>
+            <div class="stat-box">
+                <span>LAST SENT</span>
+                <strong id="syncTimeVal">--:--:--</strong>
             </div>
         </div>
 
-        <button id="toggleGpsBtn" class="btn btn-start" onclick="toggleTracking()">
-            🟢 ডিউটি শুরু করুন (Start Live GPS)
+        <!-- সিঙ্গেল ক্লিক জিপিএস আপডেট বাটন -->
+        <button id="btnManualPush" class="btn btn-sync" onclick="captureAndPushGPS()">
+            📍 আমার বর্তমান লোকেশন পাঠান
+        </button>
+
+        <!-- ডিউটি শেষ / অফলাইন বাটন -->
+        <button class="btn btn-offline" onclick="sendOfflineStatus()">
+            🔴 ডিউটি শেষ (অফলাইন করুন)
         </button>
 
         <div id="statusMsg" class="status-banner"></div>
     </div>
-
-    <div class="api-settings" onclick="toggleApiBox()">⚙️ সার্ভার লিঙ্ক (API URL) পরিবর্তন করুন</div>
 </div>
 
 <script>
-    const DEFAULT_GAS_URL = "https://iqra-api-worker.tarikul-aisj.workers.dev";
-    let watchId = null;
-    let syncTimer = null;
-    let wakeLock = null;
-    let isTracking = false;
-    let latestCoords = null;
-    let deferredDriverPrompt = null;
-
-    // Service Worker রেজিস্ট্রেশন PWA ইনস্টলের জন্য
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js')
-                .then(reg => console.log('Driver PWA Service Worker Registered', reg))
-                .catch(err => console.log('SW registration failed', err));
-        });
-    }
+    const API_WORKER_URL = "https://iqra-api-worker.tarikul-aisj.workers.dev";
 
     window.onload = function() {
-        try {
-            const savedUrl = localStorage.getItem("IQRA_GAS_API_URL");
-            if (savedUrl) {
-                document.getElementById("gasUrlInput").value = savedUrl;
-            } else {
-                document.getElementById("gasUrlInput").value = DEFAULT_GAS_URL;
-                localStorage.setItem("IQRA_GAS_API_URL", DEFAULT_GAS_URL);
-            }
-        } catch (e) {}
-        
-        if (window.matchMedia("(display-mode: standalone)").matches) {
-            document.getElementById("installAppContainer").style.display = "none";
-        }
         checkSavedLogin();
     };
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredDriverPrompt = e;
-        document.getElementById("installAppContainer").style.display = "block";
-    });
-
-    window.addEventListener('appinstalled', () => {
-        deferredDriverPrompt = null;
-        document.getElementById("installAppContainer").style.display = "none";
-    });
-
-    function installDriverPWA() {
-        if (deferredDriverPrompt) {
-            deferredDriverPrompt.prompt();
-            deferredDriverPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the driver app install');
-                }
-                deferredDriverPrompt = null;
-            });
-        } else {
-            alert('আপনার ব্রাউজার থেকে সরাসরি ইনস্টল করতে ওপরের ডানদিকের (⋮) মেনু থেকে "Install app" বা "Add to Home screen" সিলেক্ট করুন।');
-        }
-    }
-
-    function getGasUrl() {
-        try {
-            return (localStorage.getItem("IQRA_GAS_API_URL") || document.getElementById("gasUrlInput").value || DEFAULT_GAS_URL).trim();
-        } catch (e) {
-            return DEFAULT_GAS_URL;
-        }
-    }
-
-    function toggleApiBox() {
-        const box = document.getElementById("apiConfigBox");
-        box.style.display = box.style.display === "none" ? "block" : "none";
-    }
-
-    function saveGasUrl() {
-        const val = document.getElementById("gasUrlInput").value.trim();
-        if (val) {
-            try { localStorage.setItem("IQRA_GAS_API_URL", val); } catch (e) {}
-            document.getElementById("apiConfigBox").style.display = "none";
-            showBanner("সার্ভার লিঙ্ক সেভ হয়েছে!", true);
-        }
-    }
 
     function checkSavedLogin() {
         try {
             const savedDriver = localStorage.getItem("IQRA_DRIVER_PROFILE");
             if (savedDriver) {
                 const profile = JSON.parse(savedDriver);
-                if (profile && profile.driverCode && profile.driverPassword) {
+                if (profile && profile.driverCode) {
                     showDashboard(profile);
                     return;
                 }
@@ -307,55 +174,20 @@
         document.getElementById("dashboardView").style.display = "none";
     }
 
-    async function handleDriverLogin() {
+    function saveDriverProfile() {
         const driverCode = document.getElementById("dCode").value.trim().toUpperCase();
         const driverName = document.getElementById("dName").value.trim();
         const vehicleName = document.getElementById("dVehicle").value.trim();
         const phone = document.getElementById("dPhone").value.trim();
-        const driverPassword = document.getElementById("dSecretPass").value.trim();
-        const errBox = document.getElementById("loginErrorMsg");
-        errBox.style.display = "none";
 
-        if (!driverCode || !driverName || !driverPassword) {
-            errBox.innerText = "অনুগ্রহ করে ড্রাইভার কোড, নাম এবং গোপন পাসওয়ার্ড লিখুন!";
-            errBox.style.display = "block";
+        if (!driverCode || !driverName) {
+            alert("অনুগ্রহ করে ড্রাইভার কোড ও নাম লিখুন!");
             return;
         }
 
-        const btn = document.getElementById("btnDriverLoginSubmit");
-        btn.disabled = true;
-        btn.innerText = "⏳ সার্ভার যাচাই করছে...";
-
-        try {
-            const res = await fetch(getGasUrl(), {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({
-                    action: "verifyDriverLogin",
-                    driverPassword: driverPassword
-                })
-            });
-            const data = await res.json();
-            if (!data || !data.success) {
-                throw new Error(data.error || "ভুল ড্রাইভার পাসওয়ার্ড!");
-            }
-
-            const profile = {
-                driverCode,
-                driverName,
-                vehicleName: vehicleName || "School Van",
-                phone,
-                driverPassword
-            };
-            try { localStorage.setItem("IQRA_DRIVER_PROFILE", JSON.stringify(profile)); } catch (e) {}
-            showDashboard(profile);
-        } catch (err) {
-            errBox.innerText = err.message || "লগইন ব্যর্থ হয়েছে!";
-            errBox.style.display = "block";
-        } finally {
-            btn.disabled = false;
-            btn.innerText = "✅ যাচাই ও লগইন করুন";
-        }
+        const profile = { driverCode, driverName, vehicleName: vehicleName || "School Van", phone };
+        try { localStorage.setItem("IQRA_DRIVER_PROFILE", JSON.stringify(profile)); } catch (e) {}
+        showDashboard(profile);
     }
 
     function showDashboard(profile) {
@@ -366,163 +198,101 @@
     }
 
     function handleLogout() {
-        if (isTracking) stopTracking();
-        else sendOfflineStatusToSheet();
-
         try { localStorage.removeItem("IQRA_DRIVER_PROFILE"); } catch (e) {}
-        document.getElementById("dSecretPass").value = "";
-        checkSavedLogin();
+        document.getElementById("loginView").style.display = "block";
+        document.getElementById("dashboardView").style.display = "none";
     }
 
-    async function requestWakeLock() {
-        try {
-            if ("wakeLock" in navigator) {
-                wakeLock = await navigator.wakeLock.request("screen");
-            }
-        } catch (e) {}
-    }
-
-    function toggleTracking() {
-        if (isTracking) {
-            stopTracking();
-        } else {
-            startTracking();
-        }
-    }
-
-    function startTracking() {
+    function captureAndPushGPS() {
         if (!navigator.geolocation) {
             showBanner("আপনার ফোনের ব্রাউজারে GPS সাপোর্ট নেই!", false);
             return;
         }
 
-        isTracking = true;
-        requestWakeLock();
+        const btn = document.getElementById("btnManualPush");
+        btn.disabled = true;
+        btn.innerText = "⏳ জিপিএস সংগ্রহ ও পাঠানো হচ্ছে...";
 
-        document.getElementById("toggleGpsBtn").className = "btn btn-stop";
-        document.getElementById("toggleGpsBtn").innerText = "🔴 ডিউটি শেষ করুন (Stop GPS)";
-        document.getElementById("pulseIndicator").classList.add("pulse-active");
-        document.getElementById("gpsStateTitle").innerText = "হাই-অ্যাকুরেসি GPS চালু আছে (Live)";
-        document.getElementById("gpsSubText").innerText = "প্রতি ১৫ সেকেন্ডে আপনার লোকেশন আপডেট হচ্ছে।";
-
-        watchId = navigator.geolocation.watchPosition(
+        navigator.geolocation.getCurrentPosition(
             pos => {
-                latestCoords = {
-                    lat: pos.coords.latitude.toFixed(6),
-                    lng: pos.coords.longitude.toFixed(6),
-                    acc: Math.round(pos.coords.accuracy)
-                };
-                document.getElementById("latVal").innerText = latestCoords.lat;
-                document.getElementById("lngVal").innerText = latestCoords.lng;
-                document.getElementById("accVal").innerText = latestCoords.acc + " m";
+                const lat = pos.coords.latitude.toFixed(6);
+                const lng = pos.coords.longitude.toFixed(6);
+                const acc = Math.round(pos.coords.accuracy);
 
-                if (!syncTimer) {
-                    pushLocationToSheet();
-                    syncTimer = setInterval(pushLocationToSheet, 15000);
-                }
+                document.getElementById("latVal").innerText = lat;
+                document.getElementById("lngVal").innerText = lng;
+                document.getElementById("accVal").innerText = acc + " m";
+
+                sendLocationToServer(lat, lng);
             },
             err => {
-                showBanner("GPS পারমিশন অন করুন: " + err.message, false);
+                btn.disabled = false;
+                btn.innerText = "📍 আমার বর্তমান লোকেশন পাঠান";
+                showBanner("GPS পারমিশন দিন: " + err.message, false);
             },
-            {
-                enableHighAccuracy: true,
-                maximumAge: 0,
-                timeout: 15000
-            }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
         );
     }
 
-    function stopTracking() {
-        isTracking = false;
-        if (watchId !== null) {
-            navigator.geolocation.clearWatch(watchId);
-            watchId = null;
-        }
-        if (syncTimer !== null) {
-            clearInterval(syncTimer);
-            syncTimer = null;
-        }
-        if (wakeLock !== null) {
-            wakeLock.release().catch(() => {});
-            wakeLock = null;
-        }
-
-        sendOfflineStatusToSheet();
-
-        document.getElementById("toggleGpsBtn").className = "btn btn-start";
-        document.getElementById("toggleGpsBtn").innerText = "🟢 ডিউটি শুরু করুন (Start Live GPS)";
-        document.getElementById("pulseIndicator").classList.remove("pulse-active");
-        document.getElementById("gpsStateTitle").innerText = "জিপিএস বন্ধ আছে (Offline)";
-        
-        document.getElementById("latVal").innerText = "--.------";
-        document.getElementById("lngVal").innerText = "--.------";
-        document.getElementById("accVal").innerText = "-- m";
-        
-        showBanner("লাইভ ট্র্যাকিং বন্ধ করা হয়েছে।", true);
-    }
-
-    function sendOfflineStatusToSheet() {
+    function sendLocationToServer(lat, lng) {
         let profile = {};
         try { profile = JSON.parse(localStorage.getItem("IQRA_DRIVER_PROFILE") || "{}"); } catch (e) {}
-        if (!profile.driverCode || !profile.driverPassword) return;
+        const btn = document.getElementById("btnManualPush");
 
-        const payload = {
-            action: "updateDriverLocation",
-            driverPassword: profile.driverPassword,
-            driverCode: profile.driverCode,
-            driverName: profile.driverName,
-            vehicleName: profile.vehicleName,
-            phone: profile.phone,
-            lat: "OFFLINE",
-            lng: "OFFLINE"
-        };
-
-        fetch(getGasUrl(), {
+        fetch(API_WORKER_URL, {
             method: "POST",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
-        }).catch(() => {});
-    }
-
-    function pushLocationToSheet() {
-        if (!latestCoords) return;
-        let profile = {};
-        try { profile = JSON.parse(localStorage.getItem("IQRA_DRIVER_PROFILE") || "{}"); } catch (e) {}
-        if (!profile.driverCode || !profile.driverPassword) return;
-
-        const payload = {
-            action: "updateDriverLocation",
-            driverPassword: profile.driverPassword,
-            driverCode: profile.driverCode,
-            driverName: profile.driverName,
-            vehicleName: profile.vehicleName,
-            phone: profile.phone,
-            lat: latestCoords.lat,
-            lng: latestCoords.lng
-        };
-
-        fetch(getGasUrl(), {
-            method: "POST",
-            headers: { "Content-Type": "text/plain;charset=utf-8" },
-            body: JSON.stringify(payload)
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "updateDriverLocation",
+                driverCode: profile.driverCode,
+                driverName: profile.driverName,
+                vehicleName: profile.vehicleName,
+                phone: profile.phone,
+                lat: lat,
+                lng: lng
+            })
         })
         .then(r => r.json())
         .then(res => {
-            if (res && res.code === "UNAUTHORIZED") {
-                handleLogout();
-                return;
-            }
             if (res && res.success) {
-                const now = new Date();
-                document.getElementById("syncTimeVal").innerText = now.toLocaleTimeString('en-IN', { hour12: false });
-                showBanner("✅ গুগল শিটে লাইভ লোকেশন সিঙ্ক হয়েছে", true);
+                document.getElementById("syncTimeVal").innerText = new Date().toLocaleTimeString('en-IN', { hour12: false });
+                showBanner("✅ গুগল শিটে লোকেশন আপডেট সফল!", true);
             } else {
-                showBanner("সিঙ্ক এরর: " + (res ? res.error : "Unknown"), false);
+                showBanner("সার্ভার ত্রুটি: " + (res ? res.error : "Unknown"), false);
             }
         })
         .catch(err => {
-            showBanner("ইন্টারনেট কানেকশন চেক করুন: " + err.message, false);
+            showBanner("নেটওয়ার্ক এরর: " + err.message, false);
+        })
+        .finally(() => {
+            btn.disabled = false;
+            btn.innerText = "📍 আমার বর্তমান লোকেশন পাঠান";
         });
+    }
+
+    function sendOfflineStatus() {
+        let profile = {};
+        try { profile = JSON.parse(localStorage.getItem("IQRA_DRIVER_PROFILE") || "{}"); } catch (e) {}
+
+        fetch(API_WORKER_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                action: "updateDriverLocation",
+                driverCode: profile.driverCode,
+                driverName: profile.driverName,
+                vehicleName: profile.vehicleName,
+                phone: profile.phone,
+                lat: "OFFLINE",
+                lng: "OFFLINE"
+            })
+        })
+        .then(() => {
+            document.getElementById("latVal").innerText = "--.------";
+            document.getElementById("lngVal").innerText = "--.------";
+            showBanner("গাড়ি অফলাইন করা হয়েছে।", true);
+        })
+        .catch(() => {});
     }
 
     function showBanner(msg, isOk) {
